@@ -25,7 +25,7 @@ public class TestDao {
         ProductoDao pd = new ProductoDao();
         
         for (Producto producto : pd.LISTA_PRODUCTOS()) {
-            System.out.println("producto: " + producto.getNom_descripcion());
+            System.out.println("producto: " + producto.getDescripcion());
         }
 
         System.out.println("ficha nueva: " + dao.NUMERO_FICHA());

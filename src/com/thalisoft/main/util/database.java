@@ -110,7 +110,7 @@ public class database {
             q = "CALL " + S_P + "(" + parametros + ")";
         }
 
-//        System.out.println(q);
+        System.out.println(q);
         //obtenemos la cantidad de registros existentes en la tabla
         try {
 

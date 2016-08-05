@@ -8,8 +8,8 @@ import java.util.Date;
 public class Producto {
     
     private int id_producto;
-    private String id_referencia;
-    private String nom_descripcion;
+    private String referencia;
+    private String descripcion;
     private int strock;
     private int costo_und;
     private int precio_venta;
@@ -29,8 +29,8 @@ public class Producto {
 
     public Producto(int id_producto, String id_referencia, String nom_descripcion, int strock, int costo_und, int precio_venta, int utilidad, String talla, String color, String materia, String sexo, String edad, String marca, String diseño, Date fechahoraingreso, Empleado empleado) {
         this.id_producto = id_producto;
-        this.id_referencia = id_referencia;
-        this.nom_descripcion = nom_descripcion;
+        this.referencia = id_referencia;
+        this.descripcion = nom_descripcion;
         this.strock = strock;
         this.costo_und = costo_und;
         this.precio_venta = precio_venta;
@@ -55,20 +55,20 @@ public class Producto {
         this.id_producto = id_producto;
     }
 
-    public String getId_referencia() {
-        return id_referencia;
+    public String getReferencia() {
+        return referencia;
     }
 
-    public void setId_referencia(String id_referencia) {
-        this.id_referencia = id_referencia;
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
     }
 
-    public String getNom_descripcion() {
-        return nom_descripcion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setNom_descripcion(String nom_descripcion) {
-        this.nom_descripcion = nom_descripcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public int getStrock() {

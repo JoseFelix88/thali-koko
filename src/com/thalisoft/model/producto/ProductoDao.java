@@ -24,8 +24,8 @@ public class ProductoDao extends database {
             empleado = new EmpleadoDao();
             producto = new Producto();
             producto.setId_producto(edicion.toNumeroEntero(rs[0][0].toString()));
-            producto.setId_referencia(rs[0][1].toString());
-            producto.setNom_descripcion(rs[0][2].toString());
+            producto.setReferencia(rs[0][1].toString());
+            producto.setDescripcion(rs[0][2].toString());
             producto.setStrock(edicion.toNumeroEntero(rs[0][3].toString()));
             producto.setCosto_und(edicion.toNumeroEntero(rs[0][4].toString()));
             producto.setPrecio_venta(edicion.toNumeroEntero(rs[0][5].toString()));

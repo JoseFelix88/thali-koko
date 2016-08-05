@@ -34,7 +34,6 @@ public class Contenedor extends javax.swing.JFrame {
         jMenu2.setVisible(false);
         Menu_Empleado.setVisible(false);
         jMenu4.setVisible(false);
-        jMenu1.setVisible(false);
         jMenu5.setVisible(false);
        //this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setSize(1010, 720);//Z
@@ -143,10 +142,8 @@ public class Contenedor extends javax.swing.JFrame {
         JM_DevolucionPunto = new javax.swing.JMenuItem();
         JM_Ubicarproducto = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jSeparator4 = new javax.swing.JPopupMenu.Separator();
-        JMReporte = new javax.swing.JMenuItem();
-        jSeparator5 = new javax.swing.JPopupMenu.Separator();
         JMReporteInvFisico = new javax.swing.JMenuItem();
+        JMReporte = new javax.swing.JMenuItem();
         JMReporteInOut = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
@@ -278,33 +275,14 @@ public class Contenedor extends javax.swing.JFrame {
         Contenedor_Menu_General.add(jMenu4);
 
         jMenu1.setForeground(new java.awt.Color(255, 255, 51));
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Documento.png"))); // NOI18N
-        jMenu1.setText("Reportes");
-
-        jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator4.setOpaque(true);
-        jMenu1.add(jSeparator4);
-
-        JMReporte.setBackground(new java.awt.Color(51, 51, 51));
-        JMReporte.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JMReporte.setForeground(new java.awt.Color(255, 153, 0));
-        JMReporte.setText("Reporte de Entrada & Salidas");
-        JMReporte.setActionCommand("Reporte");
-        JMReporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMReporteActionPerformed(evt);
-            }
-        });
-        jMenu1.add(JMReporte);
-
-        jSeparator5.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator5.setOpaque(true);
-        jMenu1.add(jSeparator5);
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/cart.png"))); // NOI18N
+        jMenu1.setText("Orden de Compra");
 
         JMReporteInvFisico.setBackground(new java.awt.Color(51, 51, 51));
         JMReporteInvFisico.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JMReporteInvFisico.setForeground(new java.awt.Color(255, 153, 0));
-        JMReporteInvFisico.setText("Planilla para Inventario Fisico");
+        JMReporteInvFisico.setForeground(new java.awt.Color(0, 0, 0));
+        JMReporteInvFisico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/money.png"))); // NOI18N
+        JMReporteInvFisico.setText("Gestionar Orden de Compra");
         JMReporteInvFisico.setActionCommand("invFisico");
         JMReporteInvFisico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,10 +291,24 @@ public class Contenedor extends javax.swing.JFrame {
         });
         jMenu1.add(JMReporteInvFisico);
 
+        JMReporte.setBackground(new java.awt.Color(51, 51, 51));
+        JMReporte.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        JMReporte.setForeground(new java.awt.Color(0, 0, 0));
+        JMReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/tablet-with-price-tag.png"))); // NOI18N
+        JMReporte.setText("Cotizador de Productos");
+        JMReporte.setActionCommand("Reporte");
+        JMReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMReporteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(JMReporte);
+
         JMReporteInOut.setBackground(new java.awt.Color(51, 51, 51));
         JMReporteInOut.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JMReporteInOut.setForeground(new java.awt.Color(255, 153, 0));
-        JMReporteInOut.setText("Entradas/Salidas - Diarias, Semanales");
+        JMReporteInOut.setForeground(new java.awt.Color(0, 0, 0));
+        JMReporteInOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/hand-holding-money-bills.png"))); // NOI18N
+        JMReporteInOut.setText("Pagos Orden de Compra");
         JMReporteInOut.setActionCommand("ReporteInOut");
         JMReporteInOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -425,14 +417,13 @@ public class Contenedor extends javax.swing.JFrame {
         Contenedor_Menu_General.add(jMenu5);
 
         jMenu3.setBackground(new java.awt.Color(255, 255, 255));
-        jMenu3.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu3.setForeground(new java.awt.Color(204, 204, 0));
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/settings.png"))); // NOI18N
         jMenu3.setText("Maestros");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         JM_Empleado.setBackground(new java.awt.Color(255, 51, 51));
         JM_Empleado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JM_Empleado.setForeground(new java.awt.Color(255, 255, 255));
         JM_Empleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Empleado.png"))); // NOI18N
         JM_Empleado.setText("EMPLEADOS");
         JM_Empleado.setActionCommand("EMPLEADO");
@@ -440,21 +431,16 @@ public class Contenedor extends javax.swing.JFrame {
 
         JM_Clientes.setBackground(new java.awt.Color(255, 51, 51));
         JM_Clientes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JM_Clientes.setForeground(new java.awt.Color(255, 255, 255));
         JM_Clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/team.png"))); // NOI18N
         JM_Clientes.setText("CLIENTES");
         jMenu3.add(JM_Clientes);
 
-        JM_Producto.setBackground(new java.awt.Color(255, 51, 51));
         JM_Producto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JM_Producto.setForeground(new java.awt.Color(255, 255, 255));
         JM_Producto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/baby-clothes.png"))); // NOI18N
         JM_Producto.setText("PRODUCTOS");
         jMenu3.add(JM_Producto);
 
-        JM_Proveedor.setBackground(new java.awt.Color(255, 51, 51));
         JM_Proveedor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JM_Proveedor.setForeground(new java.awt.Color(255, 255, 255));
         JM_Proveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/employee.png"))); // NOI18N
         JM_Proveedor.setText("PROVEEDORES");
         jMenu3.add(JM_Proveedor);
@@ -645,8 +631,6 @@ public class Contenedor extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
-    private javax.swing.JPopupMenu.Separator jSeparator4;
-    private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
     // End of variables declaration//GEN-END:variables

@@ -574,8 +574,8 @@ public class FormProducto extends javax.swing.JInternalFrame {
 
     public void LOAD_PRODUCT_COMPONET() {
         txtnumficha.setText(formatoTexto.numerico(producto.getId_producto()));
-        txtreferencia.setText(producto.getId_referencia());
-        txtdescripcion.setText(producto.getNom_descripcion());
+        txtreferencia.setText(producto.getReferencia());
+        txtdescripcion.setText(producto.getDescripcion());
         txtstock.setText(formatoTexto.numerico(producto.getStrock()));
         txtcosto.setText("$ " + formatoTexto.numerico(producto.getCosto_und()));
         txtprecioventa.setText("$ " + formatoTexto.numerico(producto.getPrecio_venta()));
@@ -638,8 +638,8 @@ public class FormProducto extends javax.swing.JInternalFrame {
             key[0] = 2;
         }
         key[1] = producto.getId_producto();
-        key[2] = "'" + producto.getId_referencia() + "'";
-        key[3] = "'" + producto.getNom_descripcion().toUpperCase() + "'";
+        key[2] = "'" + producto.getReferencia() + "'";
+        key[3] = "'" + producto.getDescripcion().toUpperCase() + "'";
         key[4] = producto.getStrock();
         key[5] = producto.getCosto_und();
         key[6] = producto.getPrecio_venta();
@@ -658,8 +658,8 @@ public class FormProducto extends javax.swing.JInternalFrame {
     private Producto Cargar_Producto() {
         producto = new Producto();
         producto.setId_producto(edicion.toNumeroEntero(txtnumficha.getText()));
-        producto.setId_referencia(txtreferencia.getText());
-        producto.setNom_descripcion(txtdescripcion.getText());
+        producto.setReferencia(txtreferencia.getText());
+        producto.setDescripcion(txtdescripcion.getText());
         producto.setStrock(edicion.toNumeroEntero(txtstock.getText()));
         producto.setCosto_und(edicion.toNumeroEntero(txtcosto.getText()));
         producto.setPrecio_venta(edicion.toNumeroEntero(txtprecioventa.getText()));
