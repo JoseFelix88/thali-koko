@@ -142,7 +142,7 @@ public class Contenedor extends javax.swing.JFrame {
         JM_DevolucionPunto = new javax.swing.JMenuItem();
         JM_Ubicarproducto = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        JMReporteInvFisico = new javax.swing.JMenuItem();
+        JM_Orden_Compra = new javax.swing.JMenuItem();
         JMReporte = new javax.swing.JMenuItem();
         JMReporteInOut = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -278,22 +278,20 @@ public class Contenedor extends javax.swing.JFrame {
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/cart.png"))); // NOI18N
         jMenu1.setText("Orden de Compra");
 
-        JMReporteInvFisico.setBackground(new java.awt.Color(51, 51, 51));
-        JMReporteInvFisico.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JMReporteInvFisico.setForeground(new java.awt.Color(0, 0, 0));
-        JMReporteInvFisico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/money.png"))); // NOI18N
-        JMReporteInvFisico.setText("Gestionar Orden de Compra");
-        JMReporteInvFisico.setActionCommand("invFisico");
-        JMReporteInvFisico.addActionListener(new java.awt.event.ActionListener() {
+        JM_Orden_Compra.setBackground(new java.awt.Color(51, 51, 51));
+        JM_Orden_Compra.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        JM_Orden_Compra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/money.png"))); // NOI18N
+        JM_Orden_Compra.setText("Gestionar Orden de Compra");
+        JM_Orden_Compra.setActionCommand("ORDENCOMPRA");
+        JM_Orden_Compra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMReporteInvFisicoActionPerformed(evt);
+                JM_Orden_CompraActionPerformed(evt);
             }
         });
-        jMenu1.add(JMReporteInvFisico);
+        jMenu1.add(JM_Orden_Compra);
 
         JMReporte.setBackground(new java.awt.Color(51, 51, 51));
         JMReporte.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JMReporte.setForeground(new java.awt.Color(0, 0, 0));
         JMReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/tablet-with-price-tag.png"))); // NOI18N
         JMReporte.setText("Cotizador de Productos");
         JMReporte.setActionCommand("Reporte");
@@ -306,7 +304,6 @@ public class Contenedor extends javax.swing.JFrame {
 
         JMReporteInOut.setBackground(new java.awt.Color(51, 51, 51));
         JMReporteInOut.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JMReporteInOut.setForeground(new java.awt.Color(0, 0, 0));
         JMReporteInOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/hand-holding-money-bills.png"))); // NOI18N
         JMReporteInOut.setText("Pagos Orden de Compra");
         JMReporteInOut.setActionCommand("ReporteInOut");
@@ -485,9 +482,9 @@ public class Contenedor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JM_conteofisicoActionPerformed
 
-    private void JMReporteInvFisicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMReporteInvFisicoActionPerformed
+    private void JM_Orden_CompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JM_Orden_CompraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JMReporteInvFisicoActionPerformed
+    }//GEN-LAST:event_JM_Orden_CompraActionPerformed
 
     private void JMReporteInOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMReporteInOutActionPerformed
         // TODO add your handling code here:
@@ -598,7 +595,6 @@ public class Contenedor extends javax.swing.JFrame {
     private javax.swing.JMenuBar Contenedor_Menu_General;
     public javax.swing.JMenuItem JMReporte;
     public javax.swing.JMenuItem JMReporteInOut;
-    public javax.swing.JMenuItem JMReporteInvFisico;
     public javax.swing.JMenuItem JM_Clientes;
     public javax.swing.JMenuItem JM_CompraProducto;
     public javax.swing.JMenuItem JM_ConsumoSaldoGeneral;
@@ -606,6 +602,7 @@ public class Contenedor extends javax.swing.JFrame {
     public javax.swing.JMenuItem JM_Empleado;
     public javax.swing.JMenuItem JM_Lotes;
     public javax.swing.JMenuItem JM_OrdenCompra;
+    public javax.swing.JMenuItem JM_Orden_Compra;
     public javax.swing.JMenuItem JM_Producto;
     public javax.swing.JMenu JM_Profile;
     public javax.swing.JMenuItem JM_Proveedor;

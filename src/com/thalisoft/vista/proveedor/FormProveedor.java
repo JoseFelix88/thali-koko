@@ -668,7 +668,7 @@ public class FormProveedor extends javax.swing.JInternalFrame {
 
     private void txtporcdescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtporcdescuentoActionPerformed
         if (validarProveedor() != false) {
-            if (consulta_proveedor(txtnumficha.getText()) != true) {
+            if (consulta_proveedor(txtnumficha.getText()) != false) {
                 edicion.mensajes(3, "el proveedor no se encuentra registrado.");
                 return;
             }
@@ -701,7 +701,9 @@ public class FormProveedor extends javax.swing.JInternalFrame {
         if (validarProveedor() != false) {
             int SI_NO = (int) edicion.msjQuest(1, "estas seguro que deseas modificar el proveedor?");
             if (SI_NO == 0) {
-                if (consulta_proveedor(txtnit.getText()) != false) {
+                System.out.println("modificar_numficha: "+consulta_proveedor(txtnumficha.getText())+""
+                        + "\nmod_nit: "+consulta_proveedor(txtnit.getText()));
+                if (consulta_proveedor(txtnumficha.getText()) != false) {
                     if (Provdao.CRUD_PROVEEDOR(montar_proveedor(1))) {
                         edicion.mensajes(2, "proveedor modificado correctamente.");
                     }

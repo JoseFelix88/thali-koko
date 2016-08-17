@@ -17,7 +17,7 @@ public class ProductoDao extends database {
     }
 
     public Producto READ_PRODUCTO(Object key) {
-        Object parametro = 1 + "," + key;
+        Object parametro = 1 + ",'" + key + "'";
         Producto producto = null;
         Object[][] rs = SELECT_SP("SELECT_PRODUCTO", parametro);
         if (rs.length > 0) {
@@ -63,7 +63,7 @@ public class ProductoDao extends database {
                 producto = new Producto(edicion.toNumeroEntero(r[0].toString()),
                         r[1].toString(), r[2].toString(),
                         edicion.toNumeroEntero(r[3].toString()), edicion.toNumeroEntero(r[4].toString()),
-                        edicion.toNumeroEntero(r[5].toString()), 
+                        edicion.toNumeroEntero(r[5].toString()),
                         edicion.toNumeroEntero(r[6].toString()), r[7].toString(), r[8].toString(),
                         r[9].toString(), r[10].toString(), r[11].toString(),
                         r[12].toString(), r[13].toString(), DateUtil.getDateTime(r[14]), empleado.CONSULTAR_EMPLEADO(r[15]));

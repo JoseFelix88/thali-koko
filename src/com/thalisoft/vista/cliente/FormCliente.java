@@ -272,9 +272,10 @@ public class FormCliente extends javax.swing.JInternalFrame {
             if (SI_NO == 0) {
                 if (Cdao.CONSULTAR_CLIENTE(cargarCliente().getIdcliente()) != null) {
                     if (Cdao.CRUD_CLIENTE(datosCliente(1)) != false) {
-                        formListarClientes.llenar_listado();
+                        if (formListarClientes != null) {
+                            formListarClientes.llenar_listado();
+                        }
                         edicion.mensajes(2, "cliente actualizado correctamente");
-
                     }
                 } else {
                     edicion.mensajes(1, "el cliente no se  encuentra registrado.");
@@ -335,7 +336,6 @@ EmpleadoDao edao;
             txtnombrecompleto.grabFocus();
             return false;
         }
-         
 
         return true;
     }
@@ -357,7 +357,7 @@ EmpleadoDao edao;
         key[3] = cliente.getTelefono();
         key[4] = cliente.getDireccion();
         key[5] = cliente.getEmpleado().getIdentificacion();
-        key[6] = "'"+cliente.getIdentificacion()+"'";
+        key[6] = "'" + cliente.getIdentificacion() + "'";
         return key;
     }
 

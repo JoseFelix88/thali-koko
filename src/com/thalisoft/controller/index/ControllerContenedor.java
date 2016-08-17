@@ -7,6 +7,7 @@ import com.thalisoft.vista.cliente.FormListarClientes;
 import com.thalisoft.vista.empleado.FormEmpleado;
 import com.thalisoft.vista.empleado.FormListarEmpleados;
 import com.thalisoft.vista.index.Contenedor;
+import com.thalisoft.vista.ordencompra.FormOrdenCompra;
 import com.thalisoft.vista.producto.FormListaProductos;
 import com.thalisoft.vista.proveedor.FormListarProveedor;
 import java.beans.PropertyVetoException;
@@ -37,9 +38,9 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
      FormInventarioPuntoEntrega formInventarioPuntoEntrega;
      FormInventarioBodega formInventarioBodega;
      FormPedidoPuntoEntrega formPedidoPuntoEntrega;
-     FormConsumoSaldoGeneral formConsumoSaldoGeneral;
-     FormOrdenCompra formOrdenCompra;*/
+     FormConsumoSaldoGeneral formConsumoSaldoGeneral;*/
 
+    FormOrdenCompra formOrdenCompra;
     FormEmpleado formEmpleado;
     FormListarEmpleados formListarEmpleados;
     FormCliente formCliente;
@@ -65,7 +66,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
             Obtener_Eventos_De_SubMenu(contenedor.JM_conteofisico);
             Obtener_Eventos_De_SubMenu(contenedor.JMReporte);
             Obtener_Eventos_De_SubMenu(contenedor.JMReporteInOut);
-            Obtener_Eventos_De_SubMenu(contenedor.JMReporteInvFisico);
+            Obtener_Eventos_De_SubMenu(contenedor.JM_Orden_Compra);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Lotes);
             Obtener_Eventos_De_SubMenu(contenedor.JM_DevolucionPunto);
             Obtener_Eventos_De_SubMenu(contenedor.JM_SalidaAutorizada);
@@ -77,7 +78,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
             Obtener_Eventos_De_SubMenu(contenedor.JM_inventariobodega);
             Obtener_Eventos_De_SubMenu(contenedor.JM_pedidoPunto);
             Obtener_Eventos_De_SubMenu(contenedor.JM_ConsumoSaldoGeneral);
-            Obtener_Eventos_De_SubMenu(contenedor.JM_OrdenCompra);
+            Obtener_Eventos_De_SubMenu(contenedor.JM_Orden_Compra);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Empleado);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Clientes);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Producto);
@@ -171,24 +172,21 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
 
                 break;
 
-            /* case "Generar Salida":
+            case "ORDENCOMPRA":
+                if (Obtener_Estado_Formulario(this.formOrdenCompra, Contenedor.Panel_Contenedor)) {
+                    formOrdenCompra = new FormOrdenCompra();
+                    formOrdenCompra.show();
+                    Contenedor.Panel_Contenedor.add(formOrdenCompra);
+                    java.awt.Dimension Tamaño_Panel = Contenedor.Panel_Contenedor.getSize();
+                    java.awt.Dimension Tamaño_InternalFrame = formOrdenCompra.getSize();
+                    formOrdenCompra.setLocation((Tamaño_Panel.width - Tamaño_InternalFrame.width) / 2,
+                            (Tamaño_Panel.height - Tamaño_InternalFrame.height) / 2);
+                } else {
+                    formOrdenCompra.setIcon(false);
+                }
+                break;
 
-             if (Obtener_Estado_Formulario(this.formSalidasProducto, Contenedor.Panel_Contenedor)) {
-             formSalidasProducto = new FormSalidasProducto();
-
-             formSalidasProducto.show();
-
-             Contenedor.Panel_Contenedor.add(formSalidasProducto);
-             java.awt.Dimension Tamaño_Panel = Contenedor.Panel_Contenedor.getSize();
-             java.awt.Dimension Tamaño_InternalFrame = formSalidasProducto.getSize();
-             formSalidasProducto.setLocation((Tamaño_Panel.width - Tamaño_InternalFrame.width) / 2,
-             (Tamaño_Panel.height - Tamaño_InternalFrame.height) / 2);
-             } else {
-             formSalidasProducto.setIcon(false);
-             }
-             break;
-
-             case "devolucionpunto":
+            /* case "devolucionpunto":
 
              if (Obtener_Estado_Formulario(this.formDevolucionPunto, Contenedor.Panel_Contenedor)) {
              formDevolucionPunto = new FormDevolucionPunto();
