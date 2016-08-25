@@ -23,7 +23,7 @@ public class Manager_Report extends database {
     public Manager_Report() {
     }
 
-     public void FichaDeEmpleado(Object key) {
+    public void FichaDeEmpleado(Object key) {
         try {
             String Ubicacion = RUTA_REPORTE + "/Empleado/";
             String reporte = "Ficha de Empleado.jasper";
@@ -36,7 +36,7 @@ public class Manager_Report extends database {
             System.out.println("Mensaje de Error:" + j);
         }
     }
-     
+
     public void ListadoDeEmpleados() {
         try {
             String Ubicacion = RUTA_REPORTE + "/Empleado/";
@@ -48,5 +48,31 @@ public class Manager_Report extends database {
             System.out.println("Mensaje de Error:" + j);
         }
     }
-     
+
+    public void ORDEN_DE_COMPRA(Object key) {
+        String reporte = "orden de compra.jasper";
+        try {
+            String Ubicacion = RUTA_REPORTE + "/Orden de Compra/";
+            masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
+            PARAMETROS.put("idordencompra", key);
+            edicion.Lanzador(masterReport, PARAMETROS);
+        } catch (Exception j) {
+            edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
+            System.out.println("Mensaje de Error:" + j);
+        }
+    }
+    
+     public void ORDEN_DE_COMPRA_PEDIDO(Object key) {
+        String reporte = "orden de compra - Pedido.jasper";
+        try {
+            String Ubicacion = RUTA_REPORTE + "/Orden de Compra/";
+            masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
+            PARAMETROS.put("idordencompra", key);
+            edicion.Lanzador(masterReport, PARAMETROS);
+        } catch (Exception j) {
+            edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
+            System.out.println("Mensaje de Error:" + j);
+        }
+    }
+
 }
