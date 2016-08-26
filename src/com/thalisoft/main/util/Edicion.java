@@ -10,6 +10,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Formatter;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +65,10 @@ public class Edicion extends database {
         }
     }
 
+    public String AGREGAR_CEROS_LEFT(int numero){
+        Formatter fmt = new Formatter();
+        return fmt.format("%04d", numero).toString();
+    }
     public int toNumeroEntero(String entero) {
 
         if (isNumeric(entero)) {

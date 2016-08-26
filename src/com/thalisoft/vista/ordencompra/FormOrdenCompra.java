@@ -958,7 +958,6 @@ public class FormOrdenCompra extends javax.swing.JInternalFrame {
     private void CALCULARTOTALCOMPRA() {
         totalcompra = edicion.toNumeroEntero(txtcantidad.getText())
                 * edicion.toNumeroEntero(txtvalorunidad.getText());
-
         txtvalorunidad.setText("$ " + formatoTexto.numerico(edicion.toNumeroEntero(txtvalorunidad.getText())));
         txtvalortotal.setText("$ " + formatoTexto.numerico(totalcompra));
         costoneto = costounidad * edicion.toNumeroEntero(txtcantidad.getText());

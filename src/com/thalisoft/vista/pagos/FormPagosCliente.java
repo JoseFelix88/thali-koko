@@ -3,16 +3,25 @@ package com.thalisoft.vista.pagos;
 import com.thalisoft.main.util.CambiaFormatoTexto;
 import com.thalisoft.main.util.DateUtil;
 import com.thalisoft.main.util.Edicion;
+import com.thalisoft.model.ordencompra.OrdenCompra;
+import com.thalisoft.model.ordencompra.OrdenCompraDao;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FormPagosCliente extends javax.swing.JInternalFrame {
 
     Edicion edicion = new Edicion();
     CambiaFormatoTexto formatoNumero = new CambiaFormatoTexto();
     String FORMA_PAGO;
+    OrdenCompraDao ordenDao;
 
     public FormPagosCliente() {
         initComponents();
+        AccionesFormulario();
         jdfechaemision.setDate(DateUtil.newTimestamp());
     }
 
@@ -53,6 +62,8 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         txtsaldoactual = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtsaldoactual1 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -107,6 +118,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         jLabel3.setText("No. del Recibo");
 
         txtnumrecibo.setEditable(false);
+        txtnumrecibo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -153,6 +165,13 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
 
         jLabel4.setText("No. Orden de Compra");
 
+        txtnumorden.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtnumorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnumordenActionPerformed(evt);
+            }
+        });
+
         jLabel5.setText("Cliente Titular");
 
         txtcliente.setEditable(false);
@@ -166,24 +185,21 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jdfechaemision, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jdfechaemision, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtnumorden, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(26, 26, 26)
+                        .addComponent(txtnumidpago, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtcliente))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtnumorden, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(26, 26, 26)
-                                .addComponent(txtnumidpago, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(txtcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,9 +213,11 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
                     .addComponent(jdfechaemision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtnumorden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtnumorden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(4, 4, 4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -284,6 +302,12 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         txtsaldoactual1.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         txtsaldoactual1.setText("$ 0");
 
+        jLabel12.setText("CANT. ABONOS");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("0");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -302,7 +326,11 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtsaldoactual1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtsaldoactual1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -324,7 +352,13 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(4, 4, 4)))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)))
+                .addGap(4, 4, 4))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Historial de Pagos"));
@@ -382,7 +416,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -479,6 +513,9 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             txtcntrecibo.setEditable(true);
             txtnumrecibo.setEditable(false);
+            txtnumrecibo.setText("");
+            txtcntrecibo.selectAll();
+            txtcntrecibo.requestFocus();
         }
     }//GEN-LAST:event_radioefectivoItemStateChanged
 
@@ -488,6 +525,8 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
             txtcntrecibo.setText("$ 0");
             txtcntdevuelta.setText("$ 0");
             txtnumrecibo.setEditable(true);
+            txtnumrecibo.selectAll();
+            txtnumrecibo.requestFocus();
         }
     }//GEN-LAST:event_radiotarjetaItemStateChanged
 
@@ -497,6 +536,8 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
             txtcntrecibo.setText("$ 0");
             txtcntdevuelta.setText("$ 0");
             txtnumrecibo.setEditable(true);
+            txtnumrecibo.selectAll();
+            txtnumrecibo.requestFocus();
         }
     }//GEN-LAST:event_radiochequeItemStateChanged
 
@@ -505,13 +546,32 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         if (validacionFormulario() != false) {
             edicion.mensajes(2, "pago registrado....");
         }
-        
-        
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         dispose();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void txtnumordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumordenActionPerformed
+        try {
+            ordenDao = new OrdenCompraDao();
+            OrdenCompra oc = ordenDao.CONSULTA_ORDEN_COMPRA(txtnumorden.getText());
+            if (oc != null) {
+                txtcliente.setText(oc.getCliente().getIdentificacion() + " - " + oc.getCliente().getNombrecompleto());
+                txtsubtotal.setText("$ " + formatoNumero.numerico(oc.getSubtotal()));
+                txtsaldoactual.setText("$ " + formatoNumero.numerico(oc.getSaldo()));
+                CARGAR_HISTORICO_PAGO(oc.getIdordencompra());
+                txtabono.selectAll();
+                txtabono.requestFocus();
+            } else {
+                edicion.mensajes(1, "la orden de compra # " + txtnumorden.getText() + " no se encuentra registrada.");
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(FormPagosCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_txtnumordenActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -519,6 +579,8 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -594,7 +656,51 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
             return false;
         }
 
+        if (radioefectivo.isSelected() && edicion.toNumeroEntero(txtcntrecibo.getText()) < edicion.toNumeroEntero(txtabono.getText())) {
+            int diferencia = edicion.toNumeroEntero(txtabono.getText()) - edicion.toNumeroEntero(txtcntrecibo.getText());
+            String str = "el Dinero recibido es Insuficiente debido aque "
+                    + "la cantidad de dinero recibida no puede ser menor al valor del abono."
+                    + "\nAbono $ " + formatoNumero.numerico(edicion.toNumeroEntero(txtabono.getText())) + ", "
+                    + "Recibido $ " + formatoNumero.numerico(edicion.toNumeroEntero(txtcntrecibo.getText())) + ", "
+                    + "hacen falta $ " + formatoNumero.numerico(diferencia) + "";
+            edicion.mensajes(3, str);
+            return false;
+        }
+
         return true;
     }
 
+    private void CARGAR_HISTORICO_PAGO(Object KEY) {
+
+    }
+
+    private void AccionesFormulario() {
+        txtabono.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                txtabono.setText("$ " + formatoNumero.numerico(edicion.toNumeroEntero(txtabono.getText())));
+            }
+        });
+        txtnumorden.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                txtnumorden.setText(edicion.AGREGAR_CEROS_LEFT(edicion.toNumeroEntero(txtnumorden.getText())));
+            }
+        });
+        txtcntrecibo.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                txtcntrecibo.setText("$ " + formatoNumero.numerico(edicion.toNumeroEntero(txtcntrecibo.getText())));
+                if (edicion.toNumeroEntero(txtabono.getText()) < edicion.toNumeroEntero(txtcntrecibo.getText())) {
+                    CALCULAR_CNT_DEVUELTA();
+                }
+            }
+
+        });
+    }
+
+    private void CALCULAR_CNT_DEVUELTA() {
+        int CNT_DEVUELTA = edicion.toNumeroEntero(txtcntrecibo.getText()) - edicion.toNumeroEntero(txtabono.getText());
+        txtcntdevuelta.setText("$ " + formatoNumero.numerico(CNT_DEVUELTA));
+    }
 }
