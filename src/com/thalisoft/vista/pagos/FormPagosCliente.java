@@ -6,6 +6,7 @@ import com.thalisoft.main.util.Edicion;
 import com.thalisoft.main.util.Variables_Gloabales;
 import com.thalisoft.model.ordencompra.OrdenCompra;
 import com.thalisoft.model.ordencompra.OrdenCompraDao;
+import com.thalisoft.model.pagos.PagosClientes;
 import com.thalisoft.model.pagos.PagosClientesDao;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
@@ -16,16 +17,19 @@ import java.util.logging.Logger;
 
 public class FormPagosCliente extends javax.swing.JInternalFrame {
 
+    OrdenCompra ordenCompra;
     Edicion edicion = new Edicion();
     CambiaFormatoTexto formatoNumero = new CambiaFormatoTexto();
-    String FORMA_PAGO;
+    static String FORMA_PAGO;
     OrdenCompraDao ordenDao;
     PagosClientesDao pagoDao;
 
     public FormPagosCliente() {
+        pagoDao = new PagosClientesDao();
         initComponents();
         AccionesFormulario();
         jdfechaemision.setDate(DateUtil.newTimestamp());
+        txtnumidpago.setText(pagoDao.NUMERO_RECIBO_PAGO());
     }
 
     @SuppressWarnings("unchecked")
@@ -460,6 +464,11 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/view-employed.png"))); // NOI18N
         jMenuItem3.setText("Consultar");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
         jMenu1.add(jSeparator1);
 
@@ -471,6 +480,11 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Cerrar.png"))); // NOI18N
         jMenuItem5.setText("Anular Comprobante");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
         jMenu1.add(jSeparator2);
 
@@ -510,6 +524,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
 
     private void radioefectivoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radioefectivoItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
+            FORMA_PAGO = radioefectivo.getText();
             txtcntrecibo.setEditable(true);
             txtnumrecibo.setEditable(false);
             txtnumrecibo.setText("");
@@ -520,6 +535,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
 
     private void radiotarjetaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radiotarjetaItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
+            FORMA_PAGO = radiotarjeta.getText();
             txtcntrecibo.setEditable(false);
             txtcntrecibo.setText("$ 0");
             txtcntdevuelta.setText("$ 0");
@@ -531,6 +547,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
 
     private void radiochequeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radiochequeItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
+            FORMA_PAGO = radiocheque.getText();
             txtcntrecibo.setEditable(false);
             txtcntrecibo.setText("$ 0");
             txtcntdevuelta.setText("$ 0");
@@ -543,7 +560,13 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 
         if (validacionFormulario() != false) {
-            edicion.mensajes(2, "pago registrado....");
+            int si_no = (int) edicion.msjQuest(1, "estas seguro que deseas registrar el pago?");
+            if (si_no == 0) {
+                if (pagoDao.CRUD_PAGO_CLIENTE(Cargar_Data_Pago(0)) != false) {
+                    CARGAR_HISTORICO_PAGO(txtnumorden.getText());
+                    edicion.mensajes(2, "pago registrado correctamente.");
+                }
+            }
         }
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -555,12 +578,12 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
     private void txtnumordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumordenActionPerformed
         try {
             ordenDao = new OrdenCompraDao();
-            OrdenCompra oc = ordenDao.CONSULTA_ORDEN_COMPRA(txtnumorden.getText());
-            if (oc != null) {
-                txtcliente.setText(oc.getCliente().getIdentificacion() + " - " + oc.getCliente().getNombrecompleto());
-                txtsubtotal.setText("$ " + formatoNumero.numerico(oc.getSubtotal()));
-                txtsaldoactual.setText("$ " + formatoNumero.numerico(oc.getSaldo()));
-                CARGAR_HISTORICO_PAGO(oc.getIdordencompra());
+            ordenCompra = ordenDao.CONSULTA_ORDEN_COMPRA(txtnumorden.getText());
+            if (ordenCompra != null) {
+                txtcliente.setText(ordenCompra.getCliente().getIdentificacion() + " - " + ordenCompra.getCliente().getNombrecompleto());
+                txtsubtotal.setText("$ " + formatoNumero.numerico(ordenCompra.getSubtotal()));
+                txtsaldoactual.setText("$ " + formatoNumero.numerico(ordenCompra.getSaldo()));
+                CARGAR_HISTORICO_PAGO(ordenCompra.getIdordencompra());
                 txtabono.selectAll();
                 txtabono.requestFocus();
             } else {
@@ -571,6 +594,16 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_txtnumordenActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        Object key = edicion.msjQuest(2, "ingresa el numero de recibo de pago o comprobante.");
+        Montar_Data_Pago(key);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -675,14 +708,16 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         if (rs.length > 0) {
             edicion.llenarTabla(jTable1, rs);
             edicion.calcula_total(jTable1, lbabono, txtsaldoactual1, 2);
+            int saldofinal = edicion.toNumeroEntero(txtsubtotal.getText()) - edicion.toNumeroEntero(txtsaldoactual1.getText());
+            txtsaldoactual.setText("$ " + formatoNumero.numerico(saldofinal));
         } else {
             edicion.limpiar_tablas(jTable1);
         }
     }
 
     private int CALCULAR_SALDO_ACTUAL() {
-        int SALDO_ACTUAL = edicion.toNumeroEntero(txtsaldoactual.getText()) - 
-                edicion.toNumeroEntero(txtabono.getText());
+        int SALDO_ACTUAL = edicion.toNumeroEntero(txtsaldoactual.getText())
+                - edicion.toNumeroEntero(txtabono.getText());
         return SALDO_ACTUAL;
     }
 
@@ -691,9 +726,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
             @Override
             public void keyReleased(KeyEvent e) {
                 txtabono.setText("$ " + formatoNumero.numerico(edicion.toNumeroEntero(txtabono.getText())));
-                txtsaldoactual.setText("$ " + formatoNumero.numerico(CALCULAR_SALDO_ACTUAL()));
             }
-
         });
         txtnumorden.addKeyListener(new KeyAdapter() {
             @Override
@@ -706,7 +739,10 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
             public void keyReleased(KeyEvent e) {
                 txtcntrecibo.setText("$ " + formatoNumero.numerico(edicion.toNumeroEntero(txtcntrecibo.getText())));
                 if (edicion.toNumeroEntero(txtabono.getText()) < edicion.toNumeroEntero(txtcntrecibo.getText())) {
-                    CALCULAR_CNT_DEVUELTA();
+                    int CNT_DEVUELTA = edicion.toNumeroEntero(txtcntrecibo.getText()) - edicion.toNumeroEntero(txtabono.getText());
+                    txtcntdevuelta.setText("$ " + formatoNumero.numerico(CNT_DEVUELTA));
+                } else {
+                    txtcntdevuelta.setText("$ " + formatoNumero.numerico(0));
                 }
             }
 
@@ -714,24 +750,50 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
     }
 
     private void CALCULAR_CNT_DEVUELTA() {
-        int CNT_DEVUELTA = edicion.toNumeroEntero(txtcntrecibo.getText()) - edicion.toNumeroEntero(txtabono.getText());
-        txtcntdevuelta.setText("$ " + formatoNumero.numerico(CNT_DEVUELTA));
+        if (edicion.toNumeroEntero(txtcntrecibo.getText()) > edicion.toNumeroEntero(txtabono.getText())) {
+            int CNT_DEVUELTA = edicion.toNumeroEntero(txtcntrecibo.getText()) - edicion.toNumeroEntero(txtabono.getText());
+            txtcntdevuelta.setText("$ " + formatoNumero.numerico(CNT_DEVUELTA));
+        } else {
+            txtcntdevuelta.setText("$ " + formatoNumero.numerico(0));
+        }
+
     }
 
     private Object[] Cargar_Data_Pago(int opcion) {
-        Object[] DATA_PAGO = new Object[9];
+        Object[] DATA_PAGO = new Object[10];
         if (opcion == 0 | opcion == 1) {
             DATA_PAGO[0] = opcion;
         }
         DATA_PAGO[1] = edicion.toNumeroEntero(txtabono.getText());
-        DATA_PAGO[2] = "'" + FORMA_PAGO.toUpperCase() + "'";
+        DATA_PAGO[2] = "'" + FORMA_PAGO + "'";
         DATA_PAGO[3] = edicion.toNumeroEntero(txtnumorden.getText());
         DATA_PAGO[4] = "'" + Variables_Gloabales.EMPLEADO.getIdentificacion() + "'";
         DATA_PAGO[5] = edicion.toNumeroEntero(txtnumidpago.getText());
         DATA_PAGO[6] = edicion.toNumeroEntero(txtcntrecibo.getText());
         DATA_PAGO[7] = edicion.toNumeroEntero(txtcntdevuelta.getText());
-        DATA_PAGO[8] = edicion.toNumeroEntero(txtsaldoactual.getText());
-
+        DATA_PAGO[8] = edicion.toNumeroEntero(txtsaldoactual.getText()) - edicion.toNumeroEntero(txtabono.getText());
+        DATA_PAGO[9] = "'" + txtnumrecibo.getText() + "'";
         return DATA_PAGO;
     }
+
+    private void Montar_Data_Pago(Object key) {
+        PagosClientes pc = pagoDao.CONSULTA_PAGO_CLIENTE(key);
+        if (pc != null) {
+            txtnumidpago.setText(edicion.AGREGAR_CEROS_LEFT(pc.getIdpagocliente()));
+            jdfechaemision.setDate(pc.getFechahoraemision());
+            txtnumorden.setText(edicion.AGREGAR_CEROS_LEFT(pc.getOrdenCompra().getIdordencompra()));
+            txtcliente.setText(pc.getOrdenCompra().getCliente().getIdentificacion() + " - "
+                    + "" + pc.getOrdenCompra().getCliente().getNombrecompleto());
+            txtabono.setText("$ " + formatoNumero.numerico(pc.getValorpago()));
+            txtcntrecibo.setText("$ " + formatoNumero.numerico(pc.getCntrecibida()));
+            txtcntdevuelta.setText("$ " + formatoNumero.numerico(pc.getCntdevuelta()));
+            txtnumrecibo.setText(pc.getNumrecibo());
+            txtsubtotal.setText("$ " + formatoNumero.numerico(pc.getOrdenCompra().getSubtotal()));
+            txtsaldoactual.setText("$ " + formatoNumero.numerico(pc.getOrdenCompra().getSaldo()));
+            CARGAR_HISTORICO_PAGO(pc.getOrdenCompra().getIdordencompra());
+        } else {
+            edicion.mensajes(1, "el comprobante aun no se ha registrado.");
+        }
+    }
+
 }
