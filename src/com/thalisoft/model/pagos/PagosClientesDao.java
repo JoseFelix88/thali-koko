@@ -3,6 +3,8 @@ package com.thalisoft.model.pagos;
 import com.thalisoft.main.util.DateUtil;
 import com.thalisoft.main.util.Edicion;
 import com.thalisoft.main.util.database;
+import com.thalisoft.model.cliente.Cliente;
+import com.thalisoft.model.cliente.ClienteDao;
 import com.thalisoft.model.empleado.EmpleadoDao;
 import com.thalisoft.model.ordencompra.OrdenCompraDao;
 import java.text.ParseException;
@@ -32,6 +34,7 @@ public class PagosClientesDao extends database {
                 pc.setValorpago(edicion.toNumeroEntero(rs[0][6].toString()));
                 pc.setCntrecibida(edicion.toNumeroEntero(rs[0][7].toString()));
                 pc.setCntdevuelta(edicion.toNumeroEntero(rs[0][8].toString()));
+                pc.getOrdenCompra().setCliente(new ClienteDao().CONSULTAR_CLIENTE(rs[0][9]));
             } catch (ParseException ex) {
                 Logger.getLogger(PagosClientesDao.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -41,7 +44,7 @@ public class PagosClientesDao extends database {
     }
     
     public Object[][] HISTORIAL_PAGOS_CLIENTE(Object key) {
-        Object param = 1+",'"+key+"'";
+        Object param = 2+",'"+key+"'";
         return SELECT_SP("SELECT_PAGOS_CLIENTE", param);
     }
     
