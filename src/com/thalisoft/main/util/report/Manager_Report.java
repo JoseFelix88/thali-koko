@@ -74,5 +74,17 @@ public class Manager_Report extends database {
             System.out.println("Mensaje de Error:" + j);
         }
     }
+      public void RECIBO_DE_PAGO_CLIENTE(Object key) {
+        String reporte = "Recibo de Pago Cliente.jasper";
+        try {
+            String Ubicacion = RUTA_REPORTE + "/Orden de Compra/";
+            masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
+            PARAMETROS.put("NUMPAGO", key);
+            edicion.Lanzador(masterReport, PARAMETROS);
+        } catch (Exception j) {
+            edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
+            System.out.println("Mensaje de Error:" + j);
+        }
+    }
 
 }

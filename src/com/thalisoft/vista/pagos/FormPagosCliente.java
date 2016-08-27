@@ -4,6 +4,7 @@ import com.thalisoft.main.util.CambiaFormatoTexto;
 import com.thalisoft.main.util.DateUtil;
 import com.thalisoft.main.util.Edicion;
 import com.thalisoft.main.util.Variables_Gloabales;
+import com.thalisoft.main.util.report.Manager_Report;
 import com.thalisoft.model.ordencompra.OrdenCompra;
 import com.thalisoft.model.ordencompra.OrdenCompraDao;
 import com.thalisoft.model.pagos.PagosClientes;
@@ -23,13 +24,14 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
     static String FORMA_PAGO;
     OrdenCompraDao ordenDao;
     PagosClientesDao pagoDao;
+    private Object NUMERO_RECIBO_PAGO;
+    Manager_Report report = new Manager_Report();
 
     public FormPagosCliente() {
         pagoDao = new PagosClientesDao();
         initComponents();
         AccionesFormulario();
-        jdfechaemision.setDate(DateUtil.newTimestamp());
-        txtnumidpago.setText(pagoDao.NUMERO_RECIBO_PAGO());
+        nuevo();
     }
 
     @SuppressWarnings("unchecked")
@@ -68,7 +70,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         txtsaldoactual = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtsaldoactual1 = new javax.swing.JTextField();
+        txtabonoacumulado = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         lbabono = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
@@ -87,6 +89,11 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
 
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vista_style_business_and_data_icons_icons_pack_120673/imprimir-icono-3650-32.png"))); // NOI18N
         jMenuItem7.setText("Imprimir Comprobante");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jPopupMenu1.add(jMenuItem7);
 
         setClosable(true);
@@ -298,11 +305,11 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
 
         jLabel11.setText("TOTAL ABONOS");
 
-        txtsaldoactual1.setEditable(false);
-        txtsaldoactual1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtsaldoactual1.setForeground(new java.awt.Color(0, 153, 255));
-        txtsaldoactual1.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        txtsaldoactual1.setText("$ 0");
+        txtabonoacumulado.setEditable(false);
+        txtabonoacumulado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtabonoacumulado.setForeground(new java.awt.Color(0, 153, 255));
+        txtabonoacumulado.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        txtabonoacumulado.setText("$ 0");
 
         jLabel12.setText("CANT. ABONOS");
 
@@ -328,7 +335,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtsaldoactual1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtabonoacumulado, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -350,7 +357,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
                         .addGap(4, 4, 4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtsaldoactual1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtabonoacumulado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(4, 4, 4)))
@@ -387,6 +394,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setComponentPopupMenu(jPopupMenu1);
         jTable1.setRowHeight(22);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
@@ -449,6 +457,11 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/add-page.png"))); // NOI18N
         jMenuItem1.setText("Nuevo");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
@@ -475,6 +488,11 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vista_style_business_and_data_icons_icons_pack_120673/imprimir-icono-3650-32.png"))); // NOI18N
         jMenuItem4.setText("Imprimir Comprobante");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem4);
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_MASK));
@@ -597,13 +615,30 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        Object key = edicion.msjQuest(2, "ingresa el numero de recibo de pago o comprobante.");
-        Montar_Data_Pago(key);
+        NUMERO_RECIBO_PAGO = edicion.msjQuest(2, "ingresa el numero de recibo de pago o comprobante.");
+        report.RECIBO_DE_PAGO_CLIENTE(NUMERO_RECIBO_PAGO);
+//        Montar_Data_Pago(key);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        report.RECIBO_DE_PAGO_CLIENTE(txtnumidpago.getText());
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        NUMERO_RECIBO_PAGO = jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+        report.RECIBO_DE_PAGO_CLIENTE(NUMERO_RECIBO_PAGO);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        nuevo();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -646,6 +681,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton radioefectivo;
     private javax.swing.JRadioButton radiotarjeta;
     private javax.swing.JTextField txtabono;
+    private javax.swing.JTextField txtabonoacumulado;
     private javax.swing.JTextField txtcliente;
     private javax.swing.JTextField txtcntdevuelta;
     private javax.swing.JTextField txtcntrecibo;
@@ -653,7 +689,6 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtnumorden;
     private javax.swing.JTextField txtnumrecibo;
     private javax.swing.JTextField txtsaldoactual;
-    private javax.swing.JTextField txtsaldoactual1;
     private javax.swing.JTextField txtsubtotal;
     // End of variables declaration//GEN-END:variables
 
@@ -707,8 +742,8 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         Object[][] rs = pagoDao.HISTORIAL_PAGOS_CLIENTE(KEY);
         if (rs.length > 0) {
             edicion.llenarTabla(jTable1, rs);
-            edicion.calcula_total(jTable1, lbabono, txtsaldoactual1, 2);
-            int saldofinal = edicion.toNumeroEntero(txtsubtotal.getText()) - edicion.toNumeroEntero(txtsaldoactual1.getText());
+            edicion.calcula_total(jTable1, lbabono, txtabonoacumulado, 2);
+            int saldofinal = edicion.toNumeroEntero(txtsubtotal.getText()) - edicion.toNumeroEntero(txtabonoacumulado.getText());
             txtsaldoactual.setText("$ " + formatoNumero.numerico(saldofinal));
         } else {
             edicion.limpiar_tablas(jTable1);
@@ -770,7 +805,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         DATA_PAGO[4] = "'" + Variables_Gloabales.EMPLEADO.getIdentificacion() + "'";
         DATA_PAGO[5] = edicion.toNumeroEntero(txtnumidpago.getText());
         DATA_PAGO[6] = edicion.toNumeroEntero(txtcntrecibo.getText());
-        DATA_PAGO[7] = edicion.toNumeroEntero(txtcntdevuelta.getText());
+        DATA_PAGO[7] = edicion.toNumeroEntero(txtcntrecibo.getText()) - edicion.toNumeroEntero(txtabono.getText());
         DATA_PAGO[8] = edicion.toNumeroEntero(txtsaldoactual.getText()) - edicion.toNumeroEntero(txtabono.getText());
         DATA_PAGO[9] = "'" + txtnumrecibo.getText() + "'";
         return DATA_PAGO;
@@ -794,6 +829,23 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         } else {
             edicion.mensajes(1, "el comprobante aun no se ha registrado.");
         }
+    }
+
+    private void nuevo() {
+        PagosClientes pc = new PagosClientes();
+        jdfechaemision.setDate(DateUtil.newTimestamp());
+        txtnumidpago.setText(pagoDao.NUMERO_RECIBO_PAGO());
+        txtnumorden.setText(null);
+        txtcliente.setText("");
+        txtabono.setText("$ " + formatoNumero.numerico(pc.getValorpago()));
+        txtcntrecibo.setText("$ " + formatoNumero.numerico(pc.getCntrecibida()));
+        txtcntdevuelta.setText("$ " + formatoNumero.numerico(pc.getCntdevuelta()));
+        txtnumrecibo.setText(pc.getNumrecibo());
+        txtsubtotal.setText("$ 0");
+        txtsaldoactual.setText("$ 0");
+        txtabonoacumulado.setText("$ 0");
+        lbabono.setText("0");
+        edicion.limpiar_tablas(jTable1);
     }
 
 }
