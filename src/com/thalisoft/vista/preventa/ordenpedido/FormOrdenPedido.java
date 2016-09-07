@@ -1,4 +1,4 @@
-package com.thalisoft.vista.ordencompra;
+package com.thalisoft.vista.preventa.ordenpedido;
 
 import com.thalisoft.controller.index.ControllerContenedor;
 import com.thalisoft.main.util.CambiaFormatoTexto;
@@ -8,8 +8,8 @@ import com.thalisoft.main.util.Variables_Gloabales;
 import com.thalisoft.main.util.report.Manager_Report;
 import com.thalisoft.model.cliente.Cliente;
 import com.thalisoft.model.cliente.ClienteDao;
-import com.thalisoft.model.ordencompra.OrdenCompra;
-import com.thalisoft.model.ordencompra.OrdenCompraDao;
+import com.thalisoft.model.preventa.ordenpedido.OrdenPedido;
+import com.thalisoft.model.preventa.ordenpedido.OrdenPedidoDao;
 import com.thalisoft.model.producto.Producto;
 import com.thalisoft.model.producto.ProductoDao;
 import com.thalisoft.model.proveedor.Proveedor;
@@ -34,10 +34,10 @@ import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-public class FormOrdenCompra extends javax.swing.JInternalFrame {
+public class FormOrdenPedido extends javax.swing.JInternalFrame {
 
-    OrdenCompra ordenCompra;
-    OrdenCompraDao ordenCompraDao;
+    OrdenPedido ordenCompra;
+    OrdenPedidoDao ordenCompraDao;
     ProductoDao productoDao;
     ProveedorDao proveedorDao;
     ClienteDao clienteDao;
@@ -49,12 +49,12 @@ public class FormOrdenCompra extends javax.swing.JInternalFrame {
     private Object KEY, IDDETALLEORDEN;
     private String NUMERO_ORDEN;
 
-    public FormOrdenCompra() {
+    public FormOrdenPedido() {
         report = new Manager_Report();
         clienteDao = new ClienteDao();
         productoDao = new ProductoDao();
         proveedorDao = new ProveedorDao();
-        ordenCompraDao = new OrdenCompraDao();
+        ordenCompraDao = new OrdenPedidoDao();
 
         initComponents();
         AccionesFormulario();
@@ -141,10 +141,10 @@ public class FormOrdenCompra extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Orden de Compra");
+        setTitle("Orden de Pedido");
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ORDEN DE COMPRA", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Black", 0, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ORDEN DE PEDIDO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Black", 0, 18))); // NOI18N
 
         jLabel1.setText("NUMERO DE ORDEN");
 
@@ -724,7 +724,7 @@ public class FormOrdenCompra extends javax.swing.JInternalFrame {
                 edicion.mensajes(1, "la orden ingresada no se encuentra registrada");
             }
         } catch (ParseException ex) {
-            Logger.getLogger(FormOrdenCompra.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormOrdenPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -766,7 +766,7 @@ public class FormOrdenCompra extends javax.swing.JInternalFrame {
                     if (SI_NO == 0) {
                         if (ordenCompraDao.CRUD_ORDENCOMPRA(Cargar_Data_Componente(1)) != false) {
                             CARGAR_DETALLE();
-                            edicion.mensajes(2, "orden de compra modificada correctamente");
+                            edicion.mensajes(2, "orden de pedido modificada correctamente");
                         }
                     }
                 }
@@ -774,7 +774,7 @@ public class FormOrdenCompra extends javax.swing.JInternalFrame {
                 edicion.mensajes(1, "la orden aun no hacido registrada.");
             }
         } catch (ParseException ex) {
-            Logger.getLogger(FormOrdenCompra.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormOrdenPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -793,7 +793,7 @@ public class FormOrdenCompra extends javax.swing.JInternalFrame {
             if (ordenCompraDao.CONSULTA_ORDEN_COMPRA(NUMERO_ORDEN) != null) {
                 report.ORDEN_DE_COMPRA(NUMERO_ORDEN);
             } else {
-                edicion.mensajes(1, "la orden de compra # " + NUMERO_ORDEN + " no sea registrado.");
+                edicion.mensajes(1, "la orden de pedido # " + NUMERO_ORDEN + " no sea registrado.");
             }
         } catch (Exception e) {
         }
@@ -805,7 +805,7 @@ public class FormOrdenCompra extends javax.swing.JInternalFrame {
             if (ordenCompraDao.CONSULTA_ORDEN_COMPRA(NUMERO_ORDEN) != null) {
                 report.ORDEN_DE_COMPRA_PEDIDO(NUMERO_ORDEN);
             } else {
-                edicion.mensajes(1, "la orden de compra # " + NUMERO_ORDEN + " no sea registrado.");
+                edicion.mensajes(1, "la orden de pedido # " + NUMERO_ORDEN + " no sea registrado.");
             }
         } catch (Exception e) {
         }
@@ -1124,7 +1124,7 @@ public class FormOrdenCompra extends javax.swing.JInternalFrame {
     }
 
     private void nuevo() {
-        ordenCompra = new OrdenCompra();
+        ordenCompra = new OrdenPedido();
         ordenCompra.setCliente(new Cliente());
         ordenCompra.setProveedor(new Proveedor());
         Montar_Data_Componente();

@@ -1,12 +1,12 @@
  
-package com.thalisoft.model.ordencompra;
+package com.thalisoft.model.preventa.ordenpedido;
 
 import com.thalisoft.model.cliente.Cliente;
 import com.thalisoft.model.empleado.Empleado;
 import com.thalisoft.model.proveedor.Proveedor;
 import java.util.Date;
 
- public class OrdenCompra {
+ public class OrdenPedido {
     
     private int idordencompra;
     private Date fechaEntrega;
@@ -18,7 +18,7 @@ import java.util.Date;
     private Empleado empleado;
     private Cliente cliente;
     private Object cotizacion;
-    private DetalleOrdenCompra detalleOrdenCompra;
+    private DetalleOrdenPedido detalleOrdenCompra;
     private Date fechahoraingreso;
 
     public int getIdordencompra() {
@@ -109,11 +109,11 @@ import java.util.Date;
         this.cotizacion = cotizacion;
     }
 
-    public DetalleOrdenCompra getDetalleOrdenCompra() {
+    public DetalleOrdenPedido getDetalleOrdenCompra() {
         return detalleOrdenCompra;
     }
 
-    public void setDetalleOrdenCompra(DetalleOrdenCompra detalleOrdenCompra) {
+    public void setDetalleOrdenCompra(DetalleOrdenPedido detalleOrdenCompra) {
         this.detalleOrdenCompra = detalleOrdenCompra;
     }
     

@@ -1,4 +1,4 @@
-package com.thalisoft.model.pagos;
+package com.thalisoft.model.preventa.ordenpedido.pagos.cliente;
 
 import com.thalisoft.main.util.DateUtil;
 import com.thalisoft.main.util.Edicion;
@@ -6,7 +6,7 @@ import com.thalisoft.main.util.database;
 import com.thalisoft.model.cliente.Cliente;
 import com.thalisoft.model.cliente.ClienteDao;
 import com.thalisoft.model.empleado.EmpleadoDao;
-import com.thalisoft.model.ordencompra.OrdenCompraDao;
+import com.thalisoft.model.preventa.ordenpedido.OrdenPedidoDao;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +29,7 @@ public class PagosClientesDao extends database {
                 pc.setIdpagocliente(edicion.toNumeroEntero(rs[0][0].toString()));
                 pc.setFechahoraemision(DateUtil.getDateTime(rs[0][1]));
                 pc.setFormapago(rs[0][2].toString());
-                pc.setOrdenCompra(new OrdenCompraDao().CONSULTA_ORDEN_COMPRA(rs[0][3]));
+                pc.setOrdenCompra(new OrdenPedidoDao().CONSULTA_ORDEN_COMPRA(rs[0][3]));
                 pc.setEmpleado(new EmpleadoDao().CONSULTAR_EMPLEADO(rs[0][4]));
                 pc.setNumrecibo(rs[0][5].toString());
                 pc.setValorpago(edicion.toNumeroEntero(rs[0][6].toString()));

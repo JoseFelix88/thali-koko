@@ -1,4 +1,4 @@
-package com.thalisoft.model.ordencompra;
+package com.thalisoft.model.preventa.ordenpedido;
 
 import com.thalisoft.main.util.DateUtil;
 import com.thalisoft.main.util.database;
@@ -7,7 +7,7 @@ import com.thalisoft.model.empleado.EmpleadoDao;
 import com.thalisoft.model.proveedor.ProveedorDao;
 import java.text.ParseException;
 
-public class OrdenCompraDao extends database {
+public class OrdenPedidoDao extends database {
 
     public boolean CRUD_ORDENCOMPRA(Object[] key) {
         return EJECUTAR_SP("CRUD_ORDEN_COMPRA", key);
@@ -21,15 +21,15 @@ public class OrdenCompraDao extends database {
         return null;
     }
 
-    public OrdenCompra CONSULTA_ORDEN_COMPRA(Object key) throws ParseException{
-        OrdenCompra compra = null;
+    public OrdenPedido CONSULTA_ORDEN_COMPRA(Object key) throws ParseException{
+        OrdenPedido compra = null;
         ProveedorDao pd;
         ClienteDao cd;
         EmpleadoDao ed;
         Object param = 1+",'"+key+"'";
         Object[][] rs = SELECT_SP("SELECT_ORDEN_COMPRA", param);
         if (rs.length > 0) {
-            compra = new OrdenCompra();
+            compra = new OrdenPedido();
             pd = new ProveedorDao();
             ed = new EmpleadoDao();
             cd = new ClienteDao();                    

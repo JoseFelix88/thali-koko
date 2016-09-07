@@ -1,7 +1,7 @@
-package com.thalisoft.model.pagos;
+package com.thalisoft.model.preventa.ordenpedido.pagos.cliente;
 
 import com.thalisoft.model.empleado.Empleado;
-import com.thalisoft.model.ordencompra.OrdenCompra;
+import com.thalisoft.model.preventa.ordenpedido.OrdenPedido;
 import java.util.Date;
 
 public class PagosClientes {
@@ -9,7 +9,7 @@ public class PagosClientes {
     private int idpagocliente;
     private Date fechahoraemision;
     private String formapago;
-    private OrdenCompra ordenCompra;
+    private OrdenPedido ordenCompra;
     private Empleado empleado;
     private String numrecibo;
     private int valorpago;
@@ -40,11 +40,11 @@ public class PagosClientes {
         this.formapago = formapago;
     }
 
-    public OrdenCompra getOrdenCompra() {
+    public OrdenPedido getOrdenCompra() {
         return ordenCompra;
     }
 
-    public void setOrdenCompra(OrdenCompra ordenCompra) {
+    public void setOrdenCompra(OrdenPedido ordenCompra) {
         this.ordenCompra = ordenCompra;
     }
 

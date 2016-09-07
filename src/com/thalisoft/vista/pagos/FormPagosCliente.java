@@ -5,10 +5,10 @@ import com.thalisoft.main.util.DateUtil;
 import com.thalisoft.main.util.Edicion;
 import com.thalisoft.main.util.Variables_Gloabales;
 import com.thalisoft.main.util.report.Manager_Report;
-import com.thalisoft.model.ordencompra.OrdenCompra;
-import com.thalisoft.model.ordencompra.OrdenCompraDao;
-import com.thalisoft.model.pagos.PagosClientes;
-import com.thalisoft.model.pagos.PagosClientesDao;
+import com.thalisoft.model.preventa.ordenpedido.OrdenPedido;
+import com.thalisoft.model.preventa.ordenpedido.OrdenPedidoDao;
+import com.thalisoft.model.preventa.ordenpedido.pagos.cliente.PagosClientes;
+import com.thalisoft.model.preventa.ordenpedido.pagos.cliente.PagosClientesDao;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -18,11 +18,11 @@ import java.util.logging.Logger;
 
 public class FormPagosCliente extends javax.swing.JInternalFrame {
 
-    OrdenCompra ordenCompra;
+    OrdenPedido ordenCompra;
     Edicion edicion = new Edicion();
     CambiaFormatoTexto formatoNumero = new CambiaFormatoTexto();
     static String FORMA_PAGO;
-    OrdenCompraDao ordenDao;
+    OrdenPedidoDao ordenDao;
     PagosClientesDao pagoDao;
     private Object NUMERO_RECIBO_PAGO;
     Manager_Report report = new Manager_Report();
@@ -177,7 +177,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         txtnumidpago.setEditable(false);
         txtnumidpago.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel4.setText("No. Orden de Compra");
+        jLabel4.setText("No. Orden de Pedido");
 
         txtnumorden.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtnumorden.addActionListener(new java.awt.event.ActionListener() {
@@ -497,7 +497,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Cerrar.png"))); // NOI18N
-        jMenuItem5.setText("Anular Comprobante");
+        jMenuItem5.setText("Devolver Comprobante");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -595,7 +595,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
 
     private void txtnumordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumordenActionPerformed
         try {
-            ordenDao = new OrdenCompraDao();
+            ordenDao = new OrdenPedidoDao();
             ordenCompra = ordenDao.CONSULTA_ORDEN_COMPRA(txtnumorden.getText());
             if (ordenCompra != null) {
                 txtcliente.setText(ordenCompra.getCliente().getIdentificacion() + " - " + ordenCompra.getCliente().getNombrecompleto());
@@ -605,7 +605,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
                 txtabono.selectAll();
                 txtabono.requestFocus();
             } else {
-                edicion.mensajes(1, "la orden de compra # " + txtnumorden.getText() + " no se encuentra registrada.");
+                edicion.mensajes(1, "la orden de pedido # " + txtnumorden.getText() + " no se encuentra registrada.");
             }
         } catch (ParseException ex) {
             Logger.getLogger(FormPagosCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -694,7 +694,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
 
     private boolean validacionFormulario() {
         if (txtnumorden.getText().isEmpty() | txtnumorden.getText() == null) {
-            edicion.mensajes(1, "ingresa el numero de la orden de compra.");
+            edicion.mensajes(1, "ingresa el numero de la orden de pedido.");
             return false;
         }
 

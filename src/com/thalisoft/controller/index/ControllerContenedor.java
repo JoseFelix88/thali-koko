@@ -7,7 +7,7 @@ import com.thalisoft.vista.cliente.FormListarClientes;
 import com.thalisoft.vista.empleado.FormEmpleado;
 import com.thalisoft.vista.empleado.FormListarEmpleados;
 import com.thalisoft.vista.index.Contenedor;
-import com.thalisoft.vista.ordencompra.FormOrdenCompra;
+import com.thalisoft.vista.preventa.ordenpedido.FormOrdenPedido;
 import com.thalisoft.vista.producto.FormListaProductos;
 import com.thalisoft.vista.proveedor.FormListarProveedor;
 import java.beans.PropertyVetoException;
@@ -40,7 +40,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
      FormPedidoPuntoEntrega formPedidoPuntoEntrega;
      FormConsumoSaldoGeneral formConsumoSaldoGeneral;*/
 
-    FormOrdenCompra formOrdenCompra;
+    FormOrdenPedido formOrdenCompra;
     FormEmpleado formEmpleado;
     FormListarEmpleados formListarEmpleados;
     FormCliente formCliente;
@@ -174,7 +174,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
 
             case "ORDENCOMPRA":
                 if (Obtener_Estado_Formulario(this.formOrdenCompra, Contenedor.Panel_Contenedor)) {
-                    formOrdenCompra = new FormOrdenCompra();
+                    formOrdenCompra = new FormOrdenPedido();
                     formOrdenCompra.show();
                     Contenedor.Panel_Contenedor.add(formOrdenCompra);
                     java.awt.Dimension Tamaño_Panel = Contenedor.Panel_Contenedor.getSize();
@@ -330,7 +330,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
 
              case "Orden de Compra":
              if (Obtener_Estado_Formulario(this.formOrdenCompra, Contenedor.Panel_Contenedor)) {
-             formOrdenCompra = new FormOrdenCompra();
+             formOrdenCompra = new FormOrdenPedido();
              formOrdenCompra.show();
              Contenedor.Panel_Contenedor.add(formOrdenCompra);
              java.awt.Dimension Tamaño_Panel = Contenedor.Panel_Contenedor.getSize();

@@ -1,15 +1,15 @@
  
-package com.thalisoft.model.ordencompra;
+package com.thalisoft.model.preventa.ordenpedido;
 
 import com.thalisoft.model.producto.Producto;
 
  
-public class DetalleOrdenCompra {
+public class DetalleOrdenPedido {
     private int iddetalleordencompra;
     private int cantidad;
     private int valorUnidad;
     private int costoTotal;
-    private OrdenCompra ordenCompra;
+    private OrdenPedido ordenCompra;
     private Producto producto;
     private String especificacion;
 
@@ -45,11 +45,11 @@ public class DetalleOrdenCompra {
         this.costoTotal = costoTotal;
     }
 
-    public OrdenCompra getOrdenCompra() {
+    public OrdenPedido getOrdenCompra() {
         return ordenCompra;
     }
 
-    public void setOrdenCompra(OrdenCompra ordenCompra) {
+    public void setOrdenCompra(OrdenPedido ordenCompra) {
         this.ordenCompra = ordenCompra;
     }
 

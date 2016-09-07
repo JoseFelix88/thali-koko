@@ -180,7 +180,7 @@
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="iconifiable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="Orden de Compra"/>
+    <Property name="title" type="java.lang.String" value="Orden de Pedido"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -226,7 +226,7 @@
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="2" title="ORDEN DE COMPRA">
+            <TitledBorder justification="2" title="ORDEN DE PEDIDO">
               <Font PropertyName="font" name="Arial Black" size="18" style="0"/>
             </TitledBorder>
           </Border>
