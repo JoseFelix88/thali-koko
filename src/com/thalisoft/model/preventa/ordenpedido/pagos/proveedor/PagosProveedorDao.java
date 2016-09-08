@@ -3,8 +3,7 @@ package com.thalisoft.model.preventa.ordenpedido.pagos.proveedor;
 import com.thalisoft.main.util.DateUtil;
 import com.thalisoft.main.util.Edicion;
 import com.thalisoft.main.util.database;
-import com.thalisoft.model.cliente.ClienteDao;
-import com.thalisoft.model.empleado.EmpleadoDao;
+import com.thalisoft.model.maestros.empleado.EmpleadoDao;
 import com.thalisoft.model.preventa.ordenpedido.OrdenPedidoDao;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -25,10 +24,10 @@ public class PagosProveedorDao extends database {
         if (rs.length > 0) {
             try {
                 pp = new PagosProveedor();
-                pp.setIdpagocliente(edicion.toNumeroEntero(rs[0][0].toString()));
+                pp.setIdpagoproveedor(edicion.toNumeroEntero(rs[0][0].toString()));
                 pp.setFechahoraemision(DateUtil.getDateTime(rs[0][1]));
                 pp.setFormapago(rs[0][2].toString());
-                pp.setOrdenCompra(new OrdenPedidoDao().CONSULTA_ORDEN_COMPRA(rs[0][3]));
+                pp.setOrdenPedido(new OrdenPedidoDao().CONSULTA_ORDEN_COMPRA(rs[0][3]));
                 pp.setEmpleado(new EmpleadoDao().CONSULTAR_EMPLEADO(rs[0][4]));
                 pp.setNumrecibo(rs[0][5].toString());
                 pp.setValorpago(edicion.toNumeroEntero(rs[0][6].toString()));

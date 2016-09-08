@@ -1,9 +1,9 @@
  
 package com.thalisoft.model.preventa.ordenpedido;
 
-import com.thalisoft.model.cliente.Cliente;
-import com.thalisoft.model.empleado.Empleado;
-import com.thalisoft.model.proveedor.Proveedor;
+import com.thalisoft.model.maestros.cliente.Cliente;
+import com.thalisoft.model.maestros.empleado.Empleado;
+import com.thalisoft.model.maestros.proveedor.Proveedor;
 import java.util.Date;
 
  public class OrdenPedido {

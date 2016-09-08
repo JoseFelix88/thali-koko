@@ -5,10 +5,10 @@
  */
 package com.thalisoft.main.util;
 
-import com.thalisoft.model.empleado.Empleado;
-import com.thalisoft.model.empleado.EmpleadoDao;
-import com.thalisoft.model.producto.Producto;
-import com.thalisoft.model.producto.ProductoDao;
+import com.thalisoft.model.maestros.empleado.Empleado;
+import com.thalisoft.model.maestros.empleado.EmpleadoDao;
+import com.thalisoft.model.maestros.producto.Producto;
+import com.thalisoft.model.maestros.producto.ProductoDao;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

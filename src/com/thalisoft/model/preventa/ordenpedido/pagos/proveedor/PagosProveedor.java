@@ -1,28 +1,28 @@
 package com.thalisoft.model.preventa.ordenpedido.pagos.proveedor;
 
 import com.thalisoft.model.preventa.ordenpedido.pagos.cliente.*;
-import com.thalisoft.model.empleado.Empleado;
+import com.thalisoft.model.maestros.empleado.Empleado;
 import com.thalisoft.model.preventa.ordenpedido.OrdenPedido;
 import java.util.Date;
 
 public class PagosProveedor {
 
-    private int idpagocliente;
+    private int idpagoproveedor;
     private Date fechahoraemision;
     private String formapago;
-    private OrdenPedido ordenCompra;
+    private OrdenPedido ordenPedido;
     private Empleado empleado;
     private String numrecibo;
     private int valorpago;
     private int cntrecibida;
     private int cntdevuelta;
 
-    public int getIdpagocliente() {
-        return idpagocliente;
+    public int getIdpagoproveedor() {
+        return idpagoproveedor;
     }
 
-    public void setIdpagocliente(int idpagocliente) {
-        this.idpagocliente = idpagocliente;
+    public void setIdpagoproveedor(int idpagoproveedor) {
+        this.idpagoproveedor = idpagoproveedor;
     }
 
     public Date getFechahoraemision() {
@@ -41,12 +41,12 @@ public class PagosProveedor {
         this.formapago = formapago;
     }
 
-    public OrdenPedido getOrdenCompra() {
-        return ordenCompra;
+    public OrdenPedido getOrdenPedido() {
+        return ordenPedido;
     }
 
-    public void setOrdenCompra(OrdenPedido ordenCompra) {
-        this.ordenCompra = ordenCompra;
+    public void setOrdenPedido(OrdenPedido ordenPedido) {
+        this.ordenPedido = ordenPedido;
     }
 
     public Empleado getEmpleado() {

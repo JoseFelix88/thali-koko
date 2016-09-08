@@ -1,6 +1,6 @@
 package com.thalisoft.model.preventa.ordenpedido.pagos.cliente;
 
-import com.thalisoft.model.empleado.Empleado;
+import com.thalisoft.model.maestros.empleado.Empleado;
 import com.thalisoft.model.preventa.ordenpedido.OrdenPedido;
 import java.util.Date;
 

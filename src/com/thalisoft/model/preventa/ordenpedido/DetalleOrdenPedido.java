@@ -1,7 +1,7 @@
  
 package com.thalisoft.model.preventa.ordenpedido;
 
-import com.thalisoft.model.producto.Producto;
+import com.thalisoft.model.maestros.producto.Producto;
 
  
 public class DetalleOrdenPedido {

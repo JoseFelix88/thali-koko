@@ -2,9 +2,9 @@ package com.thalisoft.model.preventa.ordenpedido;
 
 import com.thalisoft.main.util.DateUtil;
 import com.thalisoft.main.util.database;
-import com.thalisoft.model.cliente.ClienteDao;
-import com.thalisoft.model.empleado.EmpleadoDao;
-import com.thalisoft.model.proveedor.ProveedorDao;
+import com.thalisoft.model.maestros.cliente.ClienteDao;
+import com.thalisoft.model.maestros.empleado.EmpleadoDao;
+import com.thalisoft.model.maestros.proveedor.ProveedorDao;
 import java.text.ParseException;
 
 public class OrdenPedidoDao extends database {

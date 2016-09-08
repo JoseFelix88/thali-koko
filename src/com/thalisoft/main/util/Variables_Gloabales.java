@@ -5,7 +5,7 @@
  */
 package com.thalisoft.main.util;
 
-import com.thalisoft.model.empleado.Empleado;
+import com.thalisoft.model.maestros.empleado.Empleado;
 
 
 

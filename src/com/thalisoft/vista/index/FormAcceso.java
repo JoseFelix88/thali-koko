@@ -4,8 +4,8 @@ import com.thalisoft.controller.index.ControllerContenedor;
 import com.thalisoft.main.util.Edicion;
 import com.thalisoft.main.util.JFrameConFondo;
 import com.thalisoft.main.util.Variables_Gloabales;
-import com.thalisoft.model.empleado.Empleado;
-import com.thalisoft.model.empleado.EmpleadoDao;
+import com.thalisoft.model.maestros.empleado.Empleado;
+import com.thalisoft.model.maestros.empleado.EmpleadoDao;
 
 /**
  *
