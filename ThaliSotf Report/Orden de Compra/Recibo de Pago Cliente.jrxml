@@ -21,7 +21,8 @@ pagosclientes.valorsaldo,
 clientes.nombreapellidos,
 clientes.telefono,
 clientes.identificacion,
-clientes.direccion
+clientes.direccion,
+clientes.email
 FROM
 pagosclientes ,
 ordencompras ,
@@ -29,8 +30,7 @@ clientes
 WHERE
 pagosclientes.ordencompra = ordencompras.idordencompras AND
 ordencompras.cliente = clientes.identificacion AND
-pagosclientes.idpagocliente = $P{NUMPAGO}
-]]>
+pagosclientes.idpagocliente = $P{NUMPAGO}]]>
 	</queryString>
 	<field name="idpagocliente" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -72,6 +72,9 @@ pagosclientes.idpagocliente = $P{NUMPAGO}
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -194,9 +197,9 @@ pagosclientes.idpagocliente = $P{NUMPAGO}
 					<textFieldExpression><![CDATA["PAGO REGISTRADO POR: "+$F{empleado}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement uuid="5855c84b-daec-46c7-a020-aa470eec8911" x="307" y="0" width="255" height="67"/>
-					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["IDENTIFICACION: "+$F{identificacion}+"\nCLIENTE: "+$F{nombreapellidos}+"\nTELEFONO: "+$F{telefono}+"\nDIRECCIÓN: "+$F{direccion}]]></textFieldExpression>
+					<reportElement uuid="5855c84b-daec-46c7-a020-aa470eec8911" x="307" y="0" width="255" height="81"/>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA["IDENTIFICACION: "+$F{identificacion}+"\nCLIENTE: "+$F{nombreapellidos}+"\nTELEFONO: "+$F{telefono}+"\nDIRECCIÓN: "+$F{direccion}+"\nE-mail: "+$F{email}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

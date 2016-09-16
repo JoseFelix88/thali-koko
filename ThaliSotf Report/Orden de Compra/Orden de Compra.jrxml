@@ -89,8 +89,9 @@ empleados.nombres) AS empleado,
 clientes.nombreapellidos AS cliente,
 clientes.identificacion,
 clientes.direccion,
-clientes.telefono,
-DATEDIFF(ordencompras.fechaentrega,curdate()) as dias_para_entrega
+clientes.telefono,clientes.email,
+if(DATEDIFF(ordencompras.fechaentrega,curdate()) > 0, concat('Son ',DATEDIFF(ordencompras.fechaentrega,curdate()), 'dias para la entrega'),
+CONCAT('El pedido esta retrazado en ',DATEDIFF(ordencompras.fechaentrega,curdate())*(-1),' dias') )   as dias_para_entrega
 FROM
 ordencompras ,
 clientes ,
@@ -137,7 +138,10 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 	<field name="telefono" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="dias_para_entrega" class="java.lang.Long"/>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dias_para_entrega" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -154,7 +158,7 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Comic Sans MS" size="14" isBold="true"/>
 					</textElement>
-					<text><![CDATA[ORDEN DE COMPRA]]></text>
+					<text><![CDATA[ORDEN DE PEDIDO]]></text>
 				</staticText>
 			</frame>
 			<frame>
@@ -164,7 +168,7 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 					<textElement>
 						<font size="10"/>
 					</textElement>
-					<textFieldExpression><![CDATA["No. Orden de Compra: "+$F{NumOrdenCompra}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["No. Orden de Pedido: "+$F{NumOrdenCompra}]]></textFieldExpression>
 				</textField>
 				<textField pattern="EEE, dd MMM, yyyy">
 					<reportElement uuid="389b0c6d-b348-4777-b48c-7b90aebb5473" x="87" y="27" width="118" height="14"/>
@@ -200,13 +204,13 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="e6b2f83c-0a7b-40ef-8e34-8c8a5e39c559" x="215" y="41" width="222" height="71"/>
+				<reportElement uuid="e6b2f83c-0a7b-40ef-8e34-8c8a5e39c559" x="215" y="41" width="222" height="76"/>
 				<textField>
 					<reportElement uuid="93d1964e-5b82-47d3-a7bc-dc07d0c5ab47" x="4" y="0" width="218" height="41"/>
 					<textElement>
 						<font size="10"/>
 					</textElement>
-					<textFieldExpression><![CDATA["Cliente: "+$F{identificacion}+" - "+$F{cliente}+"\nTelefono: "+$F{telefono}+"\nDirección: "+$F{direccion}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Cliente: "+$F{identificacion}+" - "+$F{cliente}+"\nTelefono: "+$F{telefono}+"\nDirección: "+$F{direccion}+"\nE-mail: "+$F{email}]]></textFieldExpression>
 				</textField>
 				<textField pattern="$ #,##0">
 					<reportElement uuid="a66527c5-6671-4069-a735-d5330f860fa6" x="89" y="41" width="85" height="15"/>
@@ -225,9 +229,9 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 				<textField>
 					<reportElement uuid="c088a7ed-ae2f-4748-a1df-a780c59e8a7d" x="4" y="56" width="218" height="15"/>
 					<textElement verticalAlignment="Middle">
-						<font size="7"/>
+						<font size="9" isBold="true" isUnderline="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["Faltan "+$F{dias_para_entrega}+" dias para la entrega de la orden."]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{dias_para_entrega}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<line>
@@ -257,25 +261,25 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 							</datasetParameter>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 						</datasetRun>
-						<jr:column width="154" uuid="d03b7b2e-d37b-4c59-83f6-2431a6742ab1">
+						<jr:column width="115" uuid="d03b7b2e-d37b-4c59-83f6-2431a6742ab1">
 							<jr:tableFooter style="table_TH" height="0" rowSpan="1"/>
 							<jr:columnHeader style="table_CH" height="30" rowSpan="1">
 								<staticText>
-									<reportElement uuid="e4c42b6a-9fc2-4200-992e-79443670ef7b" x="0" y="0" width="154" height="30"/>
+									<reportElement uuid="e4c42b6a-9fc2-4200-992e-79443670ef7b" x="0" y="0" width="115" height="30"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<text><![CDATA[Descripcion]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:columnFooter height="30" rowSpan="1">
 								<textField>
-									<reportElement uuid="0b8984db-4b79-4e1a-9b6b-f6bc81d7aabe" x="3" y="0" width="151" height="15"/>
+									<reportElement uuid="0b8984db-4b79-4e1a-9b6b-f6bc81d7aabe" x="3" y="0" width="112" height="15"/>
 									<textElement verticalAlignment="Middle">
 										<font size="7"/>
 									</textElement>
 									<textFieldExpression><![CDATA["Realizado Por: "+$P{empleado}]]></textFieldExpression>
 								</textField>
 								<textField pattern="dd/MM/yyyy HH.mm.ss">
-									<reportElement uuid="6b67831f-4ed4-453e-b9a1-2870555b0d13" x="4" y="15" width="150" height="15"/>
+									<reportElement uuid="6b67831f-4ed4-453e-b9a1-2870555b0d13" x="4" y="15" width="111" height="15"/>
 									<textElement verticalAlignment="Middle">
 										<font size="7"/>
 									</textElement>
@@ -284,7 +288,7 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 							</jr:columnFooter>
 							<jr:detailCell style="table_TD" height="29" rowSpan="1">
 								<textField>
-									<reportElement uuid="e5e4e8c4-ea3b-41b0-8f48-039a4cf91a22" x="4" y="0" width="150" height="29"/>
+									<reportElement uuid="e5e4e8c4-ea3b-41b0-8f48-039a4cf91a22" x="4" y="0" width="111" height="29"/>
 									<textElement verticalAlignment="Middle">
 										<font size="8"/>
 									</textElement>
@@ -304,7 +308,9 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 							<jr:detailCell style="table_TD" height="29" rowSpan="1">
 								<textField>
 									<reportElement uuid="d9f4fd62-e32d-4b28-8827-dd873e62d0b7" x="0" y="0" width="47" height="29"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="8"/>
+									</textElement>
 									<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
@@ -330,7 +336,9 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 							<jr:detailCell style="table_TD" height="29" rowSpan="1">
 								<textField pattern="$ #,##0">
 									<reportElement uuid="79f0b086-a228-4b22-9afc-6f46fdfb5d6c" x="0" y="0" width="44" height="29"/>
-									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font size="8"/>
+									</textElement>
 									<textFieldExpression><![CDATA[$F{valorunidad}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
@@ -356,25 +364,27 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 							<jr:detailCell style="table_TD" height="29" rowSpan="1">
 								<textField pattern="$ #,##0">
 									<reportElement uuid="908c59dc-9442-48bf-a6c2-cbd487ad0e0f" x="0" y="0" width="64" height="29"/>
-									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font size="8"/>
+									</textElement>
 									<textFieldExpression><![CDATA[$F{costototal}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="126" uuid="0a1e9d2a-ddd7-40b1-959d-cf7a6635c64a">
+						<jr:column width="187" uuid="0a1e9d2a-ddd7-40b1-959d-cf7a6635c64a">
 							<jr:tableFooter style="table_TH" height="0" rowSpan="1"/>
 							<jr:columnHeader style="table_CH" height="30" rowSpan="1">
 								<staticText>
-									<reportElement uuid="2f43b71f-50e6-4b6f-9da7-309880f1f18b" x="0" y="0" width="126" height="30"/>
+									<reportElement uuid="2f43b71f-50e6-4b6f-9da7-309880f1f18b" x="0" y="0" width="187" height="30"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<text><![CDATA[Especificaciones]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="table_TD" height="29" rowSpan="1">
 								<textField>
-									<reportElement uuid="25bb2320-5d9e-4ee4-b42d-18a3aaabd586" x="0" y="0" width="123" height="29"/>
-									<textElement textAlignment="Justified" verticalAlignment="Top">
-										<font size="5"/>
+									<reportElement uuid="25bb2320-5d9e-4ee4-b42d-18a3aaabd586" x="1" y="0" width="186" height="29"/>
+									<textElement textAlignment="Justified" verticalAlignment="Middle">
+										<font size="9"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$F{especificacion}]]></textFieldExpression>
 								</textField>
