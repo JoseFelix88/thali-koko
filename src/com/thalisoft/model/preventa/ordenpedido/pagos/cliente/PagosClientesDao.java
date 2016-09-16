@@ -21,7 +21,7 @@ public class PagosClientesDao extends database {
 
     public PagosClientes CONSULTA_PAGO_CLIENTE(Object KEY) {
         PagosClientes pc = null;
-        Object param = 0 + ",'" + KEY + "'";
+        Object param = 1 + ",'" + KEY + "'";
         Object[][] rs = SELECT_SP("SELECT_PAGOS_CLIENTE", param);
         if (rs.length > 0) {
             try {
@@ -36,6 +36,8 @@ public class PagosClientesDao extends database {
                 pc.setCntrecibida(edicion.toNumeroEntero(rs[0][7].toString()));
                 pc.setCntdevuelta(edicion.toNumeroEntero(rs[0][8].toString()));
                 pc.getOrdenCompra().setCliente(new ClienteDao().CONSULTAR_CLIENTE(rs[0][9]));
+                System.out.println("estado: "+rs[0][10]);
+                pc.setEstado(edicion.toNumeroEntero(rs[0][10].toString()));
             } catch (ParseException ex) {
                 Logger.getLogger(PagosClientesDao.class.getName()).log(Level.SEVERE, null, ex);
             }

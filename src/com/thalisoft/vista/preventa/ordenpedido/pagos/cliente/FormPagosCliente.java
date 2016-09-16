@@ -81,6 +81,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -483,6 +484,11 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
             }
         });
         jMenu1.add(jMenuItem3);
+
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F10, 0));
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/folder.png"))); // NOI18N
+        jMenuItem8.setText("Historial de Pagos");
+        jMenu1.add(jMenuItem8);
         jMenu1.add(jSeparator1);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
@@ -497,7 +503,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Cerrar.png"))); // NOI18N
-        jMenuItem5.setText("Devolver Comprobante");
+        jMenuItem5.setText("ANULAR PAGO");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -616,12 +622,26 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         NUMERO_RECIBO_PAGO = edicion.msjQuest(2, "ingresa el numero de recibo de pago o comprobante.");
-        report.RECIBO_DE_PAGO_CLIENTE(NUMERO_RECIBO_PAGO);
-//        Montar_Data_Pago(key);
+        PagosClientes pc = pagoDao.CONSULTA_PAGO_CLIENTE(NUMERO_RECIBO_PAGO);
+        if (pc != null) {
+            Montar_Data_Pago(pc.getIdpagocliente());
+            report.RECIBO_DE_PAGO_CLIENTE(NUMERO_RECIBO_PAGO);
+        } else {
+            edicion.mensajes(1, "recibo de pago no se encuentra registrado o fue aunulado.");
+        }
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
+        int si_no = (int) edicion.msjQuest(1, "estas seguro que deseas anular el pago?");
+        if (si_no == 0) {
+            if (pagoDao.CRUD_PAGO_CLIENTE(Cargar_Data_Pago(1)) != false) {
+                CARGAR_HISTORICO_PAGO(txtnumorden.getText());
+                edicion.mensajes(1, "pago anulado correctamente.");
+            }
+        }
+
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -664,6 +684,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -846,6 +867,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         txtabonoacumulado.setText("$ 0");
         lbabono.setText("0");
         edicion.limpiar_tablas(jTable1);
+        txtnumorden.grabFocus();
     }
 
 }

@@ -15,6 +15,7 @@ public class PagosClientes {
     private int valorpago;
     private int cntrecibida;
     private int cntdevuelta;
+    private int estado;
 
     public int getIdpagocliente() {
         return idpagocliente;
@@ -86,6 +87,14 @@ public class PagosClientes {
 
     public void setCntdevuelta(int cntdevuelta) {
         this.cntdevuelta = cntdevuelta;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
     
 }

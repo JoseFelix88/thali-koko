@@ -13,11 +13,12 @@ public class Cliente implements Serializable {
     private String direccion;
     private Empleado empleado;
     private Date fechahoraingreso;
+    private String email;
 
     public Cliente() {
     }
 
-    public Cliente(int idcliente, String identificacion, String nombrecompleto, String telefono, String direccion, Empleado empleado, Date fechahoraingreso) {
+    public Cliente(int idcliente, String identificacion, String nombrecompleto, String telefono, String direccion, Empleado empleado, Date fechahoraingreso, String email) {
         this.idcliente = idcliente;
         this.identificacion = identificacion;
         this.nombrecompleto = nombrecompleto;
@@ -25,7 +26,10 @@ public class Cliente implements Serializable {
         this.direccion = direccion;
         this.empleado = empleado;
         this.fechahoraingreso = fechahoraingreso;
+        this.email = email;
     }
+
+    
 
     public int getIdcliente() {
         return idcliente;
@@ -81,6 +85,14 @@ public class Cliente implements Serializable {
 
     public void setFechahoraingreso(Date fechahoraingreso) {
         this.fechahoraingreso = fechahoraingreso;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
 

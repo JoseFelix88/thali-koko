@@ -259,7 +259,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/thalisoft/image/iconos/cart.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Orden de Compra"/>
+            <Property name="text" type="java.lang.String" value="PRE-VENTA"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="JM_Orden_Compra">
@@ -273,7 +273,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/thalisoft/image/iconos/money.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Gestionar Orden de Compra"/>
+                <Property name="text" type="java.lang.String" value="Gestionar Orden de Pedido"/>
                 <Property name="actionCommand" type="java.lang.String" value="ORDENCOMPRA"/>
               </Properties>
               <Events>
@@ -315,7 +315,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/thalisoft/image/iconos/hand-holding-money-bills.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Pagos Orden de Compra"/>
+                <Property name="text" type="java.lang.String" value="Plan Separe"/>
                 <Property name="actionCommand" type="java.lang.String" value="ReporteInOut"/>
               </Properties>
               <Events>
@@ -513,7 +513,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/thalisoft/image/iconos/settings.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Maestros"/>
+            <Property name="text" type="java.lang.String" value="MAESTROS"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>

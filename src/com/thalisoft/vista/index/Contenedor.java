@@ -276,12 +276,12 @@ public class Contenedor extends javax.swing.JFrame {
 
         jMenu1.setForeground(new java.awt.Color(255, 255, 51));
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/cart.png"))); // NOI18N
-        jMenu1.setText("Orden de Compra");
+        jMenu1.setText("PRE-VENTA");
 
         JM_Orden_Compra.setBackground(new java.awt.Color(51, 51, 51));
         JM_Orden_Compra.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         JM_Orden_Compra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/money.png"))); // NOI18N
-        JM_Orden_Compra.setText("Gestionar Orden de Compra");
+        JM_Orden_Compra.setText("Gestionar Orden de Pedido");
         JM_Orden_Compra.setActionCommand("ORDENCOMPRA");
         JM_Orden_Compra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,7 +305,7 @@ public class Contenedor extends javax.swing.JFrame {
         JMReporteInOut.setBackground(new java.awt.Color(51, 51, 51));
         JMReporteInOut.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         JMReporteInOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/hand-holding-money-bills.png"))); // NOI18N
-        JMReporteInOut.setText("Pagos Orden de Compra");
+        JMReporteInOut.setText("Plan Separe");
         JMReporteInOut.setActionCommand("ReporteInOut");
         JMReporteInOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -416,7 +416,7 @@ public class Contenedor extends javax.swing.JFrame {
         jMenu3.setBackground(new java.awt.Color(255, 255, 255));
         jMenu3.setForeground(new java.awt.Color(204, 204, 0));
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/settings.png"))); // NOI18N
-        jMenu3.setText("Maestros");
+        jMenu3.setText("MAESTROS");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         JM_Empleado.setBackground(new java.awt.Color(255, 51, 51));

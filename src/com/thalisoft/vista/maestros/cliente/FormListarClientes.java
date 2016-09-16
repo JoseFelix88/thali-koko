@@ -55,20 +55,20 @@ public class FormListarClientes extends javax.swing.JInternalFrame {
         TB_LISTADO_CLIENTES.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         TB_LISTADO_CLIENTES.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "No. Ficha", "Identificacion", "Apellidos y Nombres", "Direccion", "Telefonos", "Registrado Por", "Fecha de Registro"
+                "No. Ficha", "Identificacion", "Apellidos y Nombres", "Direccion", "Telefonos", "Registrado Por", "Fecha de Registro", "E-mail"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true
+                false, false, false, false, false, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -86,7 +86,8 @@ public class FormListarClientes extends javax.swing.JInternalFrame {
         if (TB_LISTADO_CLIENTES.getColumnModel().getColumnCount() > 0) {
             TB_LISTADO_CLIENTES.getColumnModel().getColumn(0).setMaxWidth(75);
             TB_LISTADO_CLIENTES.getColumnModel().getColumn(2).setMinWidth(150);
-            TB_LISTADO_CLIENTES.getColumnModel().getColumn(3).setMinWidth(200);
+            TB_LISTADO_CLIENTES.getColumnModel().getColumn(3).setMinWidth(150);
+            TB_LISTADO_CLIENTES.getColumnModel().getColumn(7).setMinWidth(160);
         }
 
         jToolBar1.setRollover(true);
@@ -134,11 +135,9 @@ public class FormListarClientes extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 988, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
