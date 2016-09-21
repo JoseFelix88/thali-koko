@@ -90,7 +90,7 @@ clientes.nombreapellidos AS cliente,
 clientes.identificacion,
 clientes.direccion,
 clientes.telefono,
-if(DATEDIFF(ordencompras.fechaentrega,curdate()) > 0, concat('Son ',DATEDIFF(ordencompras.fechaentrega,curdate()), 'dias para la entrega'),
+if(DATEDIFF(ordencompras.fechaentrega,curdate()) > 0, concat('Son ',DATEDIFF(ordencompras.fechaentrega,curdate()), ' dias para la entrega'),
 CONCAT('El pedido esta retrazado en ',DATEDIFF(ordencompras.fechaentrega,curdate())*(-1),' dias') )     as dias_para_entrega
 FROM
 ordencompras ,
@@ -165,7 +165,7 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 					<textElement>
 						<font size="10"/>
 					</textElement>
-					<textFieldExpression><![CDATA["No. Orden de Compra: "+$F{NumOrdenCompra}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["No. Orden de Pedido: "+$F{NumOrdenCompra}]]></textFieldExpression>
 				</textField>
 				<textField pattern="EEE, dd MMM, yyyy">
 					<reportElement uuid="389b0c6d-b348-4777-b48c-7b90aebb5473" x="87" y="27" width="118" height="14"/>
