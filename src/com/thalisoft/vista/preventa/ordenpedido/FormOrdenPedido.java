@@ -18,6 +18,7 @@ import com.thalisoft.vista.maestros.cliente.FormCliente;
 import com.thalisoft.vista.index.Contenedor;
 import com.thalisoft.vista.preventa.ordenpedido.pagos.cliente.FormPagosCliente;
 import com.thalisoft.vista.maestros.producto.FormProducto;
+import com.thalisoft.vista.preventa.ordenpedido.pagos.proveedor.FormPagosProveedor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -609,8 +610,8 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
         jMenu1.add(jSeparator3);
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/file.png"))); // NOI18N
-        jMenuItem7.setText("Agregar Cotizacion");
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/folder.png"))); // NOI18N
+        jMenuItem7.setText("Relacion de Pedidos");
         jMenu1.add(jMenuItem7);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vista_style_business_and_data_icons_icons_pack_120673/imprimir-icono-3650-32.png"))); // NOI18N
@@ -631,7 +632,7 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
 
         jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/investment.png"))); // NOI18N
-        jMenuItem10.setText("Orden de Compra");
+        jMenuItem10.setText("Orden de Pedido");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem10ActionPerformed(evt);
@@ -658,11 +659,16 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/money.png"))); // NOI18N
         jMenuItem5.setText("Pago a Proveedor");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem5);
         jMenu2.add(jSeparator1);
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vista_style_business_and_data_icons_icons_pack_120673/de-pago-con-tarjeta-de-credito-icono-3855-48.png"))); // NOI18N
-        jMenuItem6.setText("Gestionar Pago de Cliente");
+        jMenuItem6.setText("Pago de Cliente");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -827,6 +833,24 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+         JInternalFrame ji = validador.getJInternalFrame(FormPagosProveedor.class.getName());
+        if (ji == null || ji.isClosed()) {
+            ji = new FormPagosCliente();
+            ControllerContenedor.getjDesktopPane1().add(ji, 0);
+            validador.addJIframe(FormPagosProveedor.class.getName(), ji);
+            ji.setVisible(true);
+        } else {
+            ji.show(true);
+            try {
+                ji.setIcon(false);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(FormCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

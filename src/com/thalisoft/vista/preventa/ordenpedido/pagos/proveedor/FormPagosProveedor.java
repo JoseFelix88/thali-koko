@@ -7,8 +7,8 @@ import com.thalisoft.main.util.Variables_Gloabales;
 import com.thalisoft.main.util.report.Manager_Report;
 import com.thalisoft.model.preventa.ordenpedido.OrdenPedido;
 import com.thalisoft.model.preventa.ordenpedido.OrdenPedidoDao;
-import com.thalisoft.model.preventa.ordenpedido.pagos.cliente.PagosClientes;
-import com.thalisoft.model.preventa.ordenpedido.pagos.cliente.PagosClientesDao;
+import com.thalisoft.model.preventa.ordenpedido.pagos.proveedor.PagosProveedor;
+import com.thalisoft.model.preventa.ordenpedido.pagos.proveedor.PagosProveedorDao;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -23,12 +23,12 @@ public class FormPagosProveedor extends javax.swing.JInternalFrame {
     CambiaFormatoTexto formatoNumero = new CambiaFormatoTexto();
     static String FORMA_PAGO;
     OrdenPedidoDao ordenDao;
-    PagosClientesDao pagoDao;
+    PagosProveedorDao pagoDao;
     private Object NUMERO_RECIBO_PAGO;
     Manager_Report report = new Manager_Report();
 
     public FormPagosProveedor() {
-        pagoDao = new PagosClientesDao();
+        pagoDao = new PagosProveedorDao();
         initComponents();
         AccionesFormulario();
         nuevo();
@@ -98,10 +98,10 @@ public class FormPagosProveedor extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Pagos Cliente");
+        setTitle("Pagos Proveedor");
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 153));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "GESTIONAR PAGOS DEL CLIENTE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "GESTIONAR PAGOS A PROVEEDOR", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18), new java.awt.Color(255, 255, 255))); // NOI18N
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Medio de Pago"));
 
@@ -425,7 +425,7 @@ public class FormPagosProveedor extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
+                                .addGap(0, 0, 0)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -580,7 +580,7 @@ public class FormPagosProveedor extends javax.swing.JInternalFrame {
         if (validacionFormulario() != false) {
             int si_no = (int) edicion.msjQuest(1, "estas seguro que deseas registrar el pago?");
             if (si_no == 0) {
-                if (pagoDao.CRUD_PAGO_CLIENTE(Cargar_Data_Pago(0)) != false) {
+                if (pagoDao.CRUD_PAGO_PROVEEDOR(Cargar_Data_Pago(0)) != false) {
                     CARGAR_HISTORICO_PAGO(txtnumorden.getText());
                     edicion.mensajes(2, "pago registrado correctamente.");
                 }
@@ -738,8 +738,8 @@ public class FormPagosProveedor extends javax.swing.JInternalFrame {
     }
 
     private void CARGAR_HISTORICO_PAGO(Object KEY) {
-        pagoDao = new PagosClientesDao();
-        Object[][] rs = pagoDao.HISTORIAL_PAGOS_CLIENTE(KEY);
+        pagoDao = new PagosProveedorDao();
+        Object[][] rs = pagoDao.HISTORIAL_PAGOS_PROVEEDOR(KEY);
         if (rs.length > 0) {
             edicion.llenarTabla(jTable1, rs);
             edicion.calcula_total(jTable1, lbabono, txtabonoacumulado, 2);
@@ -812,27 +812,27 @@ public class FormPagosProveedor extends javax.swing.JInternalFrame {
     }
 
     private void Montar_Data_Pago(Object key) {
-        PagosClientes pc = pagoDao.CONSULTA_PAGO_CLIENTE(key);
+        PagosProveedor pc = pagoDao.CONSULTA_PAGO_PROVEEDOR(key);
         if (pc != null) {
-            txtnumidpago.setText(edicion.AGREGAR_CEROS_LEFT(pc.getIdpagocliente()));
+            txtnumidpago.setText(edicion.AGREGAR_CEROS_LEFT(pc.getIdpagoproveedor()));
             jdfechaemision.setDate(pc.getFechahoraemision());
-            txtnumorden.setText(edicion.AGREGAR_CEROS_LEFT(pc.getOrdenCompra().getIdordencompra()));
-            txtcliente.setText(pc.getOrdenCompra().getCliente().getIdentificacion() + " - "
-                    + "" + pc.getOrdenCompra().getCliente().getNombrecompleto());
+            txtnumorden.setText(edicion.AGREGAR_CEROS_LEFT(pc.getOrdenPedido().getIdordencompra()));
+            txtcliente.setText(pc.getOrdenPedido().getCliente().getIdentificacion() + " - "
+                    + "" + pc.getOrdenPedido().getCliente().getNombrecompleto());
             txtabono.setText("$ " + formatoNumero.numerico(pc.getValorpago()));
             txtcntrecibo.setText("$ " + formatoNumero.numerico(pc.getCntrecibida()));
             txtcntdevuelta.setText("$ " + formatoNumero.numerico(pc.getCntdevuelta()));
             txtnumrecibo.setText(pc.getNumrecibo());
-            txtsubtotal.setText("$ " + formatoNumero.numerico(pc.getOrdenCompra().getSubtotal()));
-            txtsaldoactual.setText("$ " + formatoNumero.numerico(pc.getOrdenCompra().getSaldo()));
-            CARGAR_HISTORICO_PAGO(pc.getOrdenCompra().getIdordencompra());
+            txtsubtotal.setText("$ " + formatoNumero.numerico(pc.getOrdenPedido().getSubtotal()));
+            txtsaldoactual.setText("$ " + formatoNumero.numerico(pc.getOrdenPedido().getSaldo()));
+            CARGAR_HISTORICO_PAGO(pc.getOrdenPedido().getIdordencompra());
         } else {
             edicion.mensajes(1, "el comprobante aun no se ha registrado.");
         }
     }
 
     private void nuevo() {
-        PagosClientes pc = new PagosClientes();
+        PagosProveedor pc = new PagosProveedor();
         jdfechaemision.setDate(DateUtil.newTimestamp());
         txtnumidpago.setText(pagoDao.NUMERO_RECIBO_PAGO());
         txtnumorden.setText(null);
