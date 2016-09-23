@@ -100,8 +100,8 @@ public class FormPagosProveedor extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Pagos Proveedor");
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "GESTIONAR PAGOS A PROVEEDOR", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "GESTIONAR PAGOS A PROVEEDOR", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18), new java.awt.Color(0, 102, 204))); // NOI18N
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Medio de Pago"));
 
@@ -424,9 +424,7 @@ public class FormPagosProveedor extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, 0)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
