@@ -48,6 +48,33 @@ public class OrdenPedidoDao extends database {
         return compra;
     }
     
+    public OrdenPedido CONSULTA_ORDEN_PEDIDO_PROVEEDOR(Object key) throws ParseException{
+        OrdenPedido compra = null;
+        ProveedorDao pd;
+        ClienteDao cd;
+        EmpleadoDao ed;
+        Object param = 3+",'"+key+"'";
+        Object[][] rs = SELECT_SP("SELECT_ORDEN_COMPRA", param);
+        if (rs.length > 0) {
+            compra = new OrdenPedido();
+            pd = new ProveedorDao();
+            ed = new EmpleadoDao();
+            cd = new ClienteDao();                    
+            compra.setIdordencompra(Integer.parseInt(rs[0][0].toString()));
+            compra.setFechaEntrega(DateUtil.toDate(rs[0][1]));
+            compra.setFehcaEmision(DateUtil.toDate(rs[0][2]));
+            compra.setSubtotal(Integer.parseInt(rs[0][3].toString()));
+            compra.setSaldo(Integer.parseInt(rs[0][4].toString()));
+            compra.setEstado(Integer.parseInt(rs[0][5].toString()));
+            compra.setProveedor(pd.CONSULTAR_PROVEEDOR(rs[0][6]));
+            compra.setEmpleado(ed.CONSULTAR_EMPLEADO(rs[0][7]));
+            compra.setCliente(cd.CONSULTAR_CLIENTE(rs[0][8]));
+            compra.setCotizacion(rs[0][9].toString());
+            compra.setFechahoraingreso(DateUtil.toDateTime(rs[0][10]));
+        }
+        return compra;
+    }
+    
     public Object[][] DETALLE_ORDEN_COMPRA(Object key){
         Object param = 2+",'"+key+"'";
         return SELECT_SP("SELECT_ORDEN_COMPRA", param);

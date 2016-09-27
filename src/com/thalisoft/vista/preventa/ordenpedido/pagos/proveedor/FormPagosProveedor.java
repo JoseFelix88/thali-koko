@@ -594,7 +594,7 @@ public class FormPagosProveedor extends javax.swing.JInternalFrame {
     private void txtnumordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumordenActionPerformed
         try {
             ordenDao = new OrdenPedidoDao();
-            ordenCompra = ordenDao.CONSULTA_ORDEN_COMPRA(txtnumorden.getText());
+            ordenCompra = ordenDao.CONSULTA_ORDEN_PEDIDO_PROVEEDOR(txtnumorden.getText());
             if (ordenCompra != null) {
                 txtcliente.setText(ordenCompra.getCliente().getIdentificacion() + " - " + ordenCompra.getCliente().getNombrecompleto());
                 txtsubtotal.setText("$ " + formatoNumero.numerico(ordenCompra.getSubtotal()));
@@ -797,15 +797,23 @@ public class FormPagosProveedor extends javax.swing.JInternalFrame {
         if (opcion == 0 | opcion == 1) {
             DATA_PAGO[0] = opcion;
         }
+        if (radioefectivo.isSelected()) {
+            DATA_PAGO[7] = edicion.toNumeroEntero(txtcntrecibo.getText()) - edicion.toNumeroEntero(txtabono.getText());
+            DATA_PAGO[8] = edicion.toNumeroEntero(txtsaldoactual.getText()) - edicion.toNumeroEntero(txtabono.getText());
+
+        } else {
+            DATA_PAGO[7] = edicion.toNumeroEntero(txtcntrecibo.getText());
+            DATA_PAGO[8] = edicion.toNumeroEntero(txtsaldoactual.getText());
+
+        }
+
         DATA_PAGO[1] = edicion.toNumeroEntero(txtabono.getText());
         DATA_PAGO[2] = "'" + FORMA_PAGO + "'";
         DATA_PAGO[3] = edicion.toNumeroEntero(txtnumorden.getText());
         DATA_PAGO[4] = "'" + Variables_Gloabales.EMPLEADO.getIdentificacion() + "'";
         DATA_PAGO[5] = edicion.toNumeroEntero(txtnumidpago.getText());
         DATA_PAGO[6] = edicion.toNumeroEntero(txtcntrecibo.getText());
-        DATA_PAGO[7] = edicion.toNumeroEntero(txtcntrecibo.getText()) - edicion.toNumeroEntero(txtabono.getText());
-        DATA_PAGO[8] = edicion.toNumeroEntero(txtsaldoactual.getText()) - edicion.toNumeroEntero(txtabono.getText());
-        DATA_PAGO[9] = "'" + txtnumrecibo.getText() + "'";
+        DATA_PAGO[9] = edicion.toNumeroEntero(txtnumrecibo.getText());
         return DATA_PAGO;
     }
 

@@ -838,7 +838,7 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
          JInternalFrame ji = validador.getJInternalFrame(FormPagosProveedor.class.getName());
         if (ji == null || ji.isClosed()) {
-            ji = new FormPagosCliente();
+            ji = new FormPagosProveedor();
             ControllerContenedor.getjDesktopPane1().add(ji, 0);
             validador.addJIframe(FormPagosProveedor.class.getName(), ji);
             ji.setVisible(true);
