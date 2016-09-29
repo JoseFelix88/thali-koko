@@ -794,25 +794,26 @@ public class FormPagosProveedor extends javax.swing.JInternalFrame {
 
     private Object[] Cargar_Data_Pago(int opcion) {
         Object[] DATA_PAGO = new Object[10];
+        int CNT_DEVUELTA = 0;
+        int CNT_SALDO_ACTUAL = edicion.toNumeroEntero(txtsaldoactual.getText()) - edicion.toNumeroEntero(txtabono.getText());
         if (opcion == 0 | opcion == 1) {
             DATA_PAGO[0] = opcion;
         }
+
         if (radioefectivo.isSelected()) {
-            DATA_PAGO[7] = edicion.toNumeroEntero(txtcntrecibo.getText()) - edicion.toNumeroEntero(txtabono.getText());
-            DATA_PAGO[8] = edicion.toNumeroEntero(txtsaldoactual.getText()) - edicion.toNumeroEntero(txtabono.getText());
-
+            CNT_DEVUELTA = edicion.toNumeroEntero(txtcntrecibo.getText()) - edicion.toNumeroEntero(txtabono.getText());
         } else {
-            DATA_PAGO[7] = edicion.toNumeroEntero(txtcntrecibo.getText());
-            DATA_PAGO[8] = edicion.toNumeroEntero(txtsaldoactual.getText());
-
+            CNT_DEVUELTA = edicion.toNumeroEntero(txtcntrecibo.getText());
         }
 
         DATA_PAGO[1] = edicion.toNumeroEntero(txtabono.getText());
         DATA_PAGO[2] = "'" + FORMA_PAGO + "'";
         DATA_PAGO[3] = edicion.toNumeroEntero(txtnumorden.getText());
         DATA_PAGO[4] = "'" + Variables_Gloabales.EMPLEADO.getIdentificacion() + "'";
-        DATA_PAGO[5] = edicion.toNumeroEntero(txtnumidpago.getText());
+        DATA_PAGO[5] = CNT_SALDO_ACTUAL;
         DATA_PAGO[6] = edicion.toNumeroEntero(txtcntrecibo.getText());
+        DATA_PAGO[7] = CNT_DEVUELTA;
+        DATA_PAGO[8] = edicion.toNumeroEntero(txtnumidpago.getText());
         DATA_PAGO[9] = edicion.toNumeroEntero(txtnumrecibo.getText());
         return DATA_PAGO;
     }

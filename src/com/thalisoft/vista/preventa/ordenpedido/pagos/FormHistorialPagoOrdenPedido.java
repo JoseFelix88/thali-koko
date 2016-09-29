@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.thalisoft.vista.preventa.ordenpedido.pagos.cliente;
+package com.thalisoft.vista.preventa.ordenpedido.pagos;
 
 /**
  *
  * @author Jose Felix
  */
-public class FormHistorialPagoCliente extends javax.swing.JInternalFrame {
+public class FormHistorialPagoOrdenPedido extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form FormHistorialPagoCliente
      */
-    public FormHistorialPagoCliente() {
+    public FormHistorialPagoOrdenPedido() {
         initComponents();
     }
 
@@ -137,17 +137,17 @@ public class FormHistorialPagoCliente extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID. PAGO", "F.H. REGISTRO", "CLIENTE", "$ ABONO", "$ SALDO", "M. DE PAGO", "No. RESIVO", "ESTADO"
+                "ID. PAGO", "FECHA HORA REG.", "MEDIO DE PAGO", "ORDEN DE PEDIDO", "No. RECIBO", "$ ABONO", "$ SALDO", "$ RECIBIDO", "$ DEVUELTO", "CLIENTE", "ESTADO", "REGISTRADO"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.Float.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -158,7 +158,7 @@ public class FormHistorialPagoCliente extends javax.swing.JInternalFrame {
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(2).setMinWidth(120);
+            jTable1.getColumnModel().getColumn(9).setMinWidth(120);
         }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
