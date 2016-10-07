@@ -12,6 +12,7 @@ public class OrdenPedidoDao extends database {
     public boolean CRUD_ORDENCOMPRA(Object[] key) {
         return EJECUTAR_SP("CRUD_ORDEN_COMPRA", key);
     }
+
     public String NUMERO_ORDEN_COMPRA() {
         Object param = 0 + ",0";
         Object[][] rs = SELECT_SP("SELECT_ORDEN_COMPRA", param);
@@ -21,18 +22,18 @@ public class OrdenPedidoDao extends database {
         return null;
     }
 
-    public OrdenPedido CONSULTA_ORDEN_COMPRA(Object key) throws ParseException{
+    public OrdenPedido CONSULTA_ORDEN_COMPRA(Object key) throws ParseException {
         OrdenPedido compra = null;
         ProveedorDao pd;
         ClienteDao cd;
         EmpleadoDao ed;
-        Object param = 1+",'"+key+"'";
+        Object param = 1 + ",'" + key + "'";
         Object[][] rs = SELECT_SP("SELECT_ORDEN_COMPRA", param);
         if (rs.length > 0) {
             compra = new OrdenPedido();
             pd = new ProveedorDao();
             ed = new EmpleadoDao();
-            cd = new ClienteDao();                    
+            cd = new ClienteDao();
             compra.setIdordencompra(Integer.parseInt(rs[0][0].toString()));
             compra.setFechaEntrega(DateUtil.toDate(rs[0][1]));
             compra.setFehcaEmision(DateUtil.toDate(rs[0][2]));
@@ -47,19 +48,19 @@ public class OrdenPedidoDao extends database {
         }
         return compra;
     }
-    
-    public OrdenPedido CONSULTA_ORDEN_PEDIDO_PROVEEDOR(Object key) throws ParseException{
+
+    public OrdenPedido CONSULTA_ORDEN_PEDIDO_PROVEEDOR(Object key) throws ParseException {
         OrdenPedido compra = null;
         ProveedorDao pd;
         ClienteDao cd;
         EmpleadoDao ed;
-        Object param = 3+",'"+key+"'";
+        Object param = 3 + ",'" + key + "'";
         Object[][] rs = SELECT_SP("SELECT_ORDEN_COMPRA", param);
         if (rs.length > 0) {
             compra = new OrdenPedido();
             pd = new ProveedorDao();
             ed = new EmpleadoDao();
-            cd = new ClienteDao();                    
+            cd = new ClienteDao();
             compra.setIdordencompra(Integer.parseInt(rs[0][0].toString()));
             compra.setFechaEntrega(DateUtil.toDate(rs[0][1]));
             compra.setFehcaEmision(DateUtil.toDate(rs[0][2]));
@@ -74,9 +75,33 @@ public class OrdenPedidoDao extends database {
         }
         return compra;
     }
-    
-    public Object[][] DETALLE_ORDEN_COMPRA(Object key){
-        Object param = 2+",'"+key+"'";
+
+    public Object[][] DETALLE_ORDEN_COMPRA(Object key) {
+        Object param = 2 + ",'" + key + "'";
         return SELECT_SP("SELECT_ORDEN_COMPRA", param);
+    }
+
+    public Object[][] HISTORIAL_PAGOS_PROVEEDOR(Object[] key) {
+        Object f1 = null, f2 = null;
+        if (key[0] != null) {
+            f1 = "'" + key[0] + "'";
+        }
+        if (key[1] != null) {
+            f2 = "'" + key[1] + "'";
+        }
+        Object param = 0 + "," + f1 + "," + f2 + ",'" + key[2] + "'";
+        return SELECT_SP("SELECT_HISTORICOS", param);
+    }
+
+    public Object[][] HISTORIAL_PAGOS_CLIENTES(Object[] key) {
+       Object f1 = null, f2 = null;
+        if (key[0] != null) {
+            f1 = "'" + key[0] + "'";
+        }
+        if (key[1] != null) {
+            f2 = "'" + key[1] + "'";
+        }
+        Object param = 1 + "," + f1 + "," + f2 + ",'" + key[2] + "'";
+        return SELECT_SP("SELECT_HISTORICOS", param);
     }
 }

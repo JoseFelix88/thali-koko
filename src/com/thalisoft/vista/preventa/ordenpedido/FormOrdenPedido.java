@@ -18,6 +18,7 @@ import com.thalisoft.vista.maestros.cliente.FormCliente;
 import com.thalisoft.vista.index.Contenedor;
 import com.thalisoft.vista.preventa.ordenpedido.pagos.cliente.FormPagosCliente;
 import com.thalisoft.vista.maestros.producto.FormProducto;
+import com.thalisoft.vista.preventa.ordenpedido.pagos.FormHistorialPagoOrdenPedido;
 import com.thalisoft.vista.preventa.ordenpedido.pagos.proveedor.FormPagosProveedor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -128,8 +129,9 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
 
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/delete.png"))); // NOI18N
         jMenuItem8.setText("ELIMINAR");
@@ -665,7 +667,6 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
             }
         });
         jMenu2.add(jMenuItem5);
-        jMenu2.add(jSeparator1);
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vista_style_business_and_data_icons_icons_pack_120673/de-pago-con-tarjeta-de-credito-icono-3855-48.png"))); // NOI18N
         jMenuItem6.setText("Pago de Cliente");
@@ -675,6 +676,20 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
             }
         });
         jMenu2.add(jMenuItem6);
+
+        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F10, 0));
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/folder.png"))); // NOI18N
+        jMenuItem11.setText("Historial de Pagos");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem11);
+
+        jSeparator1.setForeground(new java.awt.Color(102, 102, 255));
+        jSeparator1.setOpaque(true);
+        jMenu2.add(jSeparator1);
 
         jMenuBar1.add(jMenu2);
 
@@ -836,7 +851,7 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-         JInternalFrame ji = validador.getJInternalFrame(FormPagosProveedor.class.getName());
+        JInternalFrame ji = validador.getJInternalFrame(FormPagosProveedor.class.getName());
         if (ji == null || ji.isClosed()) {
             ji = new FormPagosProveedor();
             ControllerContenedor.getjDesktopPane1().add(ji, 0);
@@ -851,6 +866,24 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        // TODO add your handling code here:
+        JInternalFrame ji = validador.getJInternalFrame(FormHistorialPagoOrdenPedido.class.getName());
+        if (ji == null || ji.isClosed()) {
+            ji = new FormHistorialPagoOrdenPedido();
+            ControllerContenedor.getjDesktopPane1().add(ji, 0);
+            validador.addJIframe(FormHistorialPagoOrdenPedido.class.getName(), ji);
+            ji.setVisible(true);
+        } else {
+            ji.show(true);
+            try {
+                ji.setIcon(false);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(FormHistorialPagoOrdenPedido.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -885,6 +918,7 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
