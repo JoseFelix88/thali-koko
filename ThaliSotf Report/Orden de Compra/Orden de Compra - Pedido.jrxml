@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Orden de Compra - Pedido" language="groovy" pageWidth="612" pageHeight="792" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="56" bottomMargin="56" uuid="a621f887-a8f4-4d22-80c0-c8b639abc046">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Orden de Compra - Pedido" language="groovy" pageWidth="612" pageHeight="792" columnWidth="556" leftMargin="28" rightMargin="28" topMargin="56" bottomMargin="56" uuid="a621f887-a8f4-4d22-80c0-c8b639abc046">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -145,7 +145,7 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 	<title>
 		<band height="118" splitType="Stretch">
 			<frame>
-				<reportElement uuid="d8538a09-93ed-4b21-9cf3-2cb5f6d49aaf" x="0" y="0" width="437" height="41"/>
+				<reportElement uuid="d8538a09-93ed-4b21-9cf3-2cb5f6d49aaf" x="61" y="0" width="437" height="41"/>
 				<image hAlign="Center" vAlign="Middle">
 					<reportElement uuid="d3286c08-46bf-4662-a67e-cc869522fed5" x="0" y="0" width="120" height="41"/>
 					<imageExpression><![CDATA["C:\\ThaliSotf Report\\img\\logo.png"]]></imageExpression>
@@ -159,7 +159,7 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement uuid="ad2e2c38-da9e-4460-9227-d7b5f1c1cc4f" x="7" y="41" width="208" height="71"/>
+				<reportElement uuid="ad2e2c38-da9e-4460-9227-d7b5f1c1cc4f" x="61" y="41" width="208" height="71"/>
 				<textField>
 					<reportElement uuid="5345c203-358b-440d-831d-730084a08137" x="0" y="0" width="208" height="13"/>
 					<textElement>
@@ -201,7 +201,7 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 				</textField>
 			</frame>
 			<frame>
-				<reportElement uuid="e6b2f83c-0a7b-40ef-8e34-8c8a5e39c559" x="215" y="41" width="222" height="71"/>
+				<reportElement uuid="e6b2f83c-0a7b-40ef-8e34-8c8a5e39c559" x="269" y="41" width="222" height="71"/>
 				<textField>
 					<reportElement uuid="c088a7ed-ae2f-4748-a1df-a780c59e8a7d" x="4" y="0" width="218" height="71"/>
 					<textElement verticalAlignment="Middle">
@@ -211,7 +211,7 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 				</textField>
 			</frame>
 			<line>
-				<reportElement uuid="18da12df-5ece-4eba-871e-34d16828d084" x="1" y="117" width="436" height="1"/>
+				<reportElement uuid="18da12df-5ece-4eba-871e-34d16828d084" x="1" y="117" width="522" height="1"/>
 				<graphicElement>
 					<pen lineWidth="3.5" lineStyle="Double" lineColor="#999999"/>
 				</graphicElement>
@@ -221,9 +221,9 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 	<summary>
 		<band height="58">
 			<frame>
-				<reportElement uuid="69de897b-9ff6-43cc-812b-52a2e4c60a79" x="0" y="0" width="437" height="58"/>
+				<reportElement uuid="69de897b-9ff6-43cc-812b-52a2e4c60a79" x="0" y="0" width="523" height="58"/>
 				<componentElement>
-					<reportElement uuid="2fcb4b0e-afc7-4d1a-8718-dd2b90ca2d74" key="table" style="table" x="0" y="7" width="437" height="51"/>
+					<reportElement uuid="2fcb4b0e-afc7-4d1a-8718-dd2b90ca2d74" key="table" style="table" x="0" y="7" width="520" height="51"/>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 						<datasetRun subDataset="DETALLE ORDEN" uuid="439fa282-e931-4f21-a9d8-ab50e127bad7">
 							<datasetParameter name="idorden">
@@ -262,9 +262,9 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 									<textFieldExpression><![CDATA[$P{fechahora}]]></textFieldExpression>
 								</textField>
 							</jr:columnFooter>
-							<jr:detailCell style="table_TD" height="29" rowSpan="1">
+							<jr:detailCell style="table_TD" height="40" rowSpan="1">
 								<textField>
-									<reportElement uuid="e5e4e8c4-ea3b-41b0-8f48-039a4cf91a22" x="4" y="0" width="150" height="29"/>
+									<reportElement uuid="e5e4e8c4-ea3b-41b0-8f48-039a4cf91a22" x="4" y="0" width="150" height="40"/>
 									<textElement verticalAlignment="Middle">
 										<font size="8"/>
 									</textElement>
@@ -281,27 +281,27 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 									<text><![CDATA[Cantidad]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table_TD" height="29" rowSpan="1">
+							<jr:detailCell style="table_TD" height="40" rowSpan="1">
 								<textField>
-									<reportElement uuid="d9f4fd62-e32d-4b28-8827-dd873e62d0b7" x="0" y="0" width="47" height="29"/>
+									<reportElement uuid="d9f4fd62-e32d-4b28-8827-dd873e62d0b7" x="0" y="0" width="47" height="40"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="282" uuid="0a1e9d2a-ddd7-40b1-959d-cf7a6635c64a">
+						<jr:column width="342" uuid="0a1e9d2a-ddd7-40b1-959d-cf7a6635c64a">
 							<jr:tableFooter style="table_TH" height="0" rowSpan="1"/>
 							<jr:columnHeader style="table_CH" height="30" rowSpan="1">
 								<staticText>
-									<reportElement uuid="2f43b71f-50e6-4b6f-9da7-309880f1f18b" x="0" y="0" width="282" height="30"/>
+									<reportElement uuid="2f43b71f-50e6-4b6f-9da7-309880f1f18b" x="0" y="0" width="340" height="30"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<text><![CDATA[Especificaciones]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="table_TD" height="29" rowSpan="1">
+							<jr:detailCell style="table_TD" height="40" rowSpan="1">
 								<textField>
-									<reportElement uuid="25bb2320-5d9e-4ee4-b42d-18a3aaabd586" x="0" y="0" width="282" height="29"/>
-									<textElement verticalAlignment="Middle">
+									<reportElement uuid="25bb2320-5d9e-4ee4-b42d-18a3aaabd586" x="0" y="0" width="342" height="40"/>
+									<textElement verticalAlignment="Top">
 										<font size="8"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$F{especificacion}]]></textFieldExpression>

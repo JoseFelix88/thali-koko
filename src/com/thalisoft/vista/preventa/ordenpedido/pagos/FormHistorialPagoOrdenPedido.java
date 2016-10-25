@@ -2,16 +2,14 @@ package com.thalisoft.vista.preventa.ordenpedido.pagos;
 
 import com.thalisoft.main.util.DateUtil;
 import com.thalisoft.main.util.Edicion;
+import com.thalisoft.main.util.report.Manager_Report;
 import com.thalisoft.model.preventa.ordenpedido.OrdenPedidoDao;
 
-/**
- *
- * @author Jose Felix
- */
 public class FormHistorialPagoOrdenPedido extends javax.swing.JInternalFrame {
 
     OrdenPedidoDao pedidoDao;
     Edicion edicion = new Edicion();
+    Manager_Report report = new Manager_Report();
 
     public FormHistorialPagoOrdenPedido() {
         initComponents();
@@ -47,6 +45,8 @@ public class FormHistorialPagoOrdenPedido extends javax.swing.JInternalFrame {
         LBCNTPGPRO = new javax.swing.JLabel();
         TXTABONOSPROVEEDOR = new javax.swing.JTextField();
 
+        setClosable(true);
+        setIconifiable(true);
         setTitle("Historial de Pagos");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "HISTORIAL DE PAGOS ORDEN DE PEDIDO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Verdana", 0, 18))); // NOI18N
@@ -78,6 +78,11 @@ public class FormHistorialPagoOrdenPedido extends javax.swing.JInternalFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/printer.png"))); // NOI18N
         jButton2.setText("Imprimir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/liberacion-de-la-puerta-icono-9156-32.png"))); // NOI18N
         jButton3.setText("Salir");
@@ -139,7 +144,8 @@ public class FormHistorialPagoOrdenPedido extends javax.swing.JInternalFrame {
         );
 
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+        jTabbedPane1.setToolTipText("");
         jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -167,6 +173,8 @@ public class FormHistorialPagoOrdenPedido extends javax.swing.JInternalFrame {
         TB_HIS_CLIENTE.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TB_HIS_CLIENTE);
         if (TB_HIS_CLIENTE.getColumnModel().getColumnCount() > 0) {
+            TB_HIS_CLIENTE.getColumnModel().getColumn(0).setMaxWidth(50);
+            TB_HIS_CLIENTE.getColumnModel().getColumn(1).setMinWidth(150);
             TB_HIS_CLIENTE.getColumnModel().getColumn(9).setMinWidth(120);
         }
 
@@ -190,19 +198,20 @@ public class FormHistorialPagoOrdenPedido extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LBCNT, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TXTABONOSCLIENTES, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(163, 163, 163)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LBCNT, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TXTABONOSCLIENTES, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -213,10 +222,10 @@ public class FormHistorialPagoOrdenPedido extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(LBCNT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TXTABONOSCLIENTES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)))
+                        .addComponent(TXTABONOSCLIENTES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -238,6 +247,10 @@ public class FormHistorialPagoOrdenPedido extends javax.swing.JInternalFrame {
         TB_HIS_PROVEEDOR.setRowHeight(22);
         TB_HIS_PROVEEDOR.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(TB_HIS_PROVEEDOR);
+        if (TB_HIS_PROVEEDOR.getColumnModel().getColumnCount() > 0) {
+            TB_HIS_PROVEEDOR.getColumnModel().getColumn(0).setMaxWidth(60);
+            TB_HIS_PROVEEDOR.getColumnModel().getColumn(1).setMinWidth(150);
+        }
 
         jLabel5.setText("SUB-TOTAL ABONOS");
 
@@ -268,12 +281,12 @@ public class FormHistorialPagoOrdenPedido extends javax.swing.JInternalFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TXTABONOSPROVEEDOR, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(329, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 924, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,16 +294,16 @@ public class FormHistorialPagoOrdenPedido extends javax.swing.JInternalFrame {
                 .addGap(224, 224, 224)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(LBCNTPGPRO, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                        .addComponent(TXTABONOSPROVEEDOR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(TXTABONOSPROVEEDOR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                    .addContainerGap(15, Short.MAX_VALUE)
+                    .addContainerGap(18, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(53, Short.MAX_VALUE)))
+                    .addContainerGap(55, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("PAGOS PROVEEDORES", jPanel4);
@@ -302,15 +315,17 @@ public class FormHistorialPagoOrdenPedido extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(208, 208, 208)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(264, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 943, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -343,6 +358,12 @@ public class FormHistorialPagoOrdenPedido extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:.
+        Object[] key = {JD_INICIO.getDate(), JD_FINAL.getDate(), TXTNUMPEDIDO.getText()};
+        report.HISTORIAL_PAGOS_CLIENTES_PROVEEDOR(key);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -386,7 +407,6 @@ public class FormHistorialPagoOrdenPedido extends javax.swing.JInternalFrame {
         }
         Object[] key = {edicion.formatearFechaSQL(JD_INICIO.getDate()),
             edicion.formatearFechaSQL(JD_FINAL.getDate()), TXTNUMPEDIDO.getText()};
-
         pedidoDao = new OrdenPedidoDao();
         Object[][] rs = pedidoDao.HISTORIAL_PAGOS_PROVEEDOR(key);
         if (rs.length > 0) {

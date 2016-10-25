@@ -61,8 +61,8 @@ public class Manager_Report extends database {
             System.out.println("Mensaje de Error:" + j);
         }
     }
-    
-     public void ORDEN_DE_COMPRA_PEDIDO(Object key) {
+
+    public void ORDEN_DE_COMPRA_PEDIDO(Object key) {
         String reporte = "orden de compra - Pedido.jasper";
         try {
             String Ubicacion = RUTA_REPORTE + "/Orden de Compra/";
@@ -74,10 +74,39 @@ public class Manager_Report extends database {
             System.out.println("Mensaje de Error:" + j);
         }
     }
-      public void RECIBO_DE_PAGO_CLIENTE(Object key) {
+
+    public void RECIBO_DE_PAGO_CLIENTE(Object key) {
         String reporte = "Recibo de Pago Cliente.jasper";
         try {
             String Ubicacion = RUTA_REPORTE + "/Orden de Compra/";
+            masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
+            PARAMETROS.put("NUMPAGO", key);
+            edicion.Lanzador(masterReport, PARAMETROS);
+        } catch (Exception j) {
+            edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
+            System.out.println("Mensaje de Error:" + j);
+        }
+    }
+    
+     public void HISTORIAL_PAGOS_CLIENTES_PROVEEDOR(Object[] key) {
+        String reporte = "historial de pagos orden de pedidos.jasper";
+        try {
+            String Ubicacion = RUTA_REPORTE + "/preventa/";
+            masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
+            PARAMETROS.put("fecha1", key[0]);
+            PARAMETROS.put("fecha2", key[1]);
+            PARAMETROS.put("idorden", key[2]);
+            edicion.Lanzador(masterReport, PARAMETROS);
+        } catch (Exception j) {
+            edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
+            System.out.println("Mensaje de Error:" + j);
+        }
+    }
+     
+         public void RECIBO_DE_PAGO_PROVEEDOR(Object key) {
+        String reporte = "Recibo de Pago Proveedor.jasper";
+        try {
+            String Ubicacion = RUTA_REPORTE + "/PREVENTA/";
             masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
             PARAMETROS.put("NUMPAGO", key);
             edicion.Lanzador(masterReport, PARAMETROS);

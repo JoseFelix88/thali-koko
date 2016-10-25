@@ -817,8 +817,15 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
 
     private Object[] Cargar_Data_Pago(int opcion) {
         Object[] DATA_PAGO = new Object[10];
+        int CNT_DEVUELTA;
+
         if (opcion == 0 | opcion == 1) {
             DATA_PAGO[0] = opcion;
+        }
+        if (radioefectivo.isSelected()) {
+            CNT_DEVUELTA = edicion.toNumeroEntero(txtcntrecibo.getText()) - edicion.toNumeroEntero(txtabono.getText());
+        } else {
+            CNT_DEVUELTA = edicion.toNumeroEntero(txtcntrecibo.getText());
         }
         DATA_PAGO[1] = edicion.toNumeroEntero(txtabono.getText());
         DATA_PAGO[2] = "'" + FORMA_PAGO + "'";
@@ -826,7 +833,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
         DATA_PAGO[4] = "'" + Variables_Gloabales.EMPLEADO.getIdentificacion() + "'";
         DATA_PAGO[5] = edicion.toNumeroEntero(txtnumidpago.getText());
         DATA_PAGO[6] = edicion.toNumeroEntero(txtcntrecibo.getText());
-        DATA_PAGO[7] = edicion.toNumeroEntero(txtcntrecibo.getText()) - edicion.toNumeroEntero(txtabono.getText());
+        DATA_PAGO[7] = CNT_DEVUELTA;
         DATA_PAGO[8] = edicion.toNumeroEntero(txtsaldoactual.getText()) - edicion.toNumeroEntero(txtabono.getText());
         DATA_PAGO[9] = "'" + txtnumrecibo.getText() + "'";
         return DATA_PAGO;

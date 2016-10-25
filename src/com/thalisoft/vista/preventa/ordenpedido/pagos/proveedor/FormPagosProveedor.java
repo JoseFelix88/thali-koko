@@ -614,7 +614,7 @@ public class FormPagosProveedor extends javax.swing.JInternalFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         NUMERO_RECIBO_PAGO = edicion.msjQuest(2, "ingresa el numero de recibo de pago o comprobante.");
-        report.RECIBO_DE_PAGO_CLIENTE(NUMERO_RECIBO_PAGO);
+        report.RECIBO_DE_PAGO_PROVEEDOR(NUMERO_RECIBO_PAGO);
 //        Montar_Data_Pago(key);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -624,13 +624,13 @@ public class FormPagosProveedor extends javax.swing.JInternalFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        report.RECIBO_DE_PAGO_CLIENTE(txtnumidpago.getText());
+        report.RECIBO_DE_PAGO_PROVEEDOR(txtnumidpago.getText());
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
         NUMERO_RECIBO_PAGO = jTable1.getValueAt(jTable1.getSelectedRow(), 0);
-        report.RECIBO_DE_PAGO_CLIENTE(NUMERO_RECIBO_PAGO);
+        report.RECIBO_DE_PAGO_PROVEEDOR(NUMERO_RECIBO_PAGO);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -794,7 +794,7 @@ public class FormPagosProveedor extends javax.swing.JInternalFrame {
 
     private Object[] Cargar_Data_Pago(int opcion) {
         Object[] DATA_PAGO = new Object[10];
-        int CNT_DEVUELTA = 0;
+        int CNT_DEVUELTA;
         int CNT_SALDO_ACTUAL = edicion.toNumeroEntero(txtsaldoactual.getText()) - edicion.toNumeroEntero(txtabono.getText());
         if (opcion == 0 | opcion == 1) {
             DATA_PAGO[0] = opcion;
