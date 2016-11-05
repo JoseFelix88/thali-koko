@@ -143,7 +143,7 @@ public class Contenedor extends javax.swing.JFrame {
         JM_Ubicarproducto = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         JM_Orden_Compra = new javax.swing.JMenuItem();
-        JMReporte = new javax.swing.JMenuItem();
+        JM_Cotizacion = new javax.swing.JMenuItem();
         JMReporteInOut = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
@@ -290,17 +290,17 @@ public class Contenedor extends javax.swing.JFrame {
         });
         jMenu1.add(JM_Orden_Compra);
 
-        JMReporte.setBackground(new java.awt.Color(51, 51, 51));
-        JMReporte.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JMReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/tablet-with-price-tag.png"))); // NOI18N
-        JMReporte.setText("Cotizador de Productos");
-        JMReporte.setActionCommand("Reporte");
-        JMReporte.addActionListener(new java.awt.event.ActionListener() {
+        JM_Cotizacion.setBackground(new java.awt.Color(51, 51, 51));
+        JM_Cotizacion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        JM_Cotizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/tablet-with-price-tag.png"))); // NOI18N
+        JM_Cotizacion.setText("Cotizador de Productos");
+        JM_Cotizacion.setActionCommand("cotizacion");
+        JM_Cotizacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMReporteActionPerformed(evt);
+                JM_CotizacionActionPerformed(evt);
             }
         });
-        jMenu1.add(JMReporte);
+        jMenu1.add(JM_Cotizacion);
 
         JMReporteInOut.setBackground(new java.awt.Color(51, 51, 51));
         JMReporteInOut.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -474,9 +474,9 @@ public class Contenedor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JMReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMReporteActionPerformed
+    private void JM_CotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JM_CotizacionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JMReporteActionPerformed
+    }//GEN-LAST:event_JM_CotizacionActionPerformed
 
     private void JM_conteofisicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JM_conteofisicoActionPerformed
         // TODO add your handling code here:
@@ -593,11 +593,11 @@ public class Contenedor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar Contenedor_Menu_General;
-    public javax.swing.JMenuItem JMReporte;
     public javax.swing.JMenuItem JMReporteInOut;
     public javax.swing.JMenuItem JM_Clientes;
     public javax.swing.JMenuItem JM_CompraProducto;
     public javax.swing.JMenuItem JM_ConsumoSaldoGeneral;
+    public javax.swing.JMenuItem JM_Cotizacion;
     public javax.swing.JMenuItem JM_DevolucionPunto;
     public javax.swing.JMenuItem JM_Empleado;
     public javax.swing.JMenuItem JM_Lotes;

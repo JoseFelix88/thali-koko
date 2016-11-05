@@ -10,6 +10,7 @@ import com.thalisoft.vista.index.Contenedor;
 import com.thalisoft.vista.preventa.ordenpedido.FormOrdenPedido;
 import com.thalisoft.vista.maestros.producto.FormListaProductos;
 import com.thalisoft.vista.maestros.proveedor.FormListarProveedor;
+import com.thalisoft.vista.preventa.cotizacion.FormCotizacion;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,6 +48,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
     FormListarClientes formListarClientes;
     FormListaProductos formListaProductos;
     FormListarProveedor formListarProveedor;
+    FormCotizacion formCotizacion;
 
     private static JDesktopPane jDesktopPane1;
 
@@ -64,7 +66,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
             Obtener_Eventos_De_SubMenu(contenedor.R_compra);
             Obtener_Eventos_De_SubMenu(contenedor.R_Salida);
             Obtener_Eventos_De_SubMenu(contenedor.JM_conteofisico);
-            Obtener_Eventos_De_SubMenu(contenedor.JMReporte);
+            Obtener_Eventos_De_SubMenu(contenedor.JM_Cotizacion);
             Obtener_Eventos_De_SubMenu(contenedor.JMReporteInOut);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Orden_Compra);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Lotes);
@@ -83,6 +85,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
             Obtener_Eventos_De_SubMenu(contenedor.JM_Clientes);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Producto);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Proveedor);
+            Obtener_Eventos_De_SubMenu(contenedor.JM_Cotizacion);
             contenedor.JM_Profile.setText(Variables_Gloabales.EMPLEADO.getNombres() + " "
                     + "" + Variables_Gloabales.EMPLEADO.getApellidos());
         } else {
@@ -186,22 +189,21 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
                 }
                 break;
 
-            /* case "devolucionpunto":
+            case "cotizacion":
 
-             if (Obtener_Estado_Formulario(this.formDevolucionPunto, Contenedor.Panel_Contenedor)) {
-             formDevolucionPunto = new FormDevolucionPunto();
-             formDevolucionPunto.show();
-
-             Contenedor.Panel_Contenedor.add(formDevolucionPunto);
-             java.awt.Dimension Tamaño_Panel = Contenedor.Panel_Contenedor.getSize();
-             java.awt.Dimension Tamaño_InternalFrame = formDevolucionPunto.getSize();
-             formDevolucionPunto.setLocation((Tamaño_Panel.width - Tamaño_InternalFrame.width) / 2,
-             (Tamaño_Panel.height - Tamaño_InternalFrame.height) / 2);
-             } else {
-             formDevolucionPunto.setIcon(false);
-             }
-             break;
-
+                if (Obtener_Estado_Formulario(this.formCotizacion, Contenedor.Panel_Contenedor)) {
+                    formCotizacion = new FormCotizacion();
+                    formCotizacion.show();
+                    Contenedor.Panel_Contenedor.add(formCotizacion);
+                    java.awt.Dimension Tamaño_Panel = Contenedor.Panel_Contenedor.getSize();
+                    java.awt.Dimension Tamaño_InternalFrame = formCotizacion.getSize();
+                    formCotizacion.setLocation((Tamaño_Panel.width - Tamaño_InternalFrame.width) / 2,
+                            (Tamaño_Panel.height - Tamaño_InternalFrame.height) / 2);
+                } else {
+                    formCotizacion.setIcon(false);
+                }
+                break;
+            /*
              case "Salida Autorizada":
 
              if (Obtener_Estado_Formulario(this.formSalidasAutorizada, Contenedor.Panel_Contenedor)) {

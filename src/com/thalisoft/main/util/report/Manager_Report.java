@@ -87,8 +87,8 @@ public class Manager_Report extends database {
             System.out.println("Mensaje de Error:" + j);
         }
     }
-    
-     public void HISTORIAL_PAGOS_CLIENTES_PROVEEDOR(Object[] key) {
+
+    public void HISTORIAL_PAGOS_CLIENTES_PROVEEDOR(Object[] key) {
         String reporte = "historial de pagos orden de pedidos.jasper";
         try {
             String Ubicacion = RUTA_REPORTE + "/preventa/";
@@ -102,8 +102,8 @@ public class Manager_Report extends database {
             System.out.println("Mensaje de Error:" + j);
         }
     }
-     
-         public void RECIBO_DE_PAGO_PROVEEDOR(Object key) {
+
+    public void RECIBO_DE_PAGO_PROVEEDOR(Object key) {
         String reporte = "Recibo de Pago Proveedor.jasper";
         try {
             String Ubicacion = RUTA_REPORTE + "/PREVENTA/";
@@ -116,4 +116,17 @@ public class Manager_Report extends database {
         }
     }
 
+    public void RELACION_DE_ORDENES_DE_PEDIDO(Object[] key) {
+        String reporte = "Relacion de ordenes de Pedido.jasper";
+        try {
+            String Ubicacion = RUTA_REPORTE + "/preventa/";
+            masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
+            PARAMETROS.put("fecha1", key[0]);
+            PARAMETROS.put("fecha2", key[1]);
+            edicion.Lanzador(masterReport, PARAMETROS);
+        } catch (Exception j) {
+            edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
+            System.out.println("Mensaje de Error:" + j);
+        }
+    }
 }

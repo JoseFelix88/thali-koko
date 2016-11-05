@@ -614,6 +614,11 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/folder.png"))); // NOI18N
         jMenuItem7.setText("Relacion de Pedidos");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem7);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vista_style_business_and_data_icons_icons_pack_120673/imprimir-icono-3650-32.png"))); // NOI18N
@@ -884,6 +889,24 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        JInternalFrame ji = validador.getJInternalFrame(FormRelacionPedidos.class.getName());
+        if (ji == null || ji.isClosed()) {
+            ji = new FormRelacionPedidos();
+            ControllerContenedor.getjDesktopPane1().add(ji, 0);
+            validador.addJIframe(FormRelacionPedidos.class.getName(), ji);
+            ji.setVisible(true);
+        } else {
+            ji.show(true);
+            try {
+                ji.setIcon(false);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(FormCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

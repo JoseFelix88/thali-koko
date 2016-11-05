@@ -104,4 +104,16 @@ public class OrdenPedidoDao extends database {
         Object param = 1 + "," + f1 + "," + f2 + ",'" + key[2] + "'";
         return SELECT_SP("SELECT_HISTORICOS", param);
     }
+    
+    public Object[][] RELACION_ORDENES_DE_PEDIDO(Object[] key) {
+       Object f1 = null, f2 = null;
+        if (key[0] != null) {
+            f1 = "'" + key[0] + "'";
+        }
+        if (key[1] != null) {
+            f2 = "'" + key[1] + "'";
+        }
+        Object param = 2 + "," + f1 + "," + f2 + ",'" + key[2] + "'";
+        return SELECT_SP("SELECT_HISTORICOS", param);
+    }
 }
