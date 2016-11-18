@@ -9,8 +9,7 @@ public class CotizacionDao extends database {
     }
 
     public Object[][] SELECT_COTIZACION(Object key) {
-        Object parametro = 0 + ",'" + key + "'";
-        return SELECT_SP("SELECT_COTIZACION", parametro);
+        return SELECT_SP("SELECT_COTIZACION", key);
     }
 
     public String NUMERO_COTIZACION() {
@@ -21,4 +20,5 @@ public class CotizacionDao extends database {
         }
         return null;
     }
+    
 }

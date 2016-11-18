@@ -129,4 +129,17 @@ public class Manager_Report extends database {
             System.out.println("Mensaje de Error:" + j);
         }
     }
+
+    public void COTIZACION(Object key) {
+        String reporte = "Cotizacion.jasper";
+        try {
+            String Ubicacion = RUTA_REPORTE + "/PREVENTA/";
+            masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
+            PARAMETROS.put("idcotizacion", key.toString());
+            edicion.Lanzador(masterReport, PARAMETROS);
+        } catch (Exception j) {
+            edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
+            System.out.println("Mensaje de Error:" + j);
+        }
+    }
 }

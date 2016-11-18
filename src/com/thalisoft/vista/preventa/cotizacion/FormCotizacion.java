@@ -4,10 +4,13 @@ import com.thalisoft.controller.index.ControllerContenedor;
 import com.thalisoft.main.util.CambiaFormatoTexto;
 import com.thalisoft.main.util.DateUtil;
 import com.thalisoft.main.util.Edicion;
+import com.thalisoft.main.util.Variables_Gloabales;
+import com.thalisoft.main.util.report.Manager_Report;
 import com.thalisoft.model.maestros.cliente.Cliente;
 import com.thalisoft.model.maestros.cliente.ClienteDao;
 import com.thalisoft.model.maestros.producto.Producto;
 import com.thalisoft.model.maestros.producto.ProductoDao;
+import com.thalisoft.model.preventa.cotizacion.Cotizacion;
 import com.thalisoft.model.preventa.cotizacion.CotizacionDao;
 import com.thalisoft.vista.maestros.cliente.FormCliente;
 import com.thalisoft.vista.maestros.producto.FormProducto;
@@ -38,13 +41,15 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
         initComponents();
         AccionesFormulario();
         llenarcombos();
-        
+
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -75,9 +80,9 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TB_DETALLE = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        lbitem = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtsubtotal = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -86,6 +91,15 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem5 = new javax.swing.JMenuItem();
+
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/delete.png"))); // NOI18N
+        jMenuItem6.setText("ELIMINAR");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem6);
 
         setClosable(true);
         setIconifiable(true);
@@ -263,6 +277,7 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TB_DETALLE.setComponentPopupMenu(jPopupMenu1);
         TB_DETALLE.setRowHeight(23);
         TB_DETALLE.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TB_DETALLE);
@@ -273,16 +288,16 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
 
         jLabel4.setText("ITEM AGREGADOS");
 
-        jLabel14.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("0");
+        lbitem.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        lbitem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbitem.setText("0");
 
         jLabel15.setText("SUB-TOTAL");
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        jTextField1.setText("$ 0");
+        txtsubtotal.setEditable(false);
+        txtsubtotal.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        txtsubtotal.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        txtsubtotal.setText("$ 0");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -320,17 +335,16 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
                                 .addGap(22, 22, 22)
                                 .addComponent(jLabel9)
                                 .addGap(136, 136, 136)
-                                .addComponent(jLabel10)
-                                .addGap(170, 170, 170))))
+                                .addComponent(jLabel10))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(147, 147, 147)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbitem, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
                         .addComponent(jLabel15)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -365,9 +379,9 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbitem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel15)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -426,27 +440,52 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/add-page.png"))); // NOI18N
         jMenuItem1.setText("Nuevo");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/reload.png"))); // NOI18N
         jMenuItem2.setText("Modificar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/view-employed.png"))); // NOI18N
         jMenuItem3.setText("Consultar");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/printer.png"))); // NOI18N
         jMenuItem4.setText("Imprimir");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem4);
         jMenu1.add(jSeparator1);
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/cancel.png"))); // NOI18N
         jMenuItem5.setText("Salir");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
 
         jMenuBar1.add(jMenu1);
@@ -495,15 +534,56 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (Validar_Formulario() != false) {
-            CARGAR_DETALLE();
-            txtreferencia.setText(null);
-            comboproducto.setSelectedItem(null);
-            txtcantidad.setText("0");
-            txtvalorunidad.setText("$ 0");
-            txtvalortotal.setText("$ 0");
-            txtreferencia.grabFocus();
+            if (cotizacionDao.CRUD_COTIZACION(CARGAR_DATOS(0)) != false) {
+                CARGAR_DETALLE();
+                txtreferencia.setText(null);
+                comboproducto.setSelectedItem(null);
+                txtcantidad.setText("0");
+                txtvalorunidad.setText("$ 0");
+                txtvalortotal.setText("$ 0");
+                txtreferencia.grabFocus();
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        int row = TB_DETALLE.getSelectedRow();
+        cotizacionDao.SELECT_COTIZACION(3 + "," + edicion.toNumeroEntero(TB_DETALLE.getValueAt(row, 0).toString()));
+        CARGAR_DETALLE();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        Object key = edicion.msjQuest(2, "ingresa el numero de la cotizacion.");
+        CONSULTAR_COTIZACION(key);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        NUEVA_COTIZACION();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        int SI_NO = (int) edicion.msjQuest(1, "estas seguro que deseas modificar la cotizacion.");
+        if (SI_NO == 0) {
+            if (cotizacionDao.CRUD_COTIZACION(CARGAR_DATOS(1)) != false) {
+                edicion.mensajes(2, "modificacion realizada correctamente.");
+            }
+        }
+
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        Manager_Report mr = new Manager_Report();
+        mr.COTIZACION(txtnumcotizacion.getText());
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -517,7 +597,6 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -534,17 +613,20 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lbitem;
     private javax.swing.JTextField txtcantidad;
     private javax.swing.JTextField txtdireccion;
     private javax.swing.JTextField txtidentificacion;
     private javax.swing.JTextField txtnumcotizacion;
     private javax.swing.JTextField txtreferencia;
+    private javax.swing.JTextField txtsubtotal;
     private javax.swing.JTextField txttelefono;
     private javax.swing.JTextField txtvalortotal;
     private javax.swing.JTextField txtvalorunidad;
@@ -577,6 +659,36 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
             }
         }
 
+    }
+
+    private void NUEVA_COTIZACION() {
+        llenarcombos();
+        txtidentificacion.setText(null);
+        txttelefono.setText(null);
+        txtdireccion.setText(null);
+        combocliente.setSelectedItem(null);
+        CARGAR_DETALLE();
+        txtreferencia.setText(null);
+        comboproducto.setSelectedItem(null);
+        txtcantidad.setText("0");
+        txtvalorunidad.setText("$ 0");
+        txtvalortotal.setText("$ 0");
+        lbitem.setText("0");
+        txtsubtotal.setText("$ 0");
+    }
+
+    private boolean CONSULTAR_COTIZACION(Object key) {
+        Object[][] rs = cotizacionDao.SELECT_COTIZACION(0 + "," + key);
+        if (rs.length > 0) {
+            txtnumcotizacion.setText(rs[0][0].toString());
+            JD_fechaEmision.setDate(DateUtil.getDateTime(rs[0][1]));
+            CARGAR_CLIENTE(rs[0][2].toString());
+            CARGAR_DETALLE();
+            return true;
+        } else {
+            edicion.mensajes(1, "la cotizacion # " + key + " no se encuentra registrada.");
+        }
+        return false;
     }
 
     private void CARGAR_PRODUCTO(String text) {
@@ -615,11 +727,27 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
             edicion.mensajes(1, "ingresa el numero de identidad del cliente.");
             return false;
         }
+
+        if (txtreferencia.getText().isEmpty() | txtreferencia.getText() == null) {
+            edicion.mensajes(1, "ingresa la referencia del producto.");
+            return false;
+        }
+
+        if (edicion.toNumeroEntero(txtcantidad.getText()) < 1) {
+            edicion.mensajes(1, "la cantidad debe ser mayor a cero (0).");
+            return false;
+        }
         return true;
     }
 
     private void CARGAR_DETALLE() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Object[][] rs = cotizacionDao.SELECT_COTIZACION("1," + txtnumcotizacion.getText());
+        if (rs.length > 0) {
+            edicion.llenarTabla(TB_DETALLE, rs);
+            edicion.calcula_total(TB_DETALLE, lbitem, txtsubtotal, 5);
+        } else {
+            edicion.limpiar_tablas(TB_DETALLE);
+        }
     }
 
     private void llenarcombos() {
@@ -633,7 +761,7 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
         for (Producto p : productoDao.LISTA_PRODUCTOS()) {
             comboproducto.addItem(p.getDescripcion());
         }
-         
+
         JD_fechaEmision.setDate(DateUtil.newDateTime());
         txtnumcotizacion.setText(cotizacionDao.NUMERO_COTIZACION());
     }
@@ -647,32 +775,44 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
                 CARGAR_CLIENTE(combocliente.getSelectedItem().toString());
             }
         });
-
         comboproducto.getEditor().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CARGAR_PRODUCTO(comboproducto.getSelectedItem().toString());
             }
         });
-
         txtcantidad.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 CALCULARTOTALCOMPRA();
             }
-
         });
         txtvalorunidad.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 CALCULARTOTALCOMPRA();
             }
-
         });
     }
 
     private void CALCULARTOTALCOMPRA() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int totalcompra = edicion.toNumeroEntero(txtvalorunidad.getText())
+                * edicion.toNumeroEntero(txtcantidad.getText());
+        txtvalortotal.setText("$ " + formatoTexto.numerico(totalcompra));
+    }
+
+    private Object[] CARGAR_DATOS(int opcion) {
+        Object[] datos = new Object[7];
+        if (opcion == 0 | opcion == 1 | opcion == 2 | opcion == 3) {
+            datos[0] = opcion;
+        }
+        datos[1] = edicion.toNumeroEntero(txtnumcotizacion.getText());
+        datos[2] = "'" + txtreferencia.getText() + "'";
+        datos[3] = edicion.toNumeroEntero(txtcantidad.getText());
+        datos[4] = edicion.toNumeroEntero(txtvalorunidad.getText());
+        datos[5] = "'" + txtidentificacion.getText() + "'";
+        datos[6] = "'" + Variables_Gloabales.EMPLEADO.getIdentificacion() + "'";
+        return datos;
     }
 }
 

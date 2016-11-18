@@ -1043,9 +1043,9 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
         txtvalortotal.setText("$ " + formatoTexto.numerico(totalcompra));
         costoneto = costounidad * edicion.toNumeroEntero(txtcantidad.getText());
         utilidadneta = totalcompra - costoneto;
-        if (totalcompra < costoneto) {
-            edicion.mensajes(1, "no hay ganancia en este producto.");
-        }
+//        if (totalcompra < costoneto) {
+//            edicion.mensajes(1, "no hay ganancia en este producto.");
+//        }
     }
 
     private void CARGAR_CLIENTE(Object KEY) {
