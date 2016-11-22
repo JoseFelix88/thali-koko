@@ -142,4 +142,8 @@ public class Manager_Report extends database {
             System.out.println("Mensaje de Error:" + j);
         }
     }
+
+    public void PLANSEPARE(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
