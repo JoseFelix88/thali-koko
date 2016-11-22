@@ -144,7 +144,7 @@ public class Contenedor extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         JM_Orden_Compra = new javax.swing.JMenuItem();
         JM_Cotizacion = new javax.swing.JMenuItem();
-        JMReporteInOut = new javax.swing.JMenuItem();
+        JM_PlanSepare = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
         JM_conteofisico = new javax.swing.JMenuItem();
@@ -302,17 +302,17 @@ public class Contenedor extends javax.swing.JFrame {
         });
         jMenu1.add(JM_Cotizacion);
 
-        JMReporteInOut.setBackground(new java.awt.Color(51, 51, 51));
-        JMReporteInOut.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JMReporteInOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/hand-holding-money-bills.png"))); // NOI18N
-        JMReporteInOut.setText("Plan Separe");
-        JMReporteInOut.setActionCommand("ReporteInOut");
-        JMReporteInOut.addActionListener(new java.awt.event.ActionListener() {
+        JM_PlanSepare.setBackground(new java.awt.Color(51, 51, 51));
+        JM_PlanSepare.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        JM_PlanSepare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/hand-holding-money-bills.png"))); // NOI18N
+        JM_PlanSepare.setText("Plan Separe");
+        JM_PlanSepare.setActionCommand("plansepare");
+        JM_PlanSepare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMReporteInOutActionPerformed(evt);
+                JM_PlanSepareActionPerformed(evt);
             }
         });
-        jMenu1.add(JMReporteInOut);
+        jMenu1.add(JM_PlanSepare);
 
         Contenedor_Menu_General.add(jMenu1);
 
@@ -486,9 +486,9 @@ public class Contenedor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JM_Orden_CompraActionPerformed
 
-    private void JMReporteInOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMReporteInOutActionPerformed
+    private void JM_PlanSepareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JM_PlanSepareActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JMReporteInOutActionPerformed
+    }//GEN-LAST:event_JM_PlanSepareActionPerformed
 
     private void JM_SalidaAutorizadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JM_SalidaAutorizadaActionPerformed
         // TODO add your handling code here:
@@ -593,7 +593,6 @@ public class Contenedor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar Contenedor_Menu_General;
-    public javax.swing.JMenuItem JMReporteInOut;
     public javax.swing.JMenuItem JM_Clientes;
     public javax.swing.JMenuItem JM_CompraProducto;
     public javax.swing.JMenuItem JM_ConsumoSaldoGeneral;
@@ -603,6 +602,7 @@ public class Contenedor extends javax.swing.JFrame {
     public javax.swing.JMenuItem JM_Lotes;
     public javax.swing.JMenuItem JM_OrdenCompra;
     public javax.swing.JMenuItem JM_Orden_Compra;
+    public javax.swing.JMenuItem JM_PlanSepare;
     public javax.swing.JMenuItem JM_Producto;
     public javax.swing.JMenu JM_Profile;
     public javax.swing.JMenuItem JM_Proveedor;

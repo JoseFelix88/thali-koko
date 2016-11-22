@@ -11,6 +11,7 @@ import com.thalisoft.vista.preventa.ordenpedido.FormOrdenPedido;
 import com.thalisoft.vista.maestros.producto.FormListaProductos;
 import com.thalisoft.vista.maestros.proveedor.FormListarProveedor;
 import com.thalisoft.vista.preventa.cotizacion.FormCotizacion;
+import com.thalisoft.vista.preventa.plansepare.FormPlanSepare;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,6 +50,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
     FormListaProductos formListaProductos;
     FormListarProveedor formListarProveedor;
     FormCotizacion formCotizacion;
+    FormPlanSepare formPlanSepare;
 
     private static JDesktopPane jDesktopPane1;
 
@@ -67,7 +69,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
             Obtener_Eventos_De_SubMenu(contenedor.R_Salida);
             Obtener_Eventos_De_SubMenu(contenedor.JM_conteofisico);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Cotizacion);
-            Obtener_Eventos_De_SubMenu(contenedor.JMReporteInOut);
+            Obtener_Eventos_De_SubMenu(contenedor.JM_PlanSepare);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Orden_Compra);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Lotes);
             Obtener_Eventos_De_SubMenu(contenedor.JM_DevolucionPunto);
@@ -86,6 +88,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
             Obtener_Eventos_De_SubMenu(contenedor.JM_Producto);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Proveedor);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Cotizacion);
+            Obtener_Eventos_De_SubMenu(contenedor.JM_PlanSepare);
             contenedor.JM_Profile.setText(Variables_Gloabales.EMPLEADO.getNombres() + " "
                     + "" + Variables_Gloabales.EMPLEADO.getApellidos());
         } else {
@@ -203,6 +206,22 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
                     formCotizacion.setIcon(false);
                 }
                 break;
+
+            case "plansepare":
+
+                if (Obtener_Estado_Formulario(this.formPlanSepare, Contenedor.Panel_Contenedor)) {
+                    formPlanSepare = new FormPlanSepare();
+                    formPlanSepare.show();
+                    Contenedor.Panel_Contenedor.add(formPlanSepare);
+                    java.awt.Dimension Tamaño_Panel = Contenedor.Panel_Contenedor.getSize();
+                    java.awt.Dimension Tamaño_InternalFrame = formPlanSepare.getSize();
+                    formPlanSepare.setLocation((Tamaño_Panel.width - Tamaño_InternalFrame.width) / 2,
+                            (Tamaño_Panel.height - Tamaño_InternalFrame.height) / 2);
+                } else {
+                    formPlanSepare.setIcon(false);
+                }
+                break;
+
             /*
              case "Salida Autorizada":
 

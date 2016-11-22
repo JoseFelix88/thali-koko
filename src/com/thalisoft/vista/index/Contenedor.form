@@ -304,7 +304,7 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="JMReporteInOut">
+            <MenuItem class="javax.swing.JMenuItem" name="JM_PlanSepare">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="33" red="33" type="rgb"/>
@@ -316,10 +316,10 @@
                   <Image iconType="3" name="/com/thalisoft/image/iconos/hand-holding-money-bills.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Plan Separe"/>
-                <Property name="actionCommand" type="java.lang.String" value="ReporteInOut"/>
+                <Property name="actionCommand" type="java.lang.String" value="plansepare"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMReporteInOutActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JM_PlanSepareActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

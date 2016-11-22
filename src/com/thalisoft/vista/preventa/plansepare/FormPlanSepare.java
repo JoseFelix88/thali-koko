@@ -13,6 +13,7 @@ import com.thalisoft.model.maestros.producto.ProductoDao;
 import com.thalisoft.model.preventa.plansepare.PlanSepareDao;
 import com.thalisoft.vista.maestros.cliente.FormCliente;
 import com.thalisoft.vista.maestros.producto.FormProducto;
+import com.thalisoft.vista.preventa.plansepare.pagos.FormPagosPlanSepare;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -52,7 +53,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtnumcotizacion = new javax.swing.JTextField();
+        txtnumplan = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         JD_fechaEmision = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
@@ -63,7 +64,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         txttelefono = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtdireccion = new javax.swing.JTextField();
-        combocliente = new javax.swing.JComboBox<>();
+        combocliente = new javax.swing.JComboBox<String>();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -71,7 +72,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtreferencia = new javax.swing.JTextField();
-        comboproducto = new javax.swing.JComboBox<>();
+        comboproducto = new javax.swing.JComboBox<String>();
         txtcantidad = new javax.swing.JTextField();
         txtvalorunidad = new javax.swing.JTextField();
         txtvalortotal = new javax.swing.JTextField();
@@ -111,9 +112,9 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel1.setText("GESTIONAR PLAN SEPARE DE PRODUCTOS");
 
-        jLabel2.setText("No. COTIZACION");
+        jLabel2.setText("No. PLAN");
 
-        txtnumcotizacion.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        txtnumplan.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
 
         jLabel3.setText("FECHA DE EMISION");
 
@@ -142,7 +143,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         txtdireccion.setEditable(false);
 
         combocliente.setEditable(true);
-        combocliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combocliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -217,7 +218,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         });
 
         comboproducto.setEditable(true);
-        comboproducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboproducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboproducto.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboproductoItemStateChanged(evt);
@@ -335,7 +336,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
                                 .addComponent(jLabel9)
-                                .addGap(136, 136, 136)
+                                .addGap(120, 120, 120)
                                 .addComponent(jLabel10))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(147, 147, 147)
@@ -400,7 +401,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtnumcotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtnumplan, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JD_fechaEmision, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -423,7 +424,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtnumcotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtnumplan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -434,6 +435,8 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jMenuBar1.setBackground(new java.awt.Color(255, 102, 51));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/userconfig-icono-8183-32.png"))); // NOI18N
         jMenu1.setText("Gestion");
@@ -471,6 +474,11 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/money.png"))); // NOI18N
         jMenuItem7.setText("Pagos");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem7);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
@@ -565,7 +573,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        Object key = edicion.msjQuest(2, "ingresa el numero de la cotizacion.");
+        Object key = edicion.msjQuest(2, "ingresa el numero de EL PLAN.");
         CONSULTAR_PLANSEPARE(key);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -581,7 +589,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        int SI_NO = (int) edicion.msjQuest(1, "estas seguro que deseas modificar la cotizacion.");
+        int SI_NO = (int) edicion.msjQuest(1, "estas seguro que deseas modificar EL PLAN.");
         if (SI_NO == 0) {
             if (planSepareDao.CRUD_PLANSEPARE(CARGAR_DATOS(1)) != false) {
                 edicion.mensajes(2, "modificacion realizada correctamente.");
@@ -593,8 +601,26 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         Manager_Report mr = new Manager_Report();
-        mr.PLANSEPARE(txtnumcotizacion.getText());
+        mr.PLANSEPARE(txtnumplan.getText());
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+         JInternalFrame ji = validador.getJInternalFrame(FormPagosPlanSepare.class.getName());
+        if (ji == null || ji.isClosed()) {
+            ji = new FormPagosPlanSepare();
+            ControllerContenedor.getjDesktopPane1().add(ji, 0);
+            validador.addJIframe(FormPagosPlanSepare.class.getName(), ji);
+            ji.setVisible(true);
+        } else {
+            ji.show(true);
+            try {
+                ji.setIcon(false);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(FormCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -637,7 +663,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtcantidad;
     private javax.swing.JTextField txtdireccion;
     private javax.swing.JTextField txtidentificacion;
-    private javax.swing.JTextField txtnumcotizacion;
+    private javax.swing.JTextField txtnumplan;
     private javax.swing.JTextField txtreferencia;
     private javax.swing.JTextField txtsubtotal;
     private javax.swing.JTextField txttelefono;
@@ -693,13 +719,13 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
     private boolean CONSULTAR_PLANSEPARE(Object key) {
         Object[][] rs = planSepareDao.SELECT_PLANSEPARE(0 + "," + key);
         if (rs.length > 0) {
-            txtnumcotizacion.setText(rs[0][0].toString());
+            txtnumplan.setText(rs[0][0].toString());
             JD_fechaEmision.setDate(DateUtil.getDateTime(rs[0][1]));
             CARGAR_CLIENTE(rs[0][2].toString());
             CARGAR_DETALLE();
             return true;
         } else {
-            edicion.mensajes(1, "la cotizacion # " + key + " no se encuentra registrada.");
+            edicion.mensajes(1, "EL PLAN # " + key + " no se encuentra registrada.");
         }
         return false;
     }
@@ -754,7 +780,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
     }
 
     private void CARGAR_DETALLE() {
-        Object[][] rs = planSepareDao.SELECT_PLANSEPARE("1," + txtnumcotizacion.getText());
+        Object[][] rs = planSepareDao.SELECT_PLANSEPARE("1," + txtnumplan.getText());
         if (rs.length > 0) {
             edicion.llenarTabla(TB_DETALLE, rs);
             edicion.calcula_total(TB_DETALLE, lbitem, txtsubtotal, 5);
@@ -776,7 +802,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         }
 
         JD_fechaEmision.setDate(DateUtil.newDateTime());
-        txtnumcotizacion.setText(planSepareDao.NUMERO_PLANSEPARE());
+        txtnumplan.setText(planSepareDao.NUMERO_PLANSEPARE());
     }
 
     private void AccionesFormulario() {
@@ -819,7 +845,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         if (opcion == 0 | opcion == 1 | opcion == 2 | opcion == 3) {
             datos[0] = opcion;
         }
-        datos[1] = edicion.toNumeroEntero(txtnumcotizacion.getText());
+        datos[1] = edicion.toNumeroEntero(txtnumplan.getText());
         datos[2] = "'" + txtreferencia.getText() + "'";
         datos[3] = edicion.toNumeroEntero(txtcantidad.getText());
         datos[4] = edicion.toNumeroEntero(txtvalorunidad.getText());
