@@ -5,24 +5,22 @@ import com.thalisoft.main.util.DateUtil;
 import com.thalisoft.main.util.Edicion;
 import com.thalisoft.main.util.Variables_Gloabales;
 import com.thalisoft.main.util.report.Manager_Report;
-import com.thalisoft.model.preventa.ordenpedido.OrdenPedido;
-import com.thalisoft.model.preventa.ordenpedido.OrdenPedidoDao;
 import com.thalisoft.model.preventa.ordenpedido.pagos.cliente.PagosClientes;
 import com.thalisoft.model.preventa.ordenpedido.pagos.cliente.PagosClientesDao;
+import com.thalisoft.model.preventa.plansepare.PlanSepare;
+import com.thalisoft.model.preventa.plansepare.PlanSepareDao;
+import com.thalisoft.model.preventa.plansepare.pagos.PagosPlanSepare;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class FormPagosPlanSepare extends javax.swing.JInternalFrame {
 
-    OrdenPedido ordenCompra;
+    PlanSepare planSepare;
     Edicion edicion = new Edicion();
     CambiaFormatoTexto formatoNumero = new CambiaFormatoTexto();
     static String FORMA_PAGO;
-    OrdenPedidoDao ordenDao;
+    PlanSepareDao separeDao;
     PagosClientesDao pagoDao;
     private Object NUMERO_RECIBO_PAGO;
     Manager_Report report = new Manager_Report();
@@ -101,7 +99,7 @@ public class FormPagosPlanSepare extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Pagos Plan");
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(255, 177, 105));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PAGOS PLAN SEPARE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Narrow", 1, 18))); // NOI18N
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Medio de Pago"));
@@ -586,7 +584,7 @@ public class FormPagosPlanSepare extends javax.swing.JInternalFrame {
         if (validacionFormulario() != false) {
             int si_no = (int) edicion.msjQuest(1, "estas seguro que deseas registrar el pago?");
             if (si_no == 0) {
-                if (pagoDao.CRUD_PAGO_CLIENTE(Cargar_Data_Pago(0)) != false) {
+                if (pagoDao.CRUD_PAGO_CLIENTE(Cargar_Data_Pago(3)) != false) {
                     CARGAR_HISTORICO_PAGO(txtnumorden.getText());
                     edicion.mensajes(2, "pago registrado correctamente.");
                 }
@@ -600,21 +598,17 @@ public class FormPagosPlanSepare extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void txtnumordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumordenActionPerformed
-        try {
-            ordenDao = new OrdenPedidoDao();
-            ordenCompra = ordenDao.CONSULTA_ORDEN_COMPRA(txtnumorden.getText());
-            if (ordenCompra != null) {
-                txtcliente.setText(ordenCompra.getCliente().getIdentificacion() + " - " + ordenCompra.getCliente().getNombrecompleto());
-                txtsubtotal.setText("$ " + formatoNumero.numerico(ordenCompra.getSubtotal()));
-                txtsaldoactual.setText("$ " + formatoNumero.numerico(ordenCompra.getSaldo()));
-                CARGAR_HISTORICO_PAGO(ordenCompra.getIdordencompra());
-                txtabono.selectAll();
-                txtabono.requestFocus();
-            } else {
-                edicion.mensajes(1, "EL PLAN # " + txtnumorden.getText() + " no se encuentra registrada.");
-            }
-        } catch (ParseException ex) {
-            Logger.getLogger(FormPagosPlanSepare.class.getName()).log(Level.SEVERE, null, ex);
+        separeDao = new PlanSepareDao();
+        planSepare = separeDao.CONSULTAR_PLAN_SEPARE(txtnumorden.getText());
+        if (planSepare != null) {
+            txtcliente.setText(planSepare.getCliente().getIdentificacion() + " - " + planSepare.getCliente().getNombrecompleto());
+            txtsubtotal.setText("$ " + formatoNumero.numerico(planSepare.getSubTotal()));
+            txtsaldoactual.setText("$ " + formatoNumero.numerico(planSepare.getSaldo()));
+            CARGAR_HISTORICO_PAGO(planSepare.getIdcotizacion());
+            txtabono.selectAll();
+            txtabono.requestFocus();
+        } else {
+            edicion.mensajes(1, "EL PLAN # " + txtnumorden.getText() + " no se encuentra registrada.");
         }
 
     }//GEN-LAST:event_txtnumordenActionPerformed
@@ -622,7 +616,7 @@ public class FormPagosPlanSepare extends javax.swing.JInternalFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         NUMERO_RECIBO_PAGO = edicion.msjQuest(2, "ingresa el numero de recibo de pago o comprobante.");
-        PagosClientes pc = pagoDao.CONSULTA_PAGO_CLIENTE(NUMERO_RECIBO_PAGO);
+        PagosPlanSepare pc = pagoDao.CONSULTA_PAGO_PLAN_SEPARE(NUMERO_RECIBO_PAGO);
         if (pc != null) {
             Montar_Data_Pago(pc.getIdpagocliente());
             report.RECIBO_DE_PAGO_CLIENTE(NUMERO_RECIBO_PAGO);
@@ -760,7 +754,7 @@ public class FormPagosPlanSepare extends javax.swing.JInternalFrame {
 
     private void CARGAR_HISTORICO_PAGO(Object KEY) {
         pagoDao = new PagosClientesDao();
-        Object[][] rs = pagoDao.HISTORIAL_PAGOS_CLIENTE(KEY);
+        Object[][] rs = pagoDao.HISTORICO_PAGOS_PLAN_SEPARE(KEY);
         if (rs.length > 0) {
             edicion.llenarTabla(jTable1, rs);
             edicion.calcula_total(jTable1, lbabono, txtabonoacumulado, 2);
@@ -819,9 +813,8 @@ public class FormPagosPlanSepare extends javax.swing.JInternalFrame {
         Object[] DATA_PAGO = new Object[10];
         int CNT_DEVUELTA;
 
-        if (opcion == 0 | opcion == 1) {
-            DATA_PAGO[0] = opcion;
-        }
+        DATA_PAGO[0] = opcion;
+
         if (radioefectivo.isSelected()) {
             CNT_DEVUELTA = edicion.toNumeroEntero(txtcntrecibo.getText()) - edicion.toNumeroEntero(txtabono.getText());
         } else {
@@ -840,20 +833,20 @@ public class FormPagosPlanSepare extends javax.swing.JInternalFrame {
     }
 
     private void Montar_Data_Pago(Object key) {
-        PagosClientes pc = pagoDao.CONSULTA_PAGO_CLIENTE(key);
+        PagosPlanSepare pc = pagoDao.CONSULTA_PAGO_PLAN_SEPARE(key);
         if (pc != null) {
             txtnumidpago.setText(edicion.AGREGAR_CEROS_LEFT(pc.getIdpagocliente()));
             jdfechaemision.setDate(pc.getFechahoraemision());
-            txtnumorden.setText(edicion.AGREGAR_CEROS_LEFT(pc.getOrdenCompra().getIdordencompra()));
-            txtcliente.setText(pc.getOrdenCompra().getCliente().getIdentificacion() + " - "
-                    + "" + pc.getOrdenCompra().getCliente().getNombrecompleto());
+            txtnumorden.setText(edicion.AGREGAR_CEROS_LEFT(pc.getPlanSepare().getIdcotizacion()));
+            txtcliente.setText(pc.getPlanSepare().getCliente().getIdentificacion() + " - "
+                    + "" + pc.getPlanSepare().getCliente().getNombrecompleto());
             txtabono.setText("$ " + formatoNumero.numerico(pc.getValorpago()));
             txtcntrecibo.setText("$ " + formatoNumero.numerico(pc.getCntrecibida()));
             txtcntdevuelta.setText("$ " + formatoNumero.numerico(pc.getCntdevuelta()));
             txtnumrecibo.setText(pc.getNumrecibo());
-            txtsubtotal.setText("$ " + formatoNumero.numerico(pc.getOrdenCompra().getSubtotal()));
-            txtsaldoactual.setText("$ " + formatoNumero.numerico(pc.getOrdenCompra().getSaldo()));
-            CARGAR_HISTORICO_PAGO(pc.getOrdenCompra().getIdordencompra());
+            txtsubtotal.setText("$ " + formatoNumero.numerico(pc.getPlanSepare().getSubTotal()));
+            txtsaldoactual.setText("$ " + formatoNumero.numerico(pc.getPlanSepare().getSaldo()));
+            CARGAR_HISTORICO_PAGO(pc.getPlanSepare().getIdcotizacion());
         } else {
             edicion.mensajes(1, "el comprobante aun no se ha registrado.");
         }
@@ -862,7 +855,7 @@ public class FormPagosPlanSepare extends javax.swing.JInternalFrame {
     private void nuevo() {
         PagosClientes pc = new PagosClientes();
         jdfechaemision.setDate(DateUtil.newTimestamp());
-        txtnumidpago.setText(pagoDao.NUMERO_RECIBO_PAGO_ORDEN_PEDIDO());
+        txtnumidpago.setText(pagoDao.NUMERO_RECIBO_PAGO_PLAN_SEPARE());
         txtnumorden.setText(null);
         txtcliente.setText("");
         txtabono.setText("$ " + formatoNumero.numerico(pc.getValorpago()));

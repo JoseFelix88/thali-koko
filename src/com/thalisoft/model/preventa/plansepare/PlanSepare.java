@@ -11,6 +11,8 @@ public class PlanSepare {
     private Date fechaEmision;
     private Cliente cliente;
     private Empleado empleado;
+    private int subTotal;
+    private int saldo;
 
     public int getIdcotizacion() {
         return idcotizacion;
@@ -42,6 +44,22 @@ public class PlanSepare {
 
     public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
+    }
+
+    public int getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(int subTotal) {
+        this.subTotal = subTotal;
+    }
+
+    public int getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
     }
     
 }

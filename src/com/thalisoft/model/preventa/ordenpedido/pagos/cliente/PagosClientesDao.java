@@ -7,6 +7,8 @@ import com.thalisoft.model.maestros.cliente.Cliente;
 import com.thalisoft.model.maestros.cliente.ClienteDao;
 import com.thalisoft.model.maestros.empleado.EmpleadoDao;
 import com.thalisoft.model.preventa.ordenpedido.OrdenPedidoDao;
+import com.thalisoft.model.preventa.plansepare.PlanSepareDao;
+import com.thalisoft.model.preventa.plansepare.pagos.PagosPlanSepare;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,7 +62,7 @@ public class PagosClientesDao extends database {
     }
 
     public String NUMERO_RECIBO_PAGO_PLAN_SEPARE() {
-        Object param = 3 + ",2";
+        Object param = 3+ ",0";
         Object[][] RS = SELECT_SP("SELECT_PAGOS_CLIENTE", param);
         if (RS.length > 0) {
             return RS[0][0].toString();
@@ -69,6 +71,28 @@ public class PagosClientesDao extends database {
     }
     
     public Object[][] HISTORICO_PAGOS_PLAN_SEPARE(Object key){
-        return SELECT_SP("SELECT_PAGOS_CLIENTE", key);
+         Object param = 5+ ",'"+key+"'";
+        return SELECT_SP("SELECT_PLANSEPARE", param);
+    }
+    
+    public PagosPlanSepare CONSULTA_PAGO_PLAN_SEPARE(Object KEY) {
+        PagosPlanSepare pc = null;
+        Object param = 4 + ",'" + KEY + "'";
+        Object[][] rs = SELECT_SP("SELECT_PLANSEPARE", param);
+        if (rs.length > 0) {
+            pc = new PagosPlanSepare();
+            pc.setIdpagocliente(edicion.toNumeroEntero(rs[0][0].toString()));
+            pc.setFechahoraemision(DateUtil.getDateTime(rs[0][1]));
+            pc.setFormapago(rs[0][2].toString());
+            pc.setPlanSepare(new PlanSepareDao().CONSULTAR_PLAN_SEPARE(rs[0][3]));
+            pc.setEmpleado(new EmpleadoDao().CONSULTAR_EMPLEADO(rs[0][4]));
+            pc.setNumrecibo(rs[0][5].toString());
+            pc.setValorpago(edicion.toNumeroEntero(rs[0][6].toString()));
+            pc.setCntrecibida(edicion.toNumeroEntero(rs[0][7].toString()));
+            pc.setCntdevuelta(edicion.toNumeroEntero(rs[0][8].toString()));
+            pc.setEstado(edicion.toNumeroEntero(rs[0][9].toString()));
+        }
+
+        return pc;
     }
 }
