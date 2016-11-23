@@ -16,6 +16,7 @@ import com.thalisoft.vista.maestros.cliente.FormCliente;
 import com.thalisoft.vista.maestros.producto.FormProducto;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
@@ -769,17 +770,24 @@ public class FormCotizacion extends javax.swing.JInternalFrame {
     private void AccionesFormulario() {
         AutoCompleteDecorator.decorate(combocliente);
         AutoCompleteDecorator.decorate(comboproducto);
-        combocliente.getEditor().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        combocliente.getEditor().addActionListener((ActionEvent e) -> {
+            CARGAR_CLIENTE(combocliente.getSelectedItem().toString());
+        });
+        
+         combocliente.addItemListener((java.awt.event.ItemEvent evt) -> {
+            if (evt.getStateChange() == ItemEvent.SELECTED && combocliente.getSelectedItem().toString().isEmpty() != true) {
                 CARGAR_CLIENTE(combocliente.getSelectedItem().toString());
             }
         });
-        comboproducto.getEditor().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+
+        comboproducto.addItemListener((java.awt.event.ItemEvent evt) -> {
+            if (evt.getStateChange() == ItemEvent.SELECTED && comboproducto.getSelectedItem().toString().isEmpty() != true) {
                 CARGAR_PRODUCTO(comboproducto.getSelectedItem().toString());
             }
+        });
+        
+        comboproducto.getEditor().addActionListener((ActionEvent e) -> {
+            CARGAR_PRODUCTO(comboproducto.getSelectedItem().toString());
         });
         txtcantidad.addKeyListener(new KeyAdapter() {
             @Override

@@ -16,6 +16,7 @@ import com.thalisoft.vista.maestros.producto.FormProducto;
 import com.thalisoft.vista.preventa.plansepare.pagos.FormPagosPlanSepare;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
@@ -28,7 +29,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
 
     Edicion edicion = new Edicion();
     CambiaFormatoTexto formatoTexto = new CambiaFormatoTexto();
-    PlanSepareDao  planSepareDao;
+    PlanSepareDao planSepareDao;
     Cliente cliente;
     Producto producto;
     ClienteDao clienteDao;
@@ -41,6 +42,17 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         initComponents();
         AccionesFormulario();
         llenarcombos();
+        combocliente.addItemListener((java.awt.event.ItemEvent evt) -> {
+            if (evt.getStateChange() == ItemEvent.SELECTED && combocliente.getSelectedItem().toString().isEmpty() != true) {
+                CARGAR_CLIENTE(combocliente.getSelectedItem().toString());
+            }
+        });
+        
+         comboproducto.addItemListener((java.awt.event.ItemEvent evt) -> {
+            if (evt.getStateChange() == ItemEvent.SELECTED && comboproducto.getSelectedItem().toString().isEmpty() != true) {
+                CARGAR_PRODUCTO(comboproducto.getSelectedItem().toString());
+            }
+        });
 
     }
 
@@ -64,7 +76,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         txttelefono = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtdireccion = new javax.swing.JTextField();
-        combocliente = new javax.swing.JComboBox<String>();
+        combocliente = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -72,7 +84,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtreferencia = new javax.swing.JTextField();
-        comboproducto = new javax.swing.JComboBox<String>();
+        comboproducto = new javax.swing.JComboBox<>();
         txtcantidad = new javax.swing.JTextField();
         txtvalorunidad = new javax.swing.JTextField();
         txtvalortotal = new javax.swing.JTextField();
@@ -143,7 +155,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         txtdireccion.setEditable(false);
 
         combocliente.setEditable(true);
-        combocliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combocliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -218,7 +230,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         });
 
         comboproducto.setEditable(true);
-        comboproducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboproducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboproducto.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboproductoItemStateChanged(evt);
@@ -606,7 +618,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
-         JInternalFrame ji = validador.getJInternalFrame(FormPagosPlanSepare.class.getName());
+        JInternalFrame ji = validador.getJInternalFrame(FormPagosPlanSepare.class.getName());
         if (ji == null || ji.isClosed()) {
             ji = new FormPagosPlanSepare();
             ControllerContenedor.getjDesktopPane1().add(ji, 0);

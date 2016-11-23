@@ -1001,25 +1001,22 @@ public class FormOrdenPedido extends javax.swing.JInternalFrame {
     private void AccionesFormulario() {
         AutoCompleteDecorator.decorate(combocliente);
         AutoCompleteDecorator.decorate(comboproducto);
-        combocliente.getEditor().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CARGAR_CLIENTE(combocliente.getSelectedItem());
+        combocliente.getEditor().addActionListener((ActionEvent e) -> {
+            CARGAR_CLIENTE(combocliente.getSelectedItem());
+        });
+        combocliente.addItemListener((java.awt.event.ItemEvent evt) -> {
+            if (evt.getStateChange() == ItemEvent.SELECTED && combocliente.getSelectedItem().toString().isEmpty() != true) {
+                CARGAR_CLIENTE(combocliente.getSelectedItem().toString());
             }
         });
-        /*comboproducto.addItemListener(new ItemListener() {
-         @Override
-         public void itemStateChanged(ItemEvent e) {
-         if (e.getStateChange() == ItemEvent.SELECTED) {
-         CARGAR_PRODUCTO(comboproducto.getSelectedItem());
-         }
-         }
-         });*/
-        comboproducto.getEditor().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CARGAR_PRODUCTO(comboproducto.getSelectedItem());
+
+        comboproducto.addItemListener((java.awt.event.ItemEvent evt) -> {
+            if (evt.getStateChange() == ItemEvent.SELECTED && comboproducto.getSelectedItem().toString().isEmpty() != true) {
+                CARGAR_PRODUCTO(comboproducto.getSelectedItem().toString());
             }
+        });
+        comboproducto.getEditor().addActionListener((ActionEvent e) -> {
+            CARGAR_PRODUCTO(comboproducto.getSelectedItem());
         });
 
         txtcantidad.addKeyListener(new KeyAdapter() {
