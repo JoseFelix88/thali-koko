@@ -76,7 +76,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         txttelefono = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtdireccion = new javax.swing.JTextField();
-        combocliente = new javax.swing.JComboBox<>();
+        combocliente = new javax.swing.JComboBox<String>();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -84,7 +84,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtreferencia = new javax.swing.JTextField();
-        comboproducto = new javax.swing.JComboBox<>();
+        comboproducto = new javax.swing.JComboBox<String>();
         txtcantidad = new javax.swing.JTextField();
         txtvalorunidad = new javax.swing.JTextField();
         txtvalortotal = new javax.swing.JTextField();
@@ -122,7 +122,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel1.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        jLabel1.setText("GESTIONAR PLAN SEPARE DE PRODUCTOS");
+        jLabel1.setText("PLAN SEPARE DE PRODUCTOS");
 
         jLabel2.setText("No. PLAN");
 
@@ -131,6 +131,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         jLabel3.setText("FECHA DE EMISION");
 
         JD_fechaEmision.setDateFormatString("EEE dd MMM yyyy");
+        JD_fechaEmision.setEnabled(false);
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CLIENTE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -155,7 +156,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         txtdireccion.setEditable(false);
 
         combocliente.setEditable(true);
-        combocliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combocliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -205,42 +206,61 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
                     .addComponent(txtdireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 153, 102));
+        jPanel3.setBackground(new java.awt.Color(0, 149, 231));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PRODUCTO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         jPanel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        jLabel9.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("REFERENCIA");
 
+        jLabel10.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("DESCRIPCIÓN");
 
+        jLabel11.setBackground(new java.awt.Color(204, 255, 153));
+        jLabel11.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("CANTIDAD");
 
+        jLabel12.setBackground(new java.awt.Color(204, 255, 153));
+        jLabel12.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("VALOR UNIDAD");
 
+        jLabel13.setBackground(new java.awt.Color(204, 255, 153));
+        jLabel13.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("VALOR TOTAL");
 
+        txtreferencia.setBackground(new java.awt.Color(204, 255, 153));
+        txtreferencia.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
         txtreferencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtreferenciaActionPerformed(evt);
             }
         });
 
+        comboproducto.setBackground(new java.awt.Color(204, 255, 153));
         comboproducto.setEditable(true);
-        comboproducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboproducto.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        comboproducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboproducto.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboproductoItemStateChanged(evt);
             }
         });
 
+        txtcantidad.setBackground(new java.awt.Color(204, 255, 153));
         txtcantidad.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtcantidad.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         txtcantidad.setText("0");
 
+        txtvalorunidad.setBackground(new java.awt.Color(204, 255, 153));
         txtvalorunidad.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtvalorunidad.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         txtvalorunidad.setText("$ 0");
@@ -251,6 +271,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
         });
 
         txtvalortotal.setEditable(false);
+        txtvalortotal.setBackground(new java.awt.Color(204, 255, 153));
         txtvalortotal.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtvalortotal.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         txtvalortotal.setText("$ 0");
@@ -260,6 +281,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/save.png"))); // NOI18N
         jButton1.setText("AGREGAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -267,6 +289,8 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
 
         TB_DETALLE.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -300,16 +324,22 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
             TB_DETALLE.getColumnModel().getColumn(2).setMinWidth(200);
         }
 
+        jLabel4.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("ITEM AGREGADOS");
 
-        lbitem.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        lbitem.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        lbitem.setForeground(new java.awt.Color(255, 255, 255));
         lbitem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbitem.setText("0");
 
+        jLabel15.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("SUB-TOTAL");
 
         txtsubtotal.setEditable(false);
-        txtsubtotal.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        txtsubtotal.setBackground(new java.awt.Color(204, 255, 153));
+        txtsubtotal.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         txtsubtotal.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         txtsubtotal.setText("$ 0");
 
@@ -418,22 +448,22 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(148, 148, 148)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(195, 195, 195))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addGap(72, 72, 72)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtnumplan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -445,7 +475,7 @@ public class FormPlanSepare extends javax.swing.JInternalFrame {
                             .addComponent(JD_fechaEmision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jMenuBar1.setBackground(new java.awt.Color(255, 102, 51));

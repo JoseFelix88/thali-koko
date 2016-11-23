@@ -102,7 +102,7 @@ public class FormPagosPlanSepare extends javax.swing.JInternalFrame {
         setTitle("Pagos Plan");
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 153));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "GESTIONAR PAGOS PLAN SEPARE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Narrow", 1, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PAGOS PLAN SEPARE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Narrow", 1, 18))); // NOI18N
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Medio de Pago"));
 
@@ -862,7 +862,7 @@ public class FormPagosPlanSepare extends javax.swing.JInternalFrame {
     private void nuevo() {
         PagosClientes pc = new PagosClientes();
         jdfechaemision.setDate(DateUtil.newTimestamp());
-        txtnumidpago.setText(pagoDao.NUMERO_RECIBO_PAGO());
+        txtnumidpago.setText(pagoDao.NUMERO_RECIBO_PAGO_ORDEN_PEDIDO());
         txtnumorden.setText(null);
         txtcliente.setText("");
         txtabono.setText("$ " + formatoNumero.numerico(pc.getValorpago()));

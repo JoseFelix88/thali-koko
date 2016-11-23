@@ -36,7 +36,6 @@ public class PagosClientesDao extends database {
                 pc.setCntrecibida(edicion.toNumeroEntero(rs[0][7].toString()));
                 pc.setCntdevuelta(edicion.toNumeroEntero(rs[0][8].toString()));
                 pc.getOrdenCompra().setCliente(new ClienteDao().CONSULTAR_CLIENTE(rs[0][9]));
-                System.out.println("estado: "+rs[0][10]);
                 pc.setEstado(edicion.toNumeroEntero(rs[0][10].toString()));
             } catch (ParseException ex) {
                 Logger.getLogger(PagosClientesDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -51,12 +50,25 @@ public class PagosClientesDao extends database {
         return SELECT_SP("SELECT_PAGOS_CLIENTE", param);
     }
 
-    public String NUMERO_RECIBO_PAGO() {
+    public String NUMERO_RECIBO_PAGO_ORDEN_PEDIDO() {
         Object param = 0 + ",2";
         Object[][] RS = SELECT_SP("SELECT_PAGOS_CLIENTE", param);
         if (RS.length > 0) {
-           return  RS[0][0].toString();
+            return RS[0][0].toString();
         }
         return null;
+    }
+
+    public String NUMERO_RECIBO_PAGO_PLAN_SEPARE() {
+        Object param = 3 + ",2";
+        Object[][] RS = SELECT_SP("SELECT_PAGOS_CLIENTE", param);
+        if (RS.length > 0) {
+            return RS[0][0].toString();
+        }
+        return null;
+    }
+    
+    public Object[][] HISTORICO_PAGOS_PLAN_SEPARE(Object key){
+        return SELECT_SP("SELECT_PAGOS_CLIENTE", key);
     }
 }

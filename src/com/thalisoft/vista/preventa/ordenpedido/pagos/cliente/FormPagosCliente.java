@@ -862,7 +862,7 @@ public class FormPagosCliente extends javax.swing.JInternalFrame {
     private void nuevo() {
         PagosClientes pc = new PagosClientes();
         jdfechaemision.setDate(DateUtil.newTimestamp());
-        txtnumidpago.setText(pagoDao.NUMERO_RECIBO_PAGO());
+        txtnumidpago.setText(pagoDao.NUMERO_RECIBO_PAGO_ORDEN_PEDIDO());
         txtnumorden.setText(null);
         txtcliente.setText("");
         txtabono.setText("$ " + formatoNumero.numerico(pc.getValorpago()));
