@@ -143,7 +143,16 @@ public class Manager_Report extends database {
         }
     }
 
-    public void PLANSEPARE(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void PLANSEPARE(String key) {
+         String reporte = "Plan Separe.jasper";
+        try {
+            String Ubicacion = RUTA_REPORTE + "/PREVENTA/";
+            masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
+            PARAMETROS.put("idplan", key);
+            edicion.Lanzador(masterReport, PARAMETROS);
+        } catch (Exception j) {
+            edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
+            System.out.println("Mensaje de Error:" + j);
+        }
     }
 }
