@@ -619,7 +619,7 @@ public class FormPagosPlanSepare extends javax.swing.JInternalFrame {
         PagosPlanSepare pc = pagoDao.CONSULTA_PAGO_PLAN_SEPARE(NUMERO_RECIBO_PAGO);
         if (pc != null) {
             Montar_Data_Pago(pc.getIdpagocliente());
-            report.RECIBO_DE_PAGO_CLIENTE(NUMERO_RECIBO_PAGO);
+            report.RECIBO_DE_PAGO_PLANSEPARE(NUMERO_RECIBO_PAGO);
         } else {
             edicion.mensajes(1, "recibo de pago no se encuentra registrado o fue aunulado.");
         }
@@ -640,13 +640,13 @@ public class FormPagosPlanSepare extends javax.swing.JInternalFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        report.RECIBO_DE_PAGO_CLIENTE(txtnumidpago.getText());
+        report.RECIBO_DE_PAGO_PLANSEPARE(txtnumidpago.getText());
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
         NUMERO_RECIBO_PAGO = jTable1.getValueAt(jTable1.getSelectedRow(), 0);
-        report.RECIBO_DE_PAGO_CLIENTE(NUMERO_RECIBO_PAGO);
+        report.RECIBO_DE_PAGO_PLANSEPARE(NUMERO_RECIBO_PAGO);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

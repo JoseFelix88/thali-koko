@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Recibo de Pago  Plan Separe" pageWidth="612" pageHeight="300" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2e14ee77-219c-43a2-8261-71ce66157474">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="NUMPAGO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+LPAD(pagosplansepare.idpagocliente,6,'0') AS idpagocliente,
+pagosplansepare.fechahoraemision,
+pagosplansepare.valorpago,
+pagosplansepare.formapago,
+LPAD(plansepare.idplansepare,4,'0') AS idplansepare,
+CONSULTAR_EMPLEADO(pagosplansepare.empleado) AS empleado,
+IFNULL(pagosplansepare.numrecibo,"") AS numrecibo,
+pagosplansepare.cntrecibido,
+pagosplansepare.cntdevuelta,
+pagosplansepare.valorsaldo,
+clientes.nombreapellidos,
+clientes.telefono,
+clientes.identificacion,
+clientes.direccion,
+clientes.email
+FROM
+pagosplansepare ,
+plansepare ,
+clientes
+WHERE
+pagosplansepare.plan = plansepare.idplansepare AND
+plansepare.cliente = clientes.identificacion AND
+pagosplansepare.idpagocliente = $P{NUMPAGO}]]>
+	</queryString>
+	<field name="idpagocliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechahoraemision" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorpago" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="formapago" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idplansepare" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empleado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numrecibo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cntrecibido" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cntdevuelta" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorsaldo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreapellidos" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="identificacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="241" splitType="Stretch">
+			<frame>
+				<reportElement uuid="a46a2096-a4e3-4243-8490-9ecb87a1fc86" x="0" y="0" width="572" height="78"/>
+				<staticText>
+					<reportElement uuid="1a499f56-8ab0-4763-8225-dfed421d864d" x="168" y="0" width="194" height="51"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[RECIBO DE PAGO PLAN SEPARE -CLIENTE]]></text>
+				</staticText>
+				<image hAlign="Center" vAlign="Top">
+					<reportElement uuid="05bb2cf5-0a73-429b-8390-ce54261c6402" x="0" y="0" width="157" height="78"/>
+					<imageExpression><![CDATA["C:\\ThaliSotf Report\\img\\logo.png"]]></imageExpression>
+				</image>
+				<componentElement>
+					<reportElement uuid="fdf1b7e7-b96f-4ba7-98ff-a1ed4c91e522" x="372" y="28" width="200" height="50"/>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128A" drawText="true" checksumRequired="false">
+						<jr:codeExpression><![CDATA[$F{idpagocliente}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<staticText>
+					<reportElement uuid="bbb6a549-0190-4bad-a7a3-b4750e7c4187" x="387" y="12" width="153" height="13"/>
+					<textElement verticalAlignment="Bottom"/>
+					<text><![CDATA[RECIBO DE PAGO No]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="c7b7f31b-62f0-452a-8337-d8101add96ea" x="0" y="159" width="572" height="82"/>
+				<line>
+					<reportElement uuid="16b335b5-44a3-4944-be0d-ce369c2be620" x="27" y="2" width="526" height="1"/>
+					<graphicElement>
+						<pen lineWidth="3.75" lineStyle="Double" lineColor="#CCCCCC"/>
+					</graphicElement>
+				</line>
+				<textField pattern="$ #,##0">
+					<reportElement uuid="c939eded-851d-418d-a75a-4e9d0aeb7d79" x="227" y="7" width="81" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{valorpago}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="58e931c3-63ef-4c8d-aa5d-26bc2d82e672" x="53" y="7" width="174" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ABONO PLAN SEPARE No. "+$F{idplansepare}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="e43e03ed-56bf-4011-b977-1dd4684fbd23" x="78" y="32" width="90" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[RECIBIDO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="a67bcc7d-7ecc-40d9-ae93-8b455edce585" x="78" y="52" width="90" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[ CAMBIO]]></text>
+				</staticText>
+				<textField pattern="$ #,##0">
+					<reportElement uuid="2b244975-40a4-4bac-9c78-67a345449ce0" x="183" y="52" width="100" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{cntdevuelta}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="a55d69fd-eb27-4a99-8a8b-1b4523389d65" x="346" y="7" width="93" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[SALDO ACTUAL]]></text>
+				</staticText>
+				<textField pattern="$ #,##0">
+					<reportElement uuid="ed9f154c-66f5-4c6b-b5fd-48c2ed79d4a5" x="439" y="7" width="100" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{valorsaldo}]]></textFieldExpression>
+				</textField>
+				<textField pattern="$ #,##0">
+					<reportElement uuid="bb1349a2-2818-4e1a-a58e-05ba659c7c33" x="184" y="32" width="100" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{cntrecibido}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="e31d439c-e991-4c38-8b1f-b081d5bc5dfb" x="27" y="74" width="526" height="1"/>
+					<graphicElement>
+						<pen lineWidth="3.75" lineStyle="Double" lineColor="#CCCCCC"/>
+					</graphicElement>
+				</line>
+			</frame>
+			<frame>
+				<reportElement uuid="e88e7a2f-84af-4040-ac46-c79e5fdd534b" x="10" y="78" width="562" height="81"/>
+				<textField pattern="EEE, d MMM yyyy HH:mm:ss aa">
+					<reportElement uuid="78fdb108-7de6-49a7-9782-459c81b24577" x="136" y="0" width="171" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{fechahoraemision}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="4078b89d-7722-4c8e-9769-18073a15e281" x="0" y="20" width="307" height="32"/>
+					<textElement/>
+					<textFieldExpression><![CDATA["MEDIO DE PAGO: "+$F{formapago}+"\nRECIBO No. "+$F{numrecibo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="90157283-6d49-4044-8fb6-eb6e795b9136" x="0" y="0" width="136" height="20"/>
+					<textElement/>
+					<text><![CDATA[FECHA HORA DE EMISION]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="0d7a0887-12e2-4d9e-9f88-b6e4c583d3ef" x="0" y="52" width="307" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA["PAGO REGISTRADO POR: "+$F{empleado}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="5855c84b-daec-46c7-a020-aa470eec8911" x="307" y="0" width="255" height="81"/>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA["IDENTIFICACION: "+$F{identificacion}+"\nCLIENTE: "+$F{nombreapellidos}+"\nTELEFONO: "+$F{telefono}+"\nDIRECCIÓN: "+$F{direccion}+"\nE-mail: "+$F{email}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+</jasperReport>
