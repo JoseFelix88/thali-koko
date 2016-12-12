@@ -32,7 +32,7 @@ public class Contenedor extends javax.swing.JFrame {
         initComponents();
 
         jMenu2.setVisible(false);
-        Menu_Empleado.setVisible(false);
+        MENU_COMPRAS.setVisible(true);
         jMenu4.setVisible(false);
         jMenu5.setVisible(false);
        //this.setExtendedState(this.MAXIMIZED_BOTH);
@@ -91,7 +91,7 @@ public class Contenedor extends javax.swing.JFrame {
             }
         });
 
-        Obtener_Eventos_De_SubMenu(R_compra);
+        Obtener_Eventos_De_SubMenu(JM_FacturaCompras);
         Obtener_Eventos_De_SubMenu(JM_OrdenCompra);
         Obtener_Eventos_De_SubMenu(R_Salir);
 
@@ -129,9 +129,9 @@ public class Contenedor extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         R_Salida = new javax.swing.JMenuItem();
         JM_despachoproducto = new javax.swing.JMenuItem();
-        Menu_Empleado = new javax.swing.JMenu();
+        MENU_COMPRAS = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        R_compra = new javax.swing.JMenuItem();
+        JM_FacturaCompras = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         JM_CompraProducto = new javax.swing.JMenuItem();
         JM_OrdenCompra = new javax.swing.JMenuItem();
@@ -199,46 +199,45 @@ public class Contenedor extends javax.swing.JFrame {
 
         Contenedor_Menu_General.add(jMenu2);
 
-        Menu_Empleado.setForeground(new java.awt.Color(255, 255, 51));
-        Menu_Empleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vista_style_business_and_data_icons_icons_pack_120673/carrito-de-la-compra-icono-7565-48.png"))); // NOI18N
-        Menu_Empleado.setText("Entradas");
-        Menu_Empleado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Menu_Empleado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        MENU_COMPRAS.setForeground(new java.awt.Color(255, 255, 51));
+        MENU_COMPRAS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vista_style_business_and_data_icons_icons_pack_120673/carrito-de-la-compra-icono-7565-48.png"))); // NOI18N
+        MENU_COMPRAS.setText("COMPRAS");
+        MENU_COMPRAS.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        MENU_COMPRAS.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setOpaque(true);
-        Menu_Empleado.add(jSeparator1);
+        MENU_COMPRAS.add(jSeparator1);
 
-        R_compra.setBackground(new java.awt.Color(51, 51, 51));
-        R_compra.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        R_compra.setForeground(new java.awt.Color(255, 204, 0));
-        R_compra.setText("Factura de Compra");
-        R_compra.setActionCommand("Compra");
-        Menu_Empleado.add(R_compra);
+        JM_FacturaCompras.setBackground(new java.awt.Color(51, 51, 51));
+        JM_FacturaCompras.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        JM_FacturaCompras.setText("Factura de Compra");
+        JM_FacturaCompras.setActionCommand("FacturaCompra");
+        MENU_COMPRAS.add(JM_FacturaCompras);
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator2.setOpaque(true);
-        Menu_Empleado.add(jSeparator2);
+        MENU_COMPRAS.add(jSeparator2);
 
         JM_CompraProducto.setBackground(new java.awt.Color(51, 51, 51));
         JM_CompraProducto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         JM_CompraProducto.setForeground(new java.awt.Color(255, 204, 0));
         JM_CompraProducto.setText("Compra de Productos");
         JM_CompraProducto.setActionCommand("CompraProductos");
-        Menu_Empleado.add(JM_CompraProducto);
+        MENU_COMPRAS.add(JM_CompraProducto);
 
         JM_OrdenCompra.setBackground(new java.awt.Color(51, 51, 51));
         JM_OrdenCompra.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         JM_OrdenCompra.setForeground(new java.awt.Color(255, 204, 51));
         JM_OrdenCompra.setText("Orden de Compra");
-        Menu_Empleado.add(JM_OrdenCompra);
+        MENU_COMPRAS.add(JM_OrdenCompra);
 
         jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator3.setForeground(new java.awt.Color(255, 153, 0));
         jSeparator3.setOpaque(true);
-        Menu_Empleado.add(jSeparator3);
+        MENU_COMPRAS.add(jSeparator3);
 
-        Contenedor_Menu_General.add(Menu_Empleado);
+        Contenedor_Menu_General.add(MENU_COMPRAS);
 
         jMenu4.setForeground(new java.awt.Color(255, 255, 255));
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vista_style_business_and_data_icons_icons_pack_120673/canasto-icono-6453-48.png"))); // NOI18N
@@ -599,6 +598,7 @@ public class Contenedor extends javax.swing.JFrame {
     public javax.swing.JMenuItem JM_Cotizacion;
     public javax.swing.JMenuItem JM_DevolucionPunto;
     public javax.swing.JMenuItem JM_Empleado;
+    public javax.swing.JMenuItem JM_FacturaCompras;
     public javax.swing.JMenuItem JM_Lotes;
     public javax.swing.JMenuItem JM_OrdenCompra;
     public javax.swing.JMenuItem JM_Orden_Compra;
@@ -614,12 +614,11 @@ public class Contenedor extends javax.swing.JFrame {
     public javax.swing.JMenuItem JM_inventariobodega;
     public javax.swing.JMenuItem JM_inventariopunto;
     public javax.swing.JMenuItem JM_pedidoPunto;
-    private javax.swing.JMenu Menu_Empleado;
+    private javax.swing.JMenu MENU_COMPRAS;
     public static javax.swing.JDesktopPane Panel_Contenedor;
     public javax.swing.JMenuItem R_Producto;
     public javax.swing.JMenuItem R_Salida;
     private javax.swing.JMenuItem R_Salir;
-    public javax.swing.JMenuItem R_compra;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

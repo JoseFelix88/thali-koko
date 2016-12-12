@@ -2,6 +2,7 @@ package com.thalisoft.controller.index;
 
 import static com.thalisoft.main.util.Metodos.Obtener_Estado_Formulario;
 import com.thalisoft.main.util.Variables_Gloabales;
+import com.thalisoft.vista.compra.FormFacturaCompra;
 import com.thalisoft.vista.maestros.cliente.FormCliente;
 import com.thalisoft.vista.maestros.cliente.FormListarClientes;
 import com.thalisoft.vista.maestros.empleado.FormEmpleado;
@@ -52,6 +53,8 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
     FormCotizacion formCotizacion;
     FormPlanSepare formPlanSepare;
 
+    FormFacturaCompra formFacturaCompra;
+
     private static JDesktopPane jDesktopPane1;
 
     public ControllerContenedor() {
@@ -65,7 +68,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
             contenedor.setVisible(true);
             Obtener_Eventos_De_SubMenu(contenedor.R_Producto);
             Obtener_Eventos_De_SubMenu(contenedor.JM_OrdenCompra);
-            Obtener_Eventos_De_SubMenu(contenedor.R_compra);
+            Obtener_Eventos_De_SubMenu(contenedor.JM_FacturaCompras);
             Obtener_Eventos_De_SubMenu(contenedor.R_Salida);
             Obtener_Eventos_De_SubMenu(contenedor.JM_conteofisico);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Cotizacion);
@@ -89,6 +92,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
             Obtener_Eventos_De_SubMenu(contenedor.JM_Proveedor);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Cotizacion);
             Obtener_Eventos_De_SubMenu(contenedor.JM_PlanSepare);
+            Obtener_Eventos_De_SubMenu(contenedor.JM_FacturaCompras);
             contenedor.JM_Profile.setText(Variables_Gloabales.EMPLEADO.getNombres() + " "
                     + "" + Variables_Gloabales.EMPLEADO.getApellidos());
         } else {
@@ -222,23 +226,22 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
                 }
                 break;
 
+            case "FacturaCompra":
+
+                if (Obtener_Estado_Formulario(this.formFacturaCompra, Contenedor.Panel_Contenedor)) {
+                    formFacturaCompra = new FormFacturaCompra();
+                    formFacturaCompra.show();
+
+                    Contenedor.Panel_Contenedor.add(formFacturaCompra);
+                    java.awt.Dimension Tamaño_Panel = Contenedor.Panel_Contenedor.getSize();
+                    java.awt.Dimension Tamaño_InternalFrame = formFacturaCompra.getSize();
+                    formFacturaCompra.setLocation((Tamaño_Panel.width - Tamaño_InternalFrame.width) / 2,
+                            (Tamaño_Panel.height - Tamaño_InternalFrame.height) / 2);
+                } else {
+                    formFacturaCompra.setIcon(false);
+                }
+                break;
             /*
-             case "Salida Autorizada":
-
-             if (Obtener_Estado_Formulario(this.formSalidasAutorizada, Contenedor.Panel_Contenedor)) {
-             formSalidasAutorizada = new FormSalidasAutorizada();
-             formSalidasAutorizada.show();
-
-             Contenedor.Panel_Contenedor.add(formSalidasAutorizada);
-             java.awt.Dimension Tamaño_Panel = Contenedor.Panel_Contenedor.getSize();
-             java.awt.Dimension Tamaño_InternalFrame = formSalidasAutorizada.getSize();
-             formSalidasAutorizada.setLocation((Tamaño_Panel.width - Tamaño_InternalFrame.width) / 2,
-             (Tamaño_Panel.height - Tamaño_InternalFrame.height) / 2);
-             } else {
-             formSalidasAutorizada.setIcon(false);
-             }
-             break;
-
              case "CompraProductos":
              if (Obtener_Estado_Formulario(this.formconsultacompraproducto, Contenedor.Panel_Contenedor)) {
              formconsultacompraproducto = new Formconsultacompraproducto();
