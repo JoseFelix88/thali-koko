@@ -4,6 +4,9 @@ import com.thalisoft.controller.index.ControllerContenedor;
 import com.thalisoft.main.util.CambiaFormatoTexto;
 import com.thalisoft.main.util.DateUtil;
 import com.thalisoft.main.util.Edicion;
+import com.thalisoft.main.util.Variables_Gloabales;
+import com.thalisoft.model.compras.FacturaCompra;
+import com.thalisoft.model.compras.FacturaCompraDao;
 import com.thalisoft.model.maestros.producto.Producto;
 import com.thalisoft.model.maestros.producto.ProductoDao;
 import com.thalisoft.model.maestros.proveedor.ProveedorDao;
@@ -20,8 +23,14 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
     Edicion edicion = new Edicion();
     CambiaFormatoTexto formatoTexto = new CambiaFormatoTexto();
     ProductoDao productoDao;
+    FacturaCompra facturaCompra;
+    FacturaCompraDao factCompraDao;
+    ProveedorDao proveedorDao;
 
     public FormFacturaCompra() {
+        proveedorDao = new ProveedorDao();
+        facturaCompra = new FacturaCompra();
+        factCompraDao = new FacturaCompraDao();
         productoDao = new ProductoDao();
         initComponents();
         llenar_combo();
@@ -43,7 +52,7 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         JDateVence = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
-        comboproveedor = new javax.swing.JComboBox<>();
+        comboproveedor = new javax.swing.JComboBox<String>();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         Radiocontado = new javax.swing.JRadioButton();
@@ -63,19 +72,19 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtreferencia = new javax.swing.JTextField();
-        comboproducto = new javax.swing.JComboBox<>();
+        comboproducto = new javax.swing.JComboBox<String>();
         txtcantidad = new javax.swing.JTextField();
         txtcostound = new javax.swing.JTextField();
         txtcostototal = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         TB_detalle = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem6 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("ELIMINAR");
@@ -101,7 +110,7 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
 
         jLabel5.setText("PROVEEDOR");
 
-        comboproveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboproveedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jSeparator1.setBackground(new java.awt.Color(255, 255, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -262,7 +271,7 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         txtreferencia.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
 
         comboproducto.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        comboproducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboproducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         txtcantidad.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         txtcantidad.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
@@ -311,6 +320,14 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
             TB_detalle.getColumnModel().getColumn(2).setMinWidth(220);
         }
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/save.png"))); // NOI18N
+        jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -339,29 +356,38 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtcostototal, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtcostototal)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addGap(2, 2, 2))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtreferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtcostound, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtcostototal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtreferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtcostound, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtcostototal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -375,25 +401,25 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         jMenuItem2.setText("Nuevo");
         jMenu1.add(jMenuItem2);
 
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Guardar.png"))); // NOI18N
-        jMenuItem3.setText("Guardar");
-        jMenu1.add(jMenuItem3);
-
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/reload.png"))); // NOI18N
         jMenuItem4.setText("Modificar");
         jMenu1.add(jMenuItem4);
-        jMenu1.add(jSeparator2);
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/view-employed.png"))); // NOI18N
         jMenuItem5.setText("Consultar");
         jMenu1.add(jMenuItem5);
+        jMenu1.add(jSeparator2);
 
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/exit.png"))); // NOI18N
         jMenuItem6.setText("Salir");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem6);
 
         jMenuBar1.add(jMenu1);
@@ -404,12 +430,15 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(92, 92, 92))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -440,6 +469,23 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_RadiocreditoItemStateChanged
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (VALIDAR_FORMULARIO() != false) {
+            if (factCompraDao.SELECT_COMPRA(txtnumfactura.getText()) == null) {
+                if (factCompraDao.CRUD_COMPRA(DATOS_FACTURA(0)) != false) {
+                    edicion.llenarTabla(TB_detalle,
+                            factCompraDao.SELECT_DETALLECOMPRA(txtnumfactura.getText()));
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JDateFactura;
@@ -450,6 +496,7 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> comboproducto;
     private javax.swing.JComboBox<String> comboproveedor;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -468,7 +515,6 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
@@ -518,11 +564,21 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
             edicion.mensajes(1, "selecciona la fecha de vencimiento de la factura.");
             return false;
         }
+
+        if (comboproducto.getSelectedItem() == null) {
+            edicion.mensajes(1, "por favor selecciona el producto.");
+            return false;
+        }
+
+        if (edicion.toNumeroEntero(txtcantidad.getText()) < 1) {
+            edicion.mensajes(1, "la cantidad debe ser mayor a cero (0).");
+            return false;
+        }
+
         return true;
     }
 
     private void llenar_combo() {
-        ProductoDao productoDao = new ProductoDao();
         ProveedorDao proveedorDao = new ProveedorDao();
         comboproveedor.removeAllItems();
         comboproducto.removeAllItems();
@@ -575,6 +631,29 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
                 }
             }
         }
+    }
+
+    private Object[] DATOS_FACTURA(int opcion) {
+        Object[] datos = new Object[10];
+        String FORMA_PAGO;
+        if (opcion == 0 | opcion == 1 | opcion == 2) {
+            datos[0] = opcion;
+        }
+        if (Radiocontado.isSelected()) {
+            FORMA_PAGO = Radiocontado.getText();
+        } else {
+            FORMA_PAGO = Radiocredito.getText();
+        }
+        datos[1] = edicion.formatearFechaSQL(JDateFactura.getDate());
+        datos[2] = edicion.formatearFechaSQL(JDateVence.getDate());
+        datos[3] = "'" + txtnumfactura.getText() + "'";
+        datos[4] = "'" + FORMA_PAGO + "'";
+        datos[5] = proveedorDao.CONSULTAR_PROVEEDOR("'" + comboproveedor.getSelectedItem() + "'").getIdproveedor();
+        datos[6] = Variables_Gloabales.EMPLEADO.getIdentificacion();
+        datos[7] = edicion.toNumeroEntero(txtcantidad.getText());
+        datos[8] = edicion.toNumeroEntero(txtcostound.getText());
+        datos[9] = "'" + txtreferencia.getText() + "'";
+        return datos;
     }
 }
 
