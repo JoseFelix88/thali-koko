@@ -13,10 +13,13 @@ import com.thalisoft.model.maestros.proveedor.ProveedorDao;
 import com.thalisoft.vista.maestros.cliente.FormCliente;
 import com.thalisoft.vista.maestros.producto.FormProducto;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 public class FormFacturaCompra extends javax.swing.JInternalFrame {
 
@@ -52,7 +55,7 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         JDateVence = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
-        comboproveedor = new javax.swing.JComboBox<String>();
+        comboproveedor = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         Radiocontado = new javax.swing.JRadioButton();
@@ -72,7 +75,7 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtreferencia = new javax.swing.JTextField();
-        comboproducto = new javax.swing.JComboBox<String>();
+        comboproducto = new javax.swing.JComboBox<>();
         txtcantidad = new javax.swing.JTextField();
         txtcostound = new javax.swing.JTextField();
         txtcostototal = new javax.swing.JTextField();
@@ -110,7 +113,7 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
 
         jLabel5.setText("PROVEEDOR");
 
-        comboproveedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboproveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jSeparator1.setBackground(new java.awt.Color(255, 255, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -207,10 +210,15 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtnumfactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Radiocontado)
+                    .addComponent(Radiocredito)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(JDateFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(JDateVence, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -219,11 +227,6 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(comboproveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Radiocontado)
-                    .addComponent(Radiocredito)
-                    .addComponent(jLabel4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,7 +248,7 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtvalorpago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 19, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -270,8 +273,9 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
 
         txtreferencia.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
 
+        comboproducto.setEditable(true);
         comboproducto.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        comboproducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboproducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         txtcantidad.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         txtcantidad.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
@@ -477,11 +481,9 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (VALIDAR_FORMULARIO() != false) {
-            if (factCompraDao.SELECT_COMPRA(txtnumfactura.getText()) == null) {
-                if (factCompraDao.CRUD_COMPRA(DATOS_FACTURA(0)) != false) {
-                    edicion.llenarTabla(TB_detalle,
-                            factCompraDao.SELECT_DETALLECOMPRA(txtnumfactura.getText()));
-                }
+            if (factCompraDao.CRUD_COMPRA(DATOS_FACTURA(0)) != false) {
+                edicion.llenarTabla(TB_detalle,
+                        factCompraDao.SELECT_DETALLECOMPRA(txtnumfactura.getText()));
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -541,10 +543,6 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
             edicion.mensajes(1, "ingrese el numero de factura.");
             return false;
         }
-        if (JDateFactura.getDate().after(JDateVence.getDate()) != false) {
-            edicion.mensajes(1, "LA FECHA DE LA FACTURA NO PUEDE SER MAYOR A LA FECHA DE VENCIMIENTO.");
-            return false;
-        }
 
         if (comboproveedor.getSelectedItem() == null) {
             edicion.mensajes(1, "por favor selecciona el proveedor.");
@@ -564,6 +562,10 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
             edicion.mensajes(1, "selecciona la fecha de vencimiento de la factura.");
             return false;
         }
+        if (JDateFactura.getDate().after(JDateVence.getDate()) != false) {
+            edicion.mensajes(1, "LA FECHA DE LA FACTURA NO PUEDE SER MAYOR A LA FECHA DE VENCIMIENTO.");
+            return false;
+        }
 
         if (comboproducto.getSelectedItem() == null) {
             edicion.mensajes(1, "por favor selecciona el producto.");
@@ -579,7 +581,6 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
     }
 
     private void llenar_combo() {
-        ProveedorDao proveedorDao = new ProveedorDao();
         comboproveedor.removeAllItems();
         comboproducto.removeAllItems();
         comboproducto.addItem(null);
@@ -599,6 +600,25 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
             }
         });
 
+        txtcantidad.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                CALCULARTOTALCOMPRA();
+            }
+        });
+
+        txtcostound.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                CALCULARTOTALCOMPRA();
+            }
+        });
+    }
+
+    private void CALCULARTOTALCOMPRA() {
+        int totalcompra = edicion.toNumeroEntero(txtcostound.getText())
+                * edicion.toNumeroEntero(txtcantidad.getText());
+        txtcostototal.setText("$ " + formatoTexto.numerico(totalcompra));
     }
 
     private void CARGAR_PRODUCTO(String text) {
@@ -644,12 +664,12 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         } else {
             FORMA_PAGO = Radiocredito.getText();
         }
-        datos[1] = edicion.formatearFechaSQL(JDateFactura.getDate());
-        datos[2] = edicion.formatearFechaSQL(JDateVence.getDate());
+        datos[1] = "'" + edicion.formatearFechaSQL(JDateFactura.getDate()) + "'";
+        datos[2] = "'" + edicion.formatearFechaSQL(JDateVence.getDate()) + "'";
         datos[3] = "'" + txtnumfactura.getText() + "'";
         datos[4] = "'" + FORMA_PAGO + "'";
         datos[5] = proveedorDao.CONSULTAR_PROVEEDOR("'" + comboproveedor.getSelectedItem() + "'").getIdproveedor();
-        datos[6] = Variables_Gloabales.EMPLEADO.getIdentificacion();
+        datos[6] = "'" + Variables_Gloabales.EMPLEADO.getIdentificacion() + "'";
         datos[7] = edicion.toNumeroEntero(txtcantidad.getText());
         datos[8] = edicion.toNumeroEntero(txtcostound.getText());
         datos[9] = "'" + txtreferencia.getText() + "'";
