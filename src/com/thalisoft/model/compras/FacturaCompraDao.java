@@ -13,7 +13,7 @@ public class FacturaCompraDao extends database {
 
     public FacturaCompra SELECT_COMPRA(Object key) {
         FacturaCompra fc = null;
-        Object[][] rs = SELECT_SP("SELECT_FACTURACOMPRAS", key);
+        Object[][] rs = SELECT_SP("SELECT_FACTURACOMPRAS", 0 + "," + key);
         if (rs.length > 0) {
             fc = new FacturaCompra();
             fc.setIdfacturacompra(Integer.parseInt(rs[0][0].toString()));
@@ -25,12 +25,15 @@ public class FacturaCompraDao extends database {
             fc.setProveedor(new ProveedorDao().CONSULTAR_PROVEEDOR(rs[0][6]));
             fc.setEmpleado(new EmpleadoDao().CONSULTAR_EMPLEADO(rs[0][7]));
             fc.setEstado(Integer.parseInt(rs[0][8].toString()));
+            fc.setFechahoraingreso(DateUtil.getDateTime(rs[0][9]));
+            fc.setSubtotal(Integer.parseInt(rs[0][10].toString()));
+            fc.setSaldo(Integer.parseInt(rs[0][11].toString()));
         }
         return fc;
     }
 
     public Object[][] SELECT_DETALLECOMPRA(Object key) {
-        Object[][] rs = SELECT_SP("SELECT_FACTURACOMPRAS", 1+","+key);
+        Object[][] rs = SELECT_SP("SELECT_FACTURACOMPRAS", 1 + "," + key);
         if (rs.length > 0) {
             return rs;
         }
@@ -43,5 +46,10 @@ public class FacturaCompraDao extends database {
             return rs;
         }
         return null;
+    }
+
+    public boolean BORRAR_PRODUCTO_DETALLE(Object key) {
+        Object[] values = {3, key};
+        return EJECUTAR_SP("SELECT_FACTURACOMPRAS", values);
     }
 }

@@ -19,7 +19,6 @@ import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 public class FormFacturaCompra extends javax.swing.JInternalFrame {
 
@@ -67,7 +66,7 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         txtvalorpago = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        txtdescuento = new javax.swing.JTextField();
+        lb_item = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -90,7 +89,13 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem6 = new javax.swing.JMenuItem();
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cerrar-icono-6397-32.png"))); // NOI18N
         jMenuItem1.setText("ELIMINAR");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jPopupMenu1.add(jMenuItem1);
 
         setClosable(true);
@@ -157,12 +162,11 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         txtvalorpago.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         txtvalorpago.setText("$ 0");
 
-        jLabel14.setText("TOTAL DESCUENTO");
+        jLabel14.setText("Item Agregados:");
 
-        txtdescuento.setEditable(false);
-        txtdescuento.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        txtdescuento.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        txtdescuento.setText("$ 0");
+        lb_item.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        lb_item.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_item.setText("0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -195,12 +199,12 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
                     .addComponent(jLabel12)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14))
-                .addGap(8, 8, 8)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtsaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtvalorpago, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtdescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lb_item, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -232,7 +236,7 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -242,13 +246,14 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtdescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtvalorpago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 19, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(lb_item, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -371,9 +376,9 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
@@ -386,12 +391,9 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
                             .addComponent(comboproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtcostound, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtcostototal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtcostototal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -413,6 +415,11 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/view-employed.png"))); // NOI18N
         jMenuItem5.setText("Consultar");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
         jMenu1.add(jSeparator2);
 
@@ -484,9 +491,41 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
             if (factCompraDao.CRUD_COMPRA(DATOS_FACTURA(0)) != false) {
                 edicion.llenarTabla(TB_detalle,
                         factCompraDao.SELECT_DETALLECOMPRA(txtnumfactura.getText()));
+                calculatotalesfactura();
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        int SI_NO = (int) edicion.msjQuest(1, "estas seguro que deseas eliminar el producto?");
+        if (SI_NO == 0) {
+            int idcompra = Integer.parseInt(TB_detalle.getValueAt(TB_detalle.getSelectedRow(), 0).toString());
+            if (factCompraDao.BORRAR_PRODUCTO_DETALLE(idcompra) != false) {
+                edicion.menu_emergente(TB_detalle);
+                calculatotalesfactura();
+            }
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        Object factura = edicion.msjQuest(2, "ingresa el numero de la factura de compra.");
+        facturaCompra = factCompraDao.SELECT_COMPRA(factura);
+        if (facturaCompra != null) {
+            if ("CONTADO".equals(facturaCompra.getTipoCompra())) {
+                Radiocontado.setSelected(true);
+            } else {
+                Radiocredito.setSelected(true);
+            }
+            txtnumfactura.setText(facturaCompra.getNumeroFactura());
+            JDateFactura.setDate(facturaCompra.getFechaFactura());
+            JDateVence.setDate(facturaCompra.getFechaVece());
+            comboproveedor.setSelectedItem(facturaCompra.getProveedor().getRazonsocial());
+            edicion.llenarTabla(TB_detalle, factCompraDao.SELECT_DETALLECOMPRA(factura));
+            calculatotalesfactura();
+        }
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -526,10 +565,10 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JLabel lb_item;
     private javax.swing.JTextField txtcantidad;
     private javax.swing.JTextField txtcostototal;
     private javax.swing.JTextField txtcostound;
-    private javax.swing.JTextField txtdescuento;
     private javax.swing.JTextField txtnumfactura;
     private javax.swing.JTextField txtreferencia;
     private javax.swing.JTextField txtsaldo;
@@ -674,6 +713,17 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         datos[8] = edicion.toNumeroEntero(txtcostound.getText());
         datos[9] = "'" + txtreferencia.getText() + "'";
         return datos;
+    }
+
+    private void calculatotalesfactura() {
+        edicion.calcula_total(TB_detalle, lb_item, txtsubtotal, 5);
+        facturaCompra = factCompraDao.SELECT_COMPRA(txtnumfactura.getText());
+        if (facturaCompra != null) {
+            txtsaldo.setText("$ " + formatoTexto.numerico(facturaCompra.getSaldo()));
+        }
+        int totalpagar = edicion.toNumeroEntero(txtsubtotal.getText())
+                - edicion.toNumeroEntero(txtsaldo.getText());
+        txtvalorpago.setText("$ " + formatoTexto.numerico(totalpagar));
     }
 }
 
