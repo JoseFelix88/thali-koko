@@ -294,6 +294,7 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         txtcostototal.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         txtcostototal.setText("$ 0");
 
+        TB_detalle.setBackground(new java.awt.Color(204, 255, 204));
         TB_detalle.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         TB_detalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -307,7 +308,7 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
@@ -323,6 +324,8 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         });
         TB_detalle.setComponentPopupMenu(jPopupMenu1);
         TB_detalle.setRowHeight(22);
+        TB_detalle.setSelectionBackground(new java.awt.Color(255, 255, 102));
+        TB_detalle.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(TB_detalle);
         if (TB_detalle.getColumnModel().getColumnCount() > 0) {
             TB_detalle.getColumnModel().getColumn(0).setMaxWidth(50);
@@ -410,6 +413,11 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/reload.png"))); // NOI18N
         jMenuItem4.setText("Modificar");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem4);
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
@@ -526,6 +534,17 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
             calculatotalesfactura();
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+         if (VALIDAR_FORMULARIO() != false) {
+            if (factCompraDao.CRUD_COMPRA(DATOS_FACTURA(1)) != false) {
+                edicion.llenarTabla(TB_detalle,
+                        factCompraDao.SELECT_DETALLECOMPRA(txtnumfactura.getText()));
+                calculatotalesfactura();
+            }
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

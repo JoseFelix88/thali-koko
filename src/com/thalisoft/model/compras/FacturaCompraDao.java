@@ -52,4 +52,9 @@ public class FacturaCompraDao extends database {
         Object[] values = {3, key};
         return EJECUTAR_SP("SELECT_FACTURACOMPRAS", values);
     }
+
+    public Object[][] RELACION_DE_COMPRAS_REG(Object[] key) {
+        System.out.println( key[0] + "," + key[1] + "," + key[2]);
+        return SELECT_SP("SELECT_COMPRAS_REG", key[0] + "," + key[1] + "," + key[2]);
+    }
 }

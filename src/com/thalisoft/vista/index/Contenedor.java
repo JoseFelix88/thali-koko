@@ -9,9 +9,12 @@ package com.thalisoft.vista.index;
 import com.thalisoft.main.util.styles.Imagen_Fondo;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Frame;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 /**
@@ -30,7 +33,7 @@ public class Contenedor extends javax.swing.JFrame {
         //las que les indicare dejando la letra Z
         setUndecorated(true);
         initComponents();
-
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         jMenu2.setVisible(false);
         MENU_COMPRAS.setVisible(true);
         jMenu4.setVisible(false);
@@ -73,8 +76,7 @@ public class Contenedor extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent e) {
 
                 if (e.getClickCount() == 2) {
-                    setExtendedState(ICONIFIED);
-//                    System.out.println("Double clicked on ");
+                    setExtendedState(MAXIMIZED_BOTH);
                 }
             }
         });
@@ -99,7 +101,7 @@ public class Contenedor extends javax.swing.JFrame {
 
         this.Panel_Contenedor.setUI(new javax.swing.plaf.basic.BasicDesktopPaneUI() {
             public void paint(java.awt.Graphics g, javax.swing.JComponent c) {
-                javax.swing.ImageIcon Img = new javax.swing.ImageIcon(getClass().getResource("/ICONOS/Gold_Collection.jpg"));
+                javax.swing.ImageIcon Img = new javax.swing.ImageIcon(getClass().getResource("/Iconos/Gold_Collection.jpg"));
                 g.drawImage(Img.getImage(), 0, 0, c.getWidth(), c.getHeight(), null);
 
             }
@@ -130,12 +132,9 @@ public class Contenedor extends javax.swing.JFrame {
         R_Salida = new javax.swing.JMenuItem();
         JM_despachoproducto = new javax.swing.JMenuItem();
         MENU_COMPRAS = new javax.swing.JMenu();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         JM_FacturaCompras = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        JM_CompraProducto = new javax.swing.JMenuItem();
+        JM_CompraRegistrada = new javax.swing.JMenuItem();
         JM_OrdenCompra = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenu4 = new javax.swing.JMenu();
         R_Producto = new javax.swing.JMenuItem();
         JM_Lotes = new javax.swing.JMenuItem();
@@ -205,37 +204,28 @@ public class Contenedor extends javax.swing.JFrame {
         MENU_COMPRAS.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         MENU_COMPRAS.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator1.setOpaque(true);
-        MENU_COMPRAS.add(jSeparator1);
-
         JM_FacturaCompras.setBackground(new java.awt.Color(51, 51, 51));
         JM_FacturaCompras.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        JM_FacturaCompras.setForeground(new java.awt.Color(255, 255, 51));
         JM_FacturaCompras.setText("Factura de Compra");
         JM_FacturaCompras.setActionCommand("FacturaCompra");
+        JM_FacturaCompras.setOpaque(true);
         MENU_COMPRAS.add(JM_FacturaCompras);
 
-        jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator2.setOpaque(true);
-        MENU_COMPRAS.add(jSeparator2);
-
-        JM_CompraProducto.setBackground(new java.awt.Color(51, 51, 51));
-        JM_CompraProducto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JM_CompraProducto.setForeground(new java.awt.Color(255, 204, 0));
-        JM_CompraProducto.setText("Compra de Productos");
-        JM_CompraProducto.setActionCommand("CompraProductos");
-        MENU_COMPRAS.add(JM_CompraProducto);
+        JM_CompraRegistrada.setBackground(new java.awt.Color(51, 51, 51));
+        JM_CompraRegistrada.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        JM_CompraRegistrada.setForeground(new java.awt.Color(255, 204, 0));
+        JM_CompraRegistrada.setText("Compras Registradas");
+        JM_CompraRegistrada.setActionCommand("CompraRegistrada");
+        JM_CompraRegistrada.setOpaque(true);
+        MENU_COMPRAS.add(JM_CompraRegistrada);
 
         JM_OrdenCompra.setBackground(new java.awt.Color(51, 51, 51));
         JM_OrdenCompra.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         JM_OrdenCompra.setForeground(new java.awt.Color(255, 204, 51));
         JM_OrdenCompra.setText("Orden de Compra");
+        JM_OrdenCompra.setOpaque(true);
         MENU_COMPRAS.add(JM_OrdenCompra);
-
-        jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator3.setForeground(new java.awt.Color(255, 153, 0));
-        jSeparator3.setOpaque(true);
-        MENU_COMPRAS.add(jSeparator3);
 
         Contenedor_Menu_General.add(MENU_COMPRAS);
 
@@ -593,7 +583,7 @@ public class Contenedor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar Contenedor_Menu_General;
     public javax.swing.JMenuItem JM_Clientes;
-    public javax.swing.JMenuItem JM_CompraProducto;
+    public javax.swing.JMenuItem JM_CompraRegistrada;
     public javax.swing.JMenuItem JM_ConsumoSaldoGeneral;
     public javax.swing.JMenuItem JM_Cotizacion;
     public javax.swing.JMenuItem JM_DevolucionPunto;
@@ -624,9 +614,6 @@ public class Contenedor extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
     // End of variables declaration//GEN-END:variables
