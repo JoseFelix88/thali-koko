@@ -537,7 +537,7 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-         if (VALIDAR_FORMULARIO() != false) {
+        if (VALIDAR_FORMULARIO() != false) {
             if (factCompraDao.CRUD_COMPRA(DATOS_FACTURA(1)) != false) {
                 edicion.llenarTabla(TB_detalle,
                         factCompraDao.SELECT_DETALLECOMPRA(txtnumfactura.getText()));
@@ -643,9 +643,13 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
         comboproducto.removeAllItems();
         comboproducto.addItem(null);
         comboproveedor.addItem(null);
-        for (Object[] objects : proveedorDao.LISTADO_PROVEEDORS()) {
-            comboproveedor.addItem(objects[2].toString());
+        Object[][] rs = proveedorDao.LISTADO_PROVEEDORS();
+        if (rs.length > 0) {
+            for (Object[] objects : rs) {
+                comboproveedor.addItem(objects[2].toString());
+            }
         }
+
         productoDao.LISTA_PRODUCTOS().stream().forEach((producto) -> {
             comboproducto.addItem(producto.getDescripcion());
         });

@@ -34,7 +34,10 @@ public class ProveedorDao extends database {
     public Object[][] LISTADO_PROVEEDORS() {
         Object parametros = 2 + "," + 0 + "";
         Object[][] rs = SELECT_SP("SELECT_PROVEEDOR", parametros);
-        return rs;
+        if (rs.length > 0) {
+        return rs;    
+        }
+        return null;
     }
 
     public String NUMERO_FICHA() {

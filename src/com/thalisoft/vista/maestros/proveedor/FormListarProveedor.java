@@ -64,7 +64,6 @@ public class FormListarProveedor extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setComponentPopupMenu(jPopupMenu1);
         jTable1.setRowHeight(22);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);

@@ -8,8 +8,24 @@ import javax.swing.table.TableRowSorter;
 
 public class FormRelacionCompras extends javax.swing.JInternalFrame {
 
+    FacturaCompraDao compraDao;
+    Edicion edicion = new Edicion();
+    private final TableRowSorter trsFiltro;
+
     public FormRelacionCompras() {
         initComponents();
+        TXTFILTRO.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyReleased(final KeyEvent e) {
+                String cadenafiltra = (TXTFILTRO.getText());
+                TXTFILTRO.setText(cadenafiltra);
+                repaint();
+                //filtro();
+            }
+        });
+        trsFiltro = new TableRowSorter(jTable1.getModel());
+        jTable1.setRowSorter(trsFiltro);
     }
 
     @SuppressWarnings("unchecked")
@@ -70,6 +86,9 @@ public class FormRelacionCompras extends javax.swing.JInternalFrame {
         jLabel6.setText("FILTRAR: ");
 
         TXTFILTRO.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TXTFILTROKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TXTFILTROKeyTyped(evt);
             }
@@ -264,18 +283,13 @@ public class FormRelacionCompras extends javax.swing.JInternalFrame {
 
     private void TXTFILTROKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTFILTROKeyTyped
         // TODO add your handling code here:
-        TXTFILTRO.addKeyListener(new KeyAdapter() {
 
-            public void keyReleased(final KeyEvent e) {
-                String cadenafiltra = (TXTFILTRO.getText());
-                TXTFILTRO.setText(cadenafiltra);
-                repaint();
-                //filtro();
-            }
-        });
-        trsFiltro = new TableRowSorter(jTable1.getModel());
-        jTable1.setRowSorter(trsFiltro);
     }//GEN-LAST:event_TXTFILTROKeyTyped
+
+    private void TXTFILTROKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTFILTROKeyReleased
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_TXTFILTROKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -300,10 +314,6 @@ public class FormRelacionCompras extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtsubtotal;
     private javax.swing.JTextField txttotalpagado;
     // End of variables declaration//GEN-END:variables
-
-    FacturaCompraDao compraDao;
-    Edicion edicion = new Edicion();
-    private TableRowSorter trsFiltro;
 
     private void CARGAR_CONSULTA() {
         if (jDateChooser1.getDate() != null | jDateChooser2.getDate() != null) {

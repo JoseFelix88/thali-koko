@@ -385,7 +385,7 @@ public class FormEmpleado extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (validarEmpleado() != false) {
-            int SI_NO = (int) edicion.msjQuest(1, "estas seguro que deseas registrar el empleado?");
+            int SI_NO = (int) edicion.msjQuest(1, "estas seguro que deseas modificar el empleado?");
             if (SI_NO == 0) {
                 if (Edao.CONSULTAR_EMPLEADO(cargarEmpleado().getIdentificacion()) != null) {
                     if (Edao.CRUD_EMPLEADO(datosEmpleado(1)) != false) {

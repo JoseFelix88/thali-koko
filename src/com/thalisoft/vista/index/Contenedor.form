@@ -91,6 +91,9 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="ff" red="ff" type="rgb"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/thalisoft/image/iconos/receipt.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Factura de Compra"/>
                 <Property name="actionCommand" type="java.lang.String" value="FacturaCompra"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -108,7 +111,10 @@
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="cc" red="ff" type="rgb"/>
+                  <Color blue="0" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/thalisoft/image/iconos/presentation.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Compras Registradas"/>
                 <Property name="actionCommand" type="java.lang.String" value="CompraRegistrada"/>
@@ -127,7 +133,10 @@
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="cc" red="ff" type="rgb"/>
+                  <Color blue="33" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/thalisoft/image/iconos/cart2.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Orden de Compra"/>
                 <Property name="opaque" type="boolean" value="true"/>

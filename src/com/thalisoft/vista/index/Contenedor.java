@@ -207,6 +207,7 @@ public class Contenedor extends javax.swing.JFrame {
         JM_FacturaCompras.setBackground(new java.awt.Color(51, 51, 51));
         JM_FacturaCompras.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         JM_FacturaCompras.setForeground(new java.awt.Color(255, 255, 51));
+        JM_FacturaCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/receipt.png"))); // NOI18N
         JM_FacturaCompras.setText("Factura de Compra");
         JM_FacturaCompras.setActionCommand("FacturaCompra");
         JM_FacturaCompras.setOpaque(true);
@@ -214,7 +215,8 @@ public class Contenedor extends javax.swing.JFrame {
 
         JM_CompraRegistrada.setBackground(new java.awt.Color(51, 51, 51));
         JM_CompraRegistrada.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JM_CompraRegistrada.setForeground(new java.awt.Color(255, 204, 0));
+        JM_CompraRegistrada.setForeground(new java.awt.Color(255, 255, 0));
+        JM_CompraRegistrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/presentation.png"))); // NOI18N
         JM_CompraRegistrada.setText("Compras Registradas");
         JM_CompraRegistrada.setActionCommand("CompraRegistrada");
         JM_CompraRegistrada.setOpaque(true);
@@ -222,7 +224,8 @@ public class Contenedor extends javax.swing.JFrame {
 
         JM_OrdenCompra.setBackground(new java.awt.Color(51, 51, 51));
         JM_OrdenCompra.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JM_OrdenCompra.setForeground(new java.awt.Color(255, 204, 51));
+        JM_OrdenCompra.setForeground(new java.awt.Color(255, 255, 51));
+        JM_OrdenCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/cart2.png"))); // NOI18N
         JM_OrdenCompra.setText("Orden de Compra");
         JM_OrdenCompra.setOpaque(true);
         MENU_COMPRAS.add(JM_OrdenCompra);
