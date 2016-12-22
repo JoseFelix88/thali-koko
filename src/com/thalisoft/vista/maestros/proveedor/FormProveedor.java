@@ -75,6 +75,7 @@ public class FormProveedor extends javax.swing.JInternalFrame {
         TB_Descuentos = new javax.swing.JTable();
         txtdiahabil = new javax.swing.JTextField();
         txtporcdescuento = new javax.swing.JTextField();
+        jButton7 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         txtsucursal = new javax.swing.JTextField();
@@ -234,7 +235,7 @@ public class FormProveedor extends javax.swing.JInternalFrame {
                     .addComponent(txtreferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -281,6 +282,13 @@ public class FormProveedor extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/save.png"))); // NOI18N
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -295,28 +303,35 @@ public class FormProveedor extends javax.swing.JInternalFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel16)
-                                .addGap(58, 58, 58)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel17))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(txtdiahabil, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtporcdescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(90, Short.MAX_VALUE))
+                                .addComponent(txtporcdescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton7)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtporcdescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtdiahabil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtdiahabil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtporcdescuento)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton7)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
 
         jTabbedPane1.addTab("Descuentos", jPanel5);
@@ -639,7 +654,7 @@ public class FormProveedor extends javax.swing.JInternalFrame {
 
     private void comboproductoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboproductoItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
-            Producto p = productoDao.READ_PRODUCTO("'" + comboproducto.getSelectedItem() + "'");
+            Producto p = productoDao.READ_PRODUCTO(comboproducto.getSelectedItem());
             if (p != null) {
                 txtreferencia.setText(p.getReferencia());
             } else {
@@ -655,7 +670,7 @@ public class FormProveedor extends javax.swing.JInternalFrame {
                 return;
             }
             if (consulta_proveedor(txtnumficha.getText()) == true) {
-                Producto p = productoDao.READ_PRODUCTO("'" + txtreferencia.getText() + "'");
+                Producto p = productoDao.READ_PRODUCTO(txtreferencia.getText());
                 if (p != null) {
                     comboproducto.setSelectedItem(p.getDescripcion());
                     registrar_proveedor(5);
@@ -667,18 +682,7 @@ public class FormProveedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtreferenciaActionPerformed
 
     private void txtporcdescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtporcdescuentoActionPerformed
-        if (validarProveedor() != false) {
-            if (consulta_proveedor(txtnumficha.getText()) != false) {
-                edicion.mensajes(3, "el proveedor no se encuentra registrado.");
-                return;
-            }
-            if (edicion.toNumeroEntero(txtdiahabil.getText()) > 0
-                    && edicion.toNumeroEntero(txtporcdescuento.getText()) > 0) {
-                registrar_proveedor(3);
-            } else {
-                edicion.mensajes(1, "los dias habiles y % de descuento deben ser mayores a cero (0).");
-            }
-        }
+
     }//GEN-LAST:event_txtporcdescuentoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -701,8 +705,8 @@ public class FormProveedor extends javax.swing.JInternalFrame {
         if (validarProveedor() != false) {
             int SI_NO = (int) edicion.msjQuest(1, "estas seguro que deseas modificar el proveedor?");
             if (SI_NO == 0) {
-                System.out.println("modificar_numficha: "+consulta_proveedor(txtnumficha.getText())+""
-                        + "\nmod_nit: "+consulta_proveedor(txtnit.getText()));
+                System.out.println("modificar_numficha: " + consulta_proveedor(txtnumficha.getText()) + ""
+                        + "\nmod_nit: " + consulta_proveedor(txtnit.getText()));
                 if (consulta_proveedor(txtnumficha.getText()) != false) {
                     if (Provdao.CRUD_PROVEEDOR(montar_proveedor(1))) {
                         edicion.mensajes(2, "proveedor modificado correctamente.");
@@ -741,6 +745,22 @@ public class FormProveedor extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        if (validarProveedor() != false) {
+            if (consulta_proveedor(txtnumficha.getText()) != true) {
+                edicion.mensajes(3, "el proveedor no se encuentra registrado.");
+                return;
+            }
+            if (edicion.toNumeroEntero(txtdiahabil.getText()) > 0
+                    && edicion.toNumeroEntero(txtporcdescuento.getText()) > 0) {
+                registrar_proveedor(3);
+            } else {
+                edicion.mensajes(1, "los dias habiles y % de descuento deben ser mayores a cero (0).");
+            }
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TB_Descuentos;
@@ -754,6 +774,7 @@ public class FormProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -804,9 +825,9 @@ public class FormProveedor extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void llenar_combos() {
-        for (Producto producto : productoDao.LISTA_PRODUCTOS()) {
+        productoDao.LISTA_PRODUCTOS().stream().forEach((producto) -> {
             comboproducto.addItem(producto.getDescripcion());
-        }
+        });
 
         txtnumficha.setText(Provdao.NUMERO_FICHA());
     }
@@ -824,25 +845,8 @@ public class FormProveedor extends javax.swing.JInternalFrame {
 
     Object[] montar_proveedor(int opcion) {
         Object[] key = new Object[13];
-        if (opcion == 0) {
-            key[0] = opcion;
-        }
-        if (opcion == 1) {
-            key[0] = opcion;
-        }
-        if (opcion == 2) {
-            key[0] = opcion;
-        }
-        if (opcion == 3) {
-            key[0] = opcion;
-        }
-        if (opcion == 4) {
-            key[0] = opcion;
-        }
-        if (opcion == 5) {
-            key[0] = opcion;
-        }
-        if (opcion == 6) {
+        if (opcion == 0 | opcion == 1 | opcion == 2 | opcion == 3
+                | opcion == 4 | opcion == 5 | opcion == 6) {
             key[0] = opcion;
         }
         key[1] = "'" + txtnit.getText() + "'";
@@ -894,25 +898,16 @@ public class FormProveedor extends javax.swing.JInternalFrame {
     }
 
     private void registrar_proveedor(int i) {
-
         if (Provdao.CRUD_PROVEEDOR(montar_proveedor(i))) {
             edicion.llenarTabla(TB_Referencia, Provdao.PRODUCTOS_PROVEEDORS(txtnumficha.getText()));
             edicion.llenarTabla(TB_Descuentos, Provdao.DESCUENTOS_PROVEEDOR(txtnumficha.getText()));
             edicion.llenarTabla(TB_banco, Provdao.BANCO_PROVEEDOR(txtnumficha.getText()));
         }
-
     }
 
     Object[] Cargar_Banco(int opcion) {
-
         Object[] key = new Object[7];
-        if (opcion == 0) {
-            key[0] = opcion;
-        }
-        if (opcion == 1) {
-            key[0] = opcion;
-        }
-        if (opcion == 2) {
+        if (opcion == 0 | opcion == 1 | opcion == 2) {
             key[0] = opcion;
         }
         key[1] = idsucursal;
@@ -926,7 +921,6 @@ public class FormProveedor extends javax.swing.JInternalFrame {
 
     private void CRUD_BANCO() {
         if (validarProveedor() != false) {
-
             if (validar_banco() != false) {
                 if (consulta_proveedor(txtnumficha.getText()) != true) {
                     edicion.mensajes(3, "el proveedor no se encuentra registrado.");

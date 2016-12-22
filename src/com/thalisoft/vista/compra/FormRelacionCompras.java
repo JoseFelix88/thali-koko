@@ -2,8 +2,10 @@ package com.thalisoft.vista.compra;
 
 import com.thalisoft.main.util.Edicion;
 import com.thalisoft.model.compras.FacturaCompraDao;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
 public class FormRelacionCompras extends javax.swing.JInternalFrame {
@@ -14,14 +16,29 @@ public class FormRelacionCompras extends javax.swing.JInternalFrame {
 
     public FormRelacionCompras() {
         initComponents();
+        llenarfiltro();
         TXTFILTRO.addKeyListener(new KeyAdapter() {
 
             @Override
             public void keyReleased(final KeyEvent e) {
                 String cadenafiltra = (TXTFILTRO.getText());
-                TXTFILTRO.setText(cadenafiltra);
+                TXTFILTRO.setText(cadenafiltra.toUpperCase());
                 repaint();
-                //filtro();
+                filtro();
+                calcularTotales();
+            }
+
+            private void filtro() {
+
+                int columnaABuscar = 0;
+                if (comboFiltro.getSelectedItem() == "PROVEEDOR") {
+                    columnaABuscar = 3;
+                }
+                if (comboFiltro.getSelectedItem() == "TIPO DE PAGO") {
+                    columnaABuscar = 8;
+                }
+                trsFiltro.setRowFilter(RowFilter.regexFilter(TXTFILTRO.getText(), columnaABuscar));
+
             }
         });
         trsFiltro = new TableRowSorter(jTable1.getModel());
@@ -41,6 +58,7 @@ public class FormRelacionCompras extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         TXTFILTRO = new javax.swing.JTextField();
+        comboFiltro = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -85,12 +103,20 @@ public class FormRelacionCompras extends javax.swing.JInternalFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vista_style_business_and_data_icons_icons_pack_120673/embudo-filtrante-icono-4497-32.png"))); // NOI18N
         jLabel6.setText("FILTRAR: ");
 
+        TXTFILTRO.setEditable(false);
         TXTFILTRO.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TXTFILTROKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TXTFILTROKeyTyped(evt);
+            }
+        });
+
+        comboFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboFiltro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboFiltroItemStateChanged(evt);
             }
         });
 
@@ -111,15 +137,18 @@ public class FormRelacionCompras extends javax.swing.JInternalFrame {
                         .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TXTFILTRO))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TXTFILTRO)
+                                    .addComponent(comboFiltro, 0, 170, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(107, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -136,10 +165,15 @@ public class FormRelacionCompras extends javax.swing.JInternalFrame {
                     .addComponent(jButton3)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(TXTFILTRO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(comboFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 23, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TXTFILTRO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         jTable1.setBackground(new java.awt.Color(255, 255, 204));
@@ -291,10 +325,23 @@ public class FormRelacionCompras extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_TXTFILTROKeyReleased
 
+    private void comboFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboFiltroItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            System.out.println(comboFiltro.getSelectedItem());
+            if (!comboFiltro.getSelectedItem().equals("") | comboFiltro.getSelectedItem() != null) {
+                TXTFILTRO.setEditable(true);
+            } else {
+                TXTFILTRO.setEditable(false);
+            }
+        }
+    }//GEN-LAST:event_comboFiltroItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LB_ITEM;
     private javax.swing.JTextField TXTFILTRO;
+    private javax.swing.JComboBox<String> comboFiltro;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -323,13 +370,22 @@ public class FormRelacionCompras extends javax.swing.JInternalFrame {
             key[1] = "'" + edicion.formatearFechaSQL(jDateChooser1.getDate()) + "'";
             key[2] = "'" + edicion.formatearFechaSQL(jDateChooser2.getDate()) + "'";
             edicion.llenarTabla(jTable1, compraDao.RELACION_DE_COMPRAS_REG(key));
-            edicion.calcula_total(jTable1, LB_ITEM, txtsubtotal, 4);
-            edicion.calcula_total(jTable1, LB_ITEM, txtsaldo, 5);
-            edicion.calcula_total(jTable1, LB_ITEM, txttotalpagado, 6);
-
+            calcularTotales();
         } else {
             edicion.mensajes(1, "selecciona un periodo de fechas valido.");
         }
 
+    }
+
+    private void calcularTotales() {
+        edicion.calcula_total(jTable1, LB_ITEM, txtsubtotal, 4);
+        edicion.calcula_total(jTable1, LB_ITEM, txtsaldo, 5);
+        edicion.calcula_total(jTable1, LB_ITEM, txttotalpagado, 6);
+    }
+
+    private void llenarfiltro() {
+        comboFiltro.removeAllItems();
+        comboFiltro.addItem("PROVEEDOR");
+        comboFiltro.addItem("TIPO DE PAGO");
     }
 }
