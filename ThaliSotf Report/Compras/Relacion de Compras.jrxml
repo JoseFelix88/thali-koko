@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relacion de Compras" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dbb5c5b3-60b4-428c-a491-036d2c060067">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Compras" uuid="73590f46-02be-473f-b40c-21451d9be574">
+		<parameter name="fecha1" class="java.util.Date">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="fecha2" class="java.util.Date">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="filtro" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+facturascompras.numerofactura,
+facturascompras.fechafactura,
+facturascompras.fechavencimiento,
+proveedores.razonsocial,
+SUBTOTAL_FACTURA_COMPRA(facturascompras.idFacturasCompras) AS subtotal,
+SALDO_FACTURA_COMPRA(facturascompras.idFacturasCompras) AS saldo,
+0 AS totalpagar,
+0 AS cntpagos,
+facturascompras.tipocompra,
+USUARIO_SISTEMA(facturascompras.empleado) AS empleado,
+facturascompras.fechahoraingreso
+FROM
+facturascompras
+INNER JOIN proveedores ON facturascompras.proveedor = proveedores.idproveedores
+WHERE
+facturascompras.fechaingreso BETWEEN  $P{fecha1} AND $P{fecha2}
+and (facturascompras.tipocompra LIKE $P{filtro}  OR proveedores.razonsocial LIKE $P{filtro})]]>
+		</queryString>
+		<field name="numerofactura" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fechafactura" class="java.sql.Date">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fechavencimiento" class="java.sql.Date">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="razonsocial" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="subtotal" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="saldo" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="totalpagar" class="java.lang.Long"/>
+		<field name="cntpagos" class="java.lang.Long"/>
+		<field name="tipocompra" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="empleado" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fechahoraingreso" class="java.sql.Timestamp">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="fe1" class="java.util.Date"/>
+	<parameter name="fe2" class="java.util.Date"/>
+	<parameter name="filtro" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     empresas.`Telefono` AS empresas_Telefono,
+     empresas.`Direccion` AS empresas_Direccion,
+     empresas.`mail` AS empresas_mail,
+     empresas.`celular` AS empresas_celular,
+     empresas.`redsocial` AS empresas_redsocial
+FROM
+     `empresas` empresas]]>
+	</queryString>
+	<field name="empresas_Telefono" class="java.lang.String"/>
+	<field name="empresas_Direccion" class="java.lang.String"/>
+	<field name="empresas_mail" class="java.lang.String"/>
+	<field name="empresas_celular" class="java.lang.String"/>
+	<field name="empresas_redsocial" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<frame>
+				<reportElement uuid="5dbbdd8b-fb8a-4fb1-8acf-407f4f62b04b" x="0" y="0" width="572" height="102"/>
+				<image scaleImage="FillFrame" hAlign="Center">
+					<reportElement uuid="b1c9eb61-73a1-4f2a-b35a-aaa0be3f2f36" x="0" y="0" width="190" height="56"/>
+					<imageExpression><![CDATA["C:\\ThaliSotf Report\\img\\logo kokopelli.jpg"]]></imageExpression>
+				</image>
+				<textField>
+					<reportElement uuid="184bdd65-c6a9-4400-b5c4-9ea7116f1aee" x="0" y="56" width="190" height="46"/>
+					<textElement verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Tel: "+$F{empresas_Telefono}+" - "+$F{empresas_celular}+"\nDir: "+$F{empresas_Direccion}+"\n"+$F{empresas_mail}+"\n"+$F{empresas_redsocial}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="20ed50b0-bb8b-4ef5-9788-c411ef8aeec7" x="225" y="0" width="166" height="45"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[RELACIÓN DE COMPRAS]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<summary>
+		<band height="50" splitType="Stretch">
+			<componentElement>
+				<reportElement uuid="32f74f1f-3671-4f7c-bacf-8b5018dc711c" key="table" style="table" x="0" y="0" width="572" height="50"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Compras" uuid="38169b76-075b-4fb3-a842-c3748061d8d7">
+						<datasetParameter name="fecha1">
+							<datasetParameterExpression><![CDATA[$P{fe1}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="fecha2">
+							<datasetParameterExpression><![CDATA[$P{fe2}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="filtro">
+							<datasetParameterExpression><![CDATA[$P{filtro}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="39" uuid="439be16b-236f-43ea-9592-7d5bc0378d20">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="d6149765-642f-4e67-9dd3-53f33d792324" x="0" y="0" width="39" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<text><![CDATA[Numero Factura]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement uuid="871ae55d-705e-4a74-af4e-7663bcdd5c1f" x="0" y="0" width="39" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{numerofactura}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="48" uuid="eba76d09-446f-4282-87e6-bdd8d48ad1d2">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="c8941721-f293-41df-9ed7-b6bbf94e73ce" x="0" y="0" width="48" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<text><![CDATA[Fecha Factura]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField pattern="dd/MM/yyyy">
+								<reportElement uuid="5c268d4e-c513-4aa7-8f7b-8e6192201b8b" x="0" y="0" width="48" height="20"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{fechafactura}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="56" uuid="65331297-9c81-4bae-98ba-cde7eb61257f">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="50d8a35e-b4cc-488c-85e2-9bc77ffb429a" x="0" y="0" width="56" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<text><![CDATA[Fecha Vencimiento]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField pattern="dd/MM/yyyy">
+								<reportElement uuid="5f53d09d-d283-4c63-bec9-d57a95ab2ad0" x="0" y="0" width="56" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{fechavencimiento}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="91" uuid="10ca0f27-dadb-418e-b2bc-3cdf5e36a780">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="aa10aef2-bbfd-4371-9ddb-9e9f8b38738d" x="0" y="0" width="91" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<text><![CDATA[Proveedor]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement uuid="17240430-69d6-4d99-96e6-3fb6d9c4827f" x="0" y="0" width="91" height="20"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{razonsocial}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="46" uuid="8d9faec9-7ecb-4b90-bb18-3d994233fade">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="3993e4af-080a-49f6-a0ae-04e6a2e7aa7c" x="0" y="0" width="46" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<text><![CDATA[Subtotal]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField pattern="$ #,##0">
+								<reportElement uuid="f323dc2f-c635-4e3a-9e5e-f32d12d2a36e" x="0" y="0" width="46" height="20"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="42" uuid="072c69a3-e990-463f-8737-2e18ddb8ed61">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="a0ca1612-e8f3-4837-ab4b-d31ed23660cc" x="0" y="0" width="42" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<text><![CDATA[Saldo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField pattern="$ #,##0">
+								<reportElement uuid="fe7795be-78ae-4c3e-aa0f-1454d4b2db5e" x="0" y="0" width="42" height="20"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="45" uuid="4958f7e4-95b4-4a82-8314-fd48b34e9566">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="46b889da-41a2-49fc-8a22-a24a4dd63290" x="0" y="0" width="45" height="30"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<text><![CDATA[Total Pagar]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField pattern="$ #,##0">
+								<reportElement uuid="4a7b1737-9f5e-422c-b611-b8df2e4ebcfd" x="0" y="0" width="45" height="20"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{totalpagar}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="56" uuid="f8dcad42-fa60-482d-a921-29951b0310aa">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="4e433e02-cc80-4720-8721-fd06a178aba0" x="0" y="0" width="56" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<text><![CDATA[Cant. Pagos Registrados]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement uuid="2bef093a-6b26-4386-adeb-d3d662cc0ee7" x="0" y="0" width="56" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{cntpagos}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="43" uuid="ef1993e6-07cb-4fc1-adcb-b71faeb66eb0">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="33d76d89-aef3-4219-967a-85af0d08438f" x="0" y="0" width="43" height="30"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<text><![CDATA[Tipo Compra]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement uuid="48b82c0b-51f8-424a-9f4c-52ffe1157481" x="0" y="0" width="43" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tipocompra}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="66" uuid="87529353-cef0-46f0-8b7e-52af5bca570b">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="4669e7de-00ba-4c3f-a372-67a8300facec" x="0" y="0" width="66" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<text><![CDATA[Reg. Realizado]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement uuid="7a8e6047-d627-488b-935c-93c9ecbd051e" x="0" y="0" width="66" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{empleado}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="700f103f-8ef2-4b78-abb1-6c77c2adf72e">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="0fd597d0-2bdf-4d1b-b6f8-1108fd68227c" x="0" y="0" width="50" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8"/>
+								</textElement>
+								<text><![CDATA[Fecha Hora Ingreso]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField pattern="">
+								<reportElement uuid="55da4de0-351d-423b-bb70-1042706d441f" x="0" y="0" width="50" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{fechahoraingreso}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

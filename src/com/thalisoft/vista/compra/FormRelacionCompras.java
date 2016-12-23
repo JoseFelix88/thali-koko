@@ -1,6 +1,7 @@
 package com.thalisoft.vista.compra;
 
 import com.thalisoft.main.util.Edicion;
+import com.thalisoft.main.util.report.Manager_Report;
 import com.thalisoft.model.compras.FacturaCompraDao;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
@@ -91,6 +92,11 @@ public class FormRelacionCompras extends javax.swing.JInternalFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/printer.png"))); // NOI18N
         jButton2.setText("Imprimir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/exit.png"))); // NOI18N
         jButton3.setText("Salir");
@@ -336,6 +342,16 @@ public class FormRelacionCompras extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_comboFiltroItemStateChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Manager_Report mr = new Manager_Report();
+        Object[] key = new Object[3];
+        key[0] = "'" + edicion.formatearFechaSQL(jDateChooser1.getDate()) + "'";
+        key[1] = "'" + edicion.formatearFechaSQL(jDateChooser2.getDate()) + "'";
+        key[2] = "'%" + TXTFILTRO.getText() + "%'";
+        mr.RELACION_DE_COMPRAS_REGISTRADAS(key);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

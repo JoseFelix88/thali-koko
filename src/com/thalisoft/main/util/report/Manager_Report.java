@@ -168,4 +168,19 @@ public class Manager_Report extends database {
             System.out.println("Mensaje de Error:" + j);
         }
     }
+    
+     public void RELACION_DE_COMPRAS_REGISTRADAS(Object[] key) {
+        String reporte = "Relacion de Compras.jasper";
+        try {
+            String Ubicacion = RUTA_REPORTE + "/compras/";
+            masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
+            PARAMETROS.put("fe1", key[0]);
+            PARAMETROS.put("fe2", key[1]);
+            PARAMETROS.put("filtro", key[2]);
+            edicion.Lanzador(masterReport, PARAMETROS);
+        } catch (Exception j) {
+            edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
+            System.out.println("Mensaje de Error:" + j);
+        }
+    }
 }
