@@ -347,9 +347,9 @@ public class FormRelacionCompras extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Manager_Report mr = new Manager_Report();
         Object[] key = new Object[3];
-        key[0] = "'" + edicion.formatearFechaSQL(jDateChooser1.getDate()) + "'";
-        key[1] = "'" + edicion.formatearFechaSQL(jDateChooser2.getDate()) + "'";
-        key[2] = "'%" + TXTFILTRO.getText() + "%'";
+        key[0] = jDateChooser1.getDate();
+        key[1] = jDateChooser2.getDate();
+        key[2] = "%" + TXTFILTRO.getText() + "%";
         mr.RELACION_DE_COMPRAS_REGISTRADAS(key);
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -12,32 +12,30 @@
         </Property>
       </Properties>
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="JM_venta">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="0" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Iconos/vista_style_business_and_data_icons_icons_pack_120673/carrito-de-compras-del-ecommerce-icono-4568-48.png"/>
+              <Image iconType="3" name="/Iconos/vista_style_business_and_data_icons_icons_pack_120673/la-lucha-contra-la-caja-registradora-icono-4028-48.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Salidas"/>
+            <Property name="text" type="java.lang.String" value="VENTAS"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="R_Salida">
+            <MenuItem class="javax.swing.JMenuItem" name="JM_FacturaVenta">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="33" red="33" type="rgb"/>
-                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="cc" red="ff" type="rgb"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/thalisoft/image/iconos/get-money.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Generar Salida"/>
+                <Property name="text" type="java.lang.String" value="Factura de Venta"/>
+                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -45,17 +43,12 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="JM_despachoproducto">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="33" red="33" type="rgb"/>
-                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="cc" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Despachos de Producto"/>
+                <Property name="text" type="java.lang.String" value="Relacion de Ventas"/>
                 <Property name="actionCommand" type="java.lang.String" value="Despachosproducto"/>
+                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

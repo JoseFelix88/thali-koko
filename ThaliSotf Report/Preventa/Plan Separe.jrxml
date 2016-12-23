@@ -81,7 +81,7 @@ plansepare.idplansepare = $P{plan}]]>
      clientes.`telefono` AS clientes_telefono,
      clientes.`direccion` AS clientes_direccion,
      clientes.`identificacion` AS clientes_identificacion,
-     clientes.`email` AS clientes_email
+     clientes.`email` AS clientes_email,datos_empresa() as empresa
 FROM
      `clientes` clientes INNER JOIN `plansepare` plansepare ON clientes.`identificacion` = plansepare.`cliente`
 WHERE
@@ -105,6 +105,7 @@ WHERE
 	<field name="clientes_direccion" class="java.lang.String"/>
 	<field name="clientes_identificacion" class="java.lang.String"/>
 	<field name="clientes_email" class="java.lang.String"/>
+	<field name="empresa" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -120,7 +121,7 @@ WHERE
 					<rightPen lineWidth="0.0" lineColor="#000000"/>
 				</box>
 				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
-					<reportElement uuid="decf9f38-c608-4148-a4a0-126af9d3f790" x="51" y="5" width="158" height="64"/>
+					<reportElement uuid="decf9f38-c608-4148-a4a0-126af9d3f790" x="24" y="1" width="108" height="29"/>
 					<box>
 						<pen lineWidth="0.0"/>
 						<topPen lineWidth="0.0"/>
@@ -166,6 +167,13 @@ WHERE
 					<textFieldExpression><![CDATA["Cliente: "+$F{clientes_nombreapellidos}+" - "+$F{clientes_identificacion}+"\n"+
 "Telefono: "+$F{clientes_telefono}+"\nDireccion: "+$F{clientes_direccion}+"\nEmail: "+$F{clientes_email}]]></textFieldExpression>
 				</textField>
+				<textField>
+					<reportElement uuid="6d22a01d-f4d2-4751-b482-5ae0881d0217" x="24" y="34" width="184" height="41"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</title>
@@ -174,7 +182,7 @@ WHERE
 			<frame>
 				<reportElement uuid="04ba292f-b69a-4e2a-bda8-2b3a58c19493" x="0" y="0" width="572" height="46"/>
 				<componentElement>
-					<reportElement uuid="732d61d3-7ab9-4bb3-b985-b1082f9156a1" key="table" style="table" x="51" y="1" width="360" height="45"/>
+					<reportElement uuid="732d61d3-7ab9-4bb3-b985-b1082f9156a1" key="table" style="table" x="24" y="1" width="360" height="45"/>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 						<datasetRun subDataset="Detalle Plan" uuid="30fe1621-c63c-453e-8d83-8e660fdf2a36">
 							<datasetParameter name="plan">

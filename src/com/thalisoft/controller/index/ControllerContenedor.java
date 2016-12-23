@@ -14,6 +14,7 @@ import com.thalisoft.vista.maestros.producto.FormListaProductos;
 import com.thalisoft.vista.maestros.proveedor.FormListarProveedor;
 import com.thalisoft.vista.preventa.cotizacion.FormCotizacion;
 import com.thalisoft.vista.preventa.plansepare.FormPlanSepare;
+import com.thalisoft.vista.ventas.FormFacturaVenta;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,6 +58,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
     FormFacturaCompra formFacturaCompra;
     FormRelacionCompras formRelacionCompras;
 
+    FormFacturaVenta formFacturaVenta;
     private static JDesktopPane jDesktopPane1;
 
     public ControllerContenedor() {
@@ -71,7 +73,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
             Obtener_Eventos_De_SubMenu(contenedor.R_Producto);
             Obtener_Eventos_De_SubMenu(contenedor.JM_OrdenCompra);
             Obtener_Eventos_De_SubMenu(contenedor.JM_FacturaCompras);
-            Obtener_Eventos_De_SubMenu(contenedor.R_Salida);
+            Obtener_Eventos_De_SubMenu(contenedor.JM_FacturaVenta);
             Obtener_Eventos_De_SubMenu(contenedor.JM_conteofisico);
             Obtener_Eventos_De_SubMenu(contenedor.JM_Cotizacion);
             Obtener_Eventos_De_SubMenu(contenedor.JM_PlanSepare);
@@ -96,6 +98,7 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
             Obtener_Eventos_De_SubMenu(contenedor.JM_PlanSepare);
             Obtener_Eventos_De_SubMenu(contenedor.JM_FacturaCompras);
             Obtener_Eventos_De_SubMenu(contenedor.JM_CompraRegistrada);
+            Obtener_Eventos_De_SubMenu(contenedor.JM_FacturaVenta);
 
             contenedor.JM_Profile.setText(Variables_Gloabales.EMPLEADO.getNombres() + " "
                     + "" + Variables_Gloabales.EMPLEADO.getApellidos());
@@ -259,21 +262,21 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
                     formRelacionCompras.setIcon(false);
                 }
                 break;
-            /*
-             case "Despachosproducto":
-             if (Obtener_Estado_Formulario(this.formConsultaSalidaProducto, Contenedor.Panel_Contenedor)) {
-             formConsultaSalidaProducto = new FormConsultaSalidaProducto();
-             formConsultaSalidaProducto.show();
-             Contenedor.Panel_Contenedor.add(formConsultaSalidaProducto);
-             java.awt.Dimension Tamaño_Panel = Contenedor.Panel_Contenedor.getSize();
-             java.awt.Dimension Tamaño_InternalFrame = formConsultaSalidaProducto.getSize();
-             formConsultaSalidaProducto.setLocation((Tamaño_Panel.width - Tamaño_InternalFrame.width) / 2,
-             (Tamaño_Panel.height - Tamaño_InternalFrame.height) / 2);
-             } else {
-             formConsultaSalidaProducto.setIcon(false);
-             }
-             break;
 
+            case "Factura de Venta":
+                if (Obtener_Estado_Formulario(this.formFacturaVenta, Contenedor.Panel_Contenedor)) {
+                    formFacturaVenta = new FormFacturaVenta();
+                    formFacturaVenta.show();
+                    Contenedor.Panel_Contenedor.add(formFacturaVenta);
+                    java.awt.Dimension Tamaño_Panel = Contenedor.Panel_Contenedor.getSize();
+                    java.awt.Dimension Tamaño_InternalFrame = formFacturaVenta.getSize();
+                    formFacturaVenta.setLocation((Tamaño_Panel.width - Tamaño_InternalFrame.width) / 2,
+                            (Tamaño_Panel.height - Tamaño_InternalFrame.height) / 2);
+                } else {
+                    formFacturaVenta.setIcon(false);
+                }
+                break;
+            /*
              case "Formconteofisico":
              if (Obtener_Estado_Formulario(this.formConteoFisicoBodega, Contenedor.Panel_Contenedor)) {
              formConteoFisicoBodega = new FormConteoFisicoBodega();

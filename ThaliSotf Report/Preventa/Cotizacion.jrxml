@@ -72,7 +72,7 @@ clientes.nombreapellidos,
 clientes.telefono,
 clientes.direccion,
 clientes.identificacion,
-clientes.email
+clientes.email,datos_empresa() as empresa
 FROM
 clientes
 INNER JOIN cotizaciones ON cotizaciones.cliente = clientes.identificacion
@@ -102,6 +102,7 @@ where cotizaciones.idcotizaciones = $P{idcotizacion}]]>
 	<field name="email" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="empresa" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -143,13 +144,20 @@ where cotizaciones.idcotizaciones = $P{idcotizacion}]]>
 					<textFieldExpression><![CDATA["Cliente: "+$F{nombreapellidos}+" - Identificacion: "+$F{identificacion}+"\n"+
 "Telefono: "+$F{telefono}+" Direccion: "+$F{direccion}+"\n E-Mail: "+$F{email}]]></textFieldExpression>
 				</textField>
+				<textField>
+					<reportElement uuid="69bce93c-4417-4657-92dd-d7b9aecde4fb" x="0" y="48" width="180" height="50"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</title>
 	<summary>
 		<band height="80" splitType="Stretch">
 			<componentElement>
-				<reportElement uuid="fe1b5ca4-c77b-4ba5-af41-893af7a94f87" key="table" style="table" x="19" y="0" width="360" height="80"/>
+				<reportElement uuid="fe1b5ca4-c77b-4ba5-af41-893af7a94f87" key="table" style="table" x="0" y="0" width="379" height="80"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="DetalleCotizacion" uuid="a667c63f-883d-44c2-8811-30cf2fe9bcd7">
 						<datasetParameter name="idcotizacion">

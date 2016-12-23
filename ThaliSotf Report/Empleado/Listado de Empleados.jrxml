@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Listado de Empleados" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5e26d181-b505-4a36-9676-3289c20240aa">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="161"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
@@ -25,8 +25,7 @@
 	</style>
 	<subDataset name="Lista de empleados" uuid="685713cc-faf5-4fef-8b53-eda8c9851be3">
 		<queryString language="SQL">
-			<![CDATA[
-SELECT idusuarios, identificacion, concat(apellidos,' ', nombres), direccion, telefono, cargo,
+			<![CDATA[SELECT idusuarios, identificacion, concat(apellidos,' ', nombres), direccion, telefono, cargo,
 salariobasico,bonificacion, if(estado = 1, 'VIGENTE', 'CANCELADO') AS estado
 FROM empleados ORDER BY apellidos;]]>
 		</queryString>
@@ -57,9 +56,9 @@ FROM empleados ORDER BY apellidos;]]>
 		</field>
 	</subDataset>
 	<queryString>
-		<![CDATA[select now()]]>
+		<![CDATA[select datos_empresa() as empresa]]>
 	</queryString>
-	<field name="now()" class="java.sql.Timestamp"/>
+	<field name="empresa" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -76,6 +75,13 @@ FROM empleados ORDER BY apellidos;]]>
 				<reportElement uuid="b9a208b0-51cd-401d-bf8c-9cdf9c9d8cb2" x="17" y="0" width="192" height="41"/>
 				<imageExpression><![CDATA["C:\\ThaliSotf Report\\img\\logo.png"]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement uuid="59fa0ecf-14b0-4b36-b689-9a37bada9ef9" x="509" y="0" width="225" height="47"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<summary>

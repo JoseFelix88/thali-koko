@@ -47,7 +47,8 @@ SALDO_ORDEN_COMPRA(ordencompras.idordencompras) AS saldo,
 PAGOS_CLIENTE_ORDEN_PEDIDO(ordencompras.idordencompras) AS TOTAL_PAGOS,
 CONTAR_PAGOS_CLIENTE_ORDEN_PEDIDO(ordencompras.idordencompras) AS CNT_PAGOS_REG,
 CONSULTAR_CLIENTE(ordencompras.cliente) AS cliente,
- IF (ordencompras.estado = 1, 'FABRICANDO', 'FACTURADO') AS estado
+ IF (ordencompras.estado = 1, 'FABRICANDO', 'FACTURADO') AS estado,
+datos_empresa() as empresa
 FROM
 ordencompras
 WHERE ordencompras.fechaemision BETWEEN $P{F1} AND $P{f2}  ORDER BY ordencompras.idordencompras;]]>
@@ -75,6 +76,7 @@ WHERE ordencompras.fechaemision BETWEEN $P{F1} AND $P{f2}  ORDER BY ordencompras
 		<field name="estado" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
+		<field name="empresa" class="java.lang.String"/>
 		<variable name="Vsubtotal" class="java.lang.Long" calculation="Sum">
 			<variableExpression><![CDATA[$F{subtotal}]]></variableExpression>
 		</variable>
@@ -338,6 +340,15 @@ WHERE ordencompras.fechaemision BETWEEN $P{F1} AND $P{f2}  ORDER BY ordencompras
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90" uuid="125ab4c9-e1a6-41d6-888d-2f52f0a09880">
+						<jr:tableHeader height="64">
+							<textField>
+								<reportElement uuid="14584365-016b-4d41-99f2-4289e6b3ade8" x="0" y="0" width="90" height="64"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="6"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
 						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement uuid="18e33c72-41f1-4c3f-8469-19c8da6c5631" x="0" y="0" width="90" height="30"/>

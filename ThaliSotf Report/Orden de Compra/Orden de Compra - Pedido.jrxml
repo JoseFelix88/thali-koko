@@ -91,7 +91,7 @@ clientes.identificacion,
 clientes.direccion,
 clientes.telefono,
 if(DATEDIFF(ordencompras.fechaentrega,curdate()) > 0, concat('Son ',DATEDIFF(ordencompras.fechaentrega,curdate()), ' dias para la entrega'),
-CONCAT('El pedido esta retrazado en ',DATEDIFF(ordencompras.fechaentrega,curdate())*(-1),' dias') )     as dias_para_entrega
+CONCAT('El pedido esta retrazado en ',DATEDIFF(ordencompras.fechaentrega,curdate())*(-1),' dias') )     as dias_para_entrega, datos_empresa() as empresa
 FROM
 ordencompras ,
 clientes ,
@@ -139,24 +139,32 @@ ordencompras.idordencompras = $P{idordencompra}]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="dias_para_entrega" class="java.lang.String"/>
+	<field name="empresa" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="118" splitType="Stretch">
 			<frame>
-				<reportElement uuid="d8538a09-93ed-4b21-9cf3-2cb5f6d49aaf" x="61" y="0" width="437" height="41"/>
-				<image hAlign="Center" vAlign="Middle">
+				<reportElement uuid="d8538a09-93ed-4b21-9cf3-2cb5f6d49aaf" x="61" y="0" width="495" height="41"/>
+				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
 					<reportElement uuid="d3286c08-46bf-4662-a67e-cc869522fed5" x="0" y="0" width="120" height="41"/>
 					<imageExpression><![CDATA["C:\\ThaliSotf Report\\img\\logo.png"]]></imageExpression>
 				</image>
 				<staticText>
-					<reportElement uuid="7193ae42-c4b5-481b-9dca-f6dd77ec0ed2" x="120" y="0" width="241" height="41"/>
+					<reportElement uuid="7193ae42-c4b5-481b-9dca-f6dd77ec0ed2" x="145" y="0" width="148" height="41"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Comic Sans MS" size="14" isBold="true"/>
 					</textElement>
 					<text><![CDATA[ORDEN DE PEDIDO]]></text>
 				</staticText>
+				<textField>
+					<reportElement uuid="f627fad0-693e-4b77-be43-3d848dfffcd3" x="314" y="0" width="181" height="41"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="ad2e2c38-da9e-4460-9227-d7b5f1c1cc4f" x="61" y="41" width="208" height="71"/>

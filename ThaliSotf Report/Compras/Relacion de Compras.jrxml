@@ -45,7 +45,8 @@ facturascompras.fechavencimiento,
 proveedores.razonsocial,
 SUBTOTAL_FACTURA_COMPRA(facturascompras.idFacturasCompras) AS subtotal,
 SALDO_FACTURA_COMPRA(facturascompras.idFacturasCompras) AS saldo,
-0 AS totalpagar,
+SUBTOTAL_FACTURA_COMPRA(facturascompras.idFacturasCompras) -
+SALDO_FACTURA_COMPRA(facturascompras.idFacturasCompras) AS totalpagar,
 0 AS cntpagos,
 facturascompras.tipocompra,
 USUARIO_SISTEMA(facturascompras.empleado) AS empleado,
@@ -86,25 +87,26 @@ and (facturascompras.tipocompra LIKE $P{filtro}  OR proveedores.razonsocial LIKE
 		<field name="fechahoraingreso" class="java.sql.Timestamp">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
+		<variable name="SUBTOTAL" class="java.lang.Long" calculation="Sum">
+			<variableExpression><![CDATA[$F{subtotal}]]></variableExpression>
+		</variable>
+		<variable name="SALDO" class="java.lang.Long" calculation="Sum">
+			<variableExpression><![CDATA[$F{saldo}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="TOTALAPAGAR" class="java.lang.Long" calculation="Sum">
+			<variableExpression><![CDATA[$F{totalpagar}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
 	</subDataset>
 	<parameter name="fe1" class="java.util.Date"/>
 	<parameter name="fe2" class="java.util.Date"/>
 	<parameter name="filtro" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
-     empresas.`Telefono` AS empresas_Telefono,
-     empresas.`Direccion` AS empresas_Direccion,
-     empresas.`mail` AS empresas_mail,
-     empresas.`celular` AS empresas_celular,
-     empresas.`redsocial` AS empresas_redsocial
-FROM
-     `empresas` empresas]]>
+     datos_empresa() as empresa]]>
 	</queryString>
-	<field name="empresas_Telefono" class="java.lang.String"/>
-	<field name="empresas_Direccion" class="java.lang.String"/>
-	<field name="empresas_mail" class="java.lang.String"/>
-	<field name="empresas_celular" class="java.lang.String"/>
-	<field name="empresas_redsocial" class="java.lang.String"/>
+	<field name="empresa" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -121,14 +123,32 @@ FROM
 					<textElement verticalAlignment="Middle">
 						<font size="7"/>
 					</textElement>
-					<textFieldExpression><![CDATA["Tel: "+$F{empresas_Telefono}+" - "+$F{empresas_celular}+"\nDir: "+$F{empresas_Direccion}+"\n"+$F{empresas_mail}+"\n"+$F{empresas_redsocial}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement uuid="20ed50b0-bb8b-4ef5-9788-c411ef8aeec7" x="225" y="0" width="166" height="45"/>
+					<reportElement uuid="20ed50b0-bb8b-4ef5-9788-c411ef8aeec7" x="225" y="0" width="211" height="45"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Arial Narrow" size="16" isBold="true"/>
 					</textElement>
 					<text><![CDATA[RELACIÓN DE COMPRAS]]></text>
+				</staticText>
+				<rectangle radius="10">
+					<reportElement uuid="5dbedb56-a014-47aa-9f23-62fa1d8438e1" x="225" y="45" width="211" height="50"/>
+				</rectangle>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement uuid="3a698538-3ab9-420f-b4f0-abd5f3f2fbbd" x="230" y="65" width="100" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{fe1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement uuid="8b7f5386-8dd6-4203-b660-51f7a403dcd1" x="330" y="65" width="100" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{fe2}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="802f595f-cd6d-401a-8b14-521f56c72e1a" x="278" y="45" width="100" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[PERIODO]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -220,6 +240,15 @@ FROM
 								<text><![CDATA[Proveedor]]></text>
 							</staticText>
 						</jr:columnHeader>
+						<jr:columnFooter height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="310cf013-548d-4b6e-88f7-bf9fd60385cc" x="0" y="0" width="91" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" isBold="true"/>
+								</textElement>
+								<text><![CDATA[TOTALES]]></text>
+							</staticText>
+						</jr:columnFooter>
 						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField>
 								<reportElement uuid="17240430-69d6-4d99-96e6-3fb6d9c4827f" x="0" y="0" width="91" height="20"/>
@@ -240,6 +269,15 @@ FROM
 								<text><![CDATA[Subtotal]]></text>
 							</staticText>
 						</jr:columnHeader>
+						<jr:columnFooter height="30" rowSpan="1">
+							<textField pattern="$ #,##0">
+								<reportElement uuid="2d01f0a0-bf80-434d-8d7c-5770bf9aa8d7" x="0" y="0" width="46" height="30"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{SUBTOTAL}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
 						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField pattern="$ #,##0">
 								<reportElement uuid="f323dc2f-c635-4e3a-9e5e-f32d12d2a36e" x="0" y="0" width="46" height="20"/>
@@ -260,6 +298,15 @@ FROM
 								<text><![CDATA[Saldo]]></text>
 							</staticText>
 						</jr:columnHeader>
+						<jr:columnFooter height="30" rowSpan="1">
+							<textField pattern="$ #,##0">
+								<reportElement uuid="ac1f4c35-e4e6-4cdf-8de9-85c419d0e0a0" x="0" y="0" width="42" height="30"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{SALDO}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
 						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField pattern="$ #,##0">
 								<reportElement uuid="fe7795be-78ae-4c3e-aa0f-1454d4b2db5e" x="0" y="0" width="42" height="20"/>
@@ -274,12 +321,21 @@ FROM
 						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement uuid="46b889da-41a2-49fc-8a22-a24a4dd63290" x="0" y="0" width="45" height="30"/>
-								<textElement verticalAlignment="Middle">
+								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial Narrow" size="8"/>
 								</textElement>
 								<text><![CDATA[Total Pagar]]></text>
 							</staticText>
 						</jr:columnHeader>
+						<jr:columnFooter height="30" rowSpan="1">
+							<textField pattern="$ #,##0">
+								<reportElement uuid="3f02657c-d43a-42a7-be3d-d40b987a0214" x="0" y="0" width="45" height="30"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Arial Narrow" size="8" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{TOTALAPAGAR}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
 						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField pattern="$ #,##0">
 								<reportElement uuid="4a7b1737-9f5e-422c-b611-b8df2e4ebcfd" x="0" y="0" width="45" height="20"/>
@@ -314,7 +370,7 @@ FROM
 						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement uuid="33d76d89-aef3-4219-967a-85af0d08438f" x="0" y="0" width="43" height="30"/>
-								<textElement verticalAlignment="Middle">
+								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial Narrow" size="8"/>
 								</textElement>
 								<text><![CDATA[Tipo Compra]]></text>

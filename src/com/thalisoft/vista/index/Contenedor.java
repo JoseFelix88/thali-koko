@@ -34,7 +34,7 @@ public class Contenedor extends javax.swing.JFrame {
         setUndecorated(true);
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        jMenu2.setVisible(false);
+        JM_venta.setVisible(false);
         MENU_COMPRAS.setVisible(true);
         jMenu4.setVisible(false);
         jMenu5.setVisible(false);
@@ -128,8 +128,8 @@ public class Contenedor extends javax.swing.JFrame {
 
         Panel_Contenedor = new javax.swing.JDesktopPane();
         Contenedor_Menu_General = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        R_Salida = new javax.swing.JMenuItem();
+        JM_venta = new javax.swing.JMenu();
+        JM_FacturaVenta = new javax.swing.JMenuItem();
         JM_despachoproducto = new javax.swing.JMenuItem();
         MENU_COMPRAS = new javax.swing.JMenu();
         JM_FacturaCompras = new javax.swing.JMenuItem();
@@ -178,25 +178,24 @@ public class Contenedor extends javax.swing.JFrame {
         Contenedor_Menu_General.setBackground(new java.awt.Color(255, 153, 102));
         Contenedor_Menu_General.setPreferredSize(new java.awt.Dimension(494, 70));
 
-        jMenu2.setForeground(new java.awt.Color(255, 255, 255));
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vista_style_business_and_data_icons_icons_pack_120673/carrito-de-compras-del-ecommerce-icono-4568-48.png"))); // NOI18N
-        jMenu2.setText("Salidas");
-        jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        JM_venta.setForeground(new java.awt.Color(255, 255, 0));
+        JM_venta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vista_style_business_and_data_icons_icons_pack_120673/la-lucha-contra-la-caja-registradora-icono-4028-48.png"))); // NOI18N
+        JM_venta.setText("VENTAS");
+        JM_venta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        R_Salida.setBackground(new java.awt.Color(51, 51, 51));
-        R_Salida.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        R_Salida.setForeground(new java.awt.Color(255, 204, 0));
-        R_Salida.setText("Generar Salida");
-        jMenu2.add(R_Salida);
+        JM_FacturaVenta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        JM_FacturaVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/get-money.png"))); // NOI18N
+        JM_FacturaVenta.setText("Factura de Venta");
+        JM_FacturaVenta.setOpaque(true);
+        JM_venta.add(JM_FacturaVenta);
 
-        JM_despachoproducto.setBackground(new java.awt.Color(51, 51, 51));
         JM_despachoproducto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JM_despachoproducto.setForeground(new java.awt.Color(255, 204, 0));
-        JM_despachoproducto.setText("Despachos de Producto");
+        JM_despachoproducto.setText("Relacion de Ventas");
         JM_despachoproducto.setActionCommand("Despachosproducto");
-        jMenu2.add(JM_despachoproducto);
+        JM_despachoproducto.setOpaque(true);
+        JM_venta.add(JM_despachoproducto);
 
-        Contenedor_Menu_General.add(jMenu2);
+        Contenedor_Menu_General.add(JM_venta);
 
         MENU_COMPRAS.setForeground(new java.awt.Color(255, 255, 51));
         MENU_COMPRAS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vista_style_business_and_data_icons_icons_pack_120673/carrito-de-la-compra-icono-7565-48.png"))); // NOI18N
@@ -592,6 +591,7 @@ public class Contenedor extends javax.swing.JFrame {
     public javax.swing.JMenuItem JM_DevolucionPunto;
     public javax.swing.JMenuItem JM_Empleado;
     public javax.swing.JMenuItem JM_FacturaCompras;
+    public javax.swing.JMenuItem JM_FacturaVenta;
     public javax.swing.JMenuItem JM_Lotes;
     public javax.swing.JMenuItem JM_OrdenCompra;
     public javax.swing.JMenuItem JM_Orden_Compra;
@@ -607,13 +607,12 @@ public class Contenedor extends javax.swing.JFrame {
     public javax.swing.JMenuItem JM_inventariobodega;
     public javax.swing.JMenuItem JM_inventariopunto;
     public javax.swing.JMenuItem JM_pedidoPunto;
+    private javax.swing.JMenu JM_venta;
     private javax.swing.JMenu MENU_COMPRAS;
     public static javax.swing.JDesktopPane Panel_Contenedor;
     public javax.swing.JMenuItem R_Producto;
-    public javax.swing.JMenuItem R_Salida;
     private javax.swing.JMenuItem R_Salir;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;

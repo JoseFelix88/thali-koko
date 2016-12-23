@@ -18,7 +18,7 @@ IFNULL(pagoproveedores.numrecibo,"") AS numrecibo,
 pagoproveedores.cntrecibida,
 pagoproveedores.cntdevuelta,
 pagoproveedores.valorsaldo,
-proveedores.razonsocial
+proveedores.razonsocial,datos_empresa() as empresa
 
 FROM
 pagoproveedores ,
@@ -60,6 +60,7 @@ pagoproveedores.idpagoproveedores = $P{NUMPAGO}]]>
 	<field name="razonsocial" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="empresa" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -68,14 +69,14 @@ pagoproveedores.idpagoproveedores = $P{NUMPAGO}]]>
 			<frame>
 				<reportElement uuid="a46a2096-a4e3-4243-8490-9ecb87a1fc86" x="0" y="0" width="572" height="78"/>
 				<staticText>
-					<reportElement uuid="1a499f56-8ab0-4763-8225-dfed421d864d" x="168" y="0" width="204" height="51"/>
+					<reportElement uuid="1a499f56-8ab0-4763-8225-dfed421d864d" x="202" y="0" width="170" height="51"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="16" isBold="true"/>
 					</textElement>
 					<text><![CDATA[RECIBO DE PAGO PROVEEDOR]]></text>
 				</staticText>
-				<image hAlign="Center" vAlign="Top">
-					<reportElement uuid="05bb2cf5-0a73-429b-8390-ce54261c6402" x="0" y="0" width="157" height="78"/>
+				<image scaleImage="FillFrame" hAlign="Center" vAlign="Top">
+					<reportElement uuid="05bb2cf5-0a73-429b-8390-ce54261c6402" x="0" y="0" width="202" height="38"/>
 					<imageExpression><![CDATA["C:\\ThaliSotf Report\\img\\logo.png"]]></imageExpression>
 				</image>
 				<componentElement>
@@ -89,6 +90,13 @@ pagoproveedores.idpagoproveedores = $P{NUMPAGO}]]>
 					<textElement verticalAlignment="Bottom"/>
 					<text><![CDATA[RECIBO DE PAGO No]]></text>
 				</staticText>
+				<textField>
+					<reportElement uuid="431eac1e-6335-44f5-91d3-9dd89f02478b" x="0" y="38" width="202" height="40"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement uuid="c7b7f31b-62f0-452a-8337-d8101add96ea" x="0" y="159" width="572" height="82"/>

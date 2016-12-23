@@ -219,7 +219,7 @@ clientes.nombreapellidos,
 clientes.telefono,
 clientes.direccion,
 clientes.identificacion,
-clientes.email
+clientes.email, datos_empresa() as empresa
 FROM
 ordencompras
 INNER JOIN proveedores ON ordencompras.proveedor = proveedores.idproveedores
@@ -254,13 +254,14 @@ where (ordencompras.fechaemision between $P{fecha1} and $P{fecha2} or
 	<field name="email" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="empresa" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="81">
+		<band height="65">
 			<frame>
-				<reportElement uuid="146ceb2d-998c-4bcb-b045-87d795fea09f" x="0" y="0" width="680" height="68"/>
+				<reportElement uuid="146ceb2d-998c-4bcb-b045-87d795fea09f" x="0" y="0" width="680" height="56"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -268,17 +269,24 @@ where (ordencompras.fechaemision between $P{fecha1} and $P{fecha2} or
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<image hAlign="Center" vAlign="Middle">
-					<reportElement uuid="fe966456-8da9-4504-a9ac-cb122f842c1b" x="0" y="0" width="171" height="68"/>
+				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+					<reportElement uuid="fe966456-8da9-4504-a9ac-cb122f842c1b" x="0" y="0" width="180" height="55"/>
 					<imageExpression><![CDATA["C:\\ThaliSotf Report\\img\\logo.png"]]></imageExpression>
 				</image>
 				<staticText>
-					<reportElement uuid="2366a730-dbbd-4ee7-b82a-5b3b74a9c080" x="266" y="16" width="153" height="39"/>
+					<reportElement uuid="2366a730-dbbd-4ee7-b82a-5b3b74a9c080" x="273" y="0" width="153" height="39"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[HISTORIAL DE PAGOS ORDEN DE PEDIDO]]></text>
 				</staticText>
+				<textField>
+					<reportElement uuid="119ed880-3280-49d3-a15c-fe4d46ebba9b" x="482" y="0" width="198" height="55"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</pageHeader>
