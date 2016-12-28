@@ -456,14 +456,14 @@
                               <EmptySpace min="0" pref="62" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="txttelefono1" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="txttelefono" min="-2" pref="120" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="txtdireccion1" max="32767" attributes="0"/>
+                              <Component id="txtdireccion" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="txtidentificacion1" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="txtidentificacion" min="-2" pref="120" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="combocliente1" max="32767" attributes="0"/>
+                              <Component id="combocliente" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -479,8 +479,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtidentificacion1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="combocliente1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtidentificacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="combocliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -489,8 +489,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txttelefono1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtdireccion1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txttelefono" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtdireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -508,9 +508,9 @@
                 <Property name="text" type="java.lang.String" value="TELFONOS"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtidentificacion1">
+            <Component class="javax.swing.JTextField" name="txtidentificacion">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtidentificacion1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtidentificacionActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel20">
@@ -518,7 +518,7 @@
                 <Property name="text" type="java.lang.String" value="NOMBRES Y APELLIDOS"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txttelefono1">
+            <Component class="javax.swing.JTextField" name="txttelefono">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
@@ -528,12 +528,12 @@
                 <Property name="text" type="java.lang.String" value="DIRECCI&#xd3;N"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtdireccion1">
+            <Component class="javax.swing.JTextField" name="txtdireccion">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="combocliente1">
+            <Component class="javax.swing.JComboBox" name="combocliente">
               <Properties>
                 <Property name="editable" type="boolean" value="true"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">

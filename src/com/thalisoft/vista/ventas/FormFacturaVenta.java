@@ -68,12 +68,12 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        txtidentificacion1 = new javax.swing.JTextField();
+        txtidentificacion = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        txttelefono1 = new javax.swing.JTextField();
+        txttelefono = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        txtdireccion1 = new javax.swing.JTextField();
-        combocliente1 = new javax.swing.JComboBox<>();
+        txtdireccion = new javax.swing.JTextField();
+        combocliente = new javax.swing.JComboBox<>();
         LBTIPOFAC = new javax.swing.JLabel();
         TXTTIPOFACT = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -188,22 +188,22 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("TELFONOS");
 
-        txtidentificacion1.addActionListener(new java.awt.event.ActionListener() {
+        txtidentificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtidentificacion1ActionPerformed(evt);
+                txtidentificacionActionPerformed(evt);
             }
         });
 
         jLabel20.setText("NOMBRES Y APELLIDOS");
 
-        txttelefono1.setEditable(false);
+        txttelefono.setEditable(false);
 
         jLabel21.setText("DIRECCIÓN");
 
-        txtdireccion1.setEditable(false);
+        txtdireccion.setEditable(false);
 
-        combocliente1.setEditable(true);
-        combocliente1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combocliente.setEditable(true);
+        combocliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -224,13 +224,13 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel21)))
                         .addGap(0, 62, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(txttelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtdireccion1))
+                        .addComponent(txtdireccion))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(txtidentificacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtidentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(combocliente1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(combocliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -241,16 +241,16 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
                     .addComponent(jLabel18))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtidentificacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combocliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtidentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combocliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(jLabel21))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txttelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtdireccion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtdireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -642,9 +642,9 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_RadioPlanItemStateChanged
 
-    private void txtidentificacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidentificacion1ActionPerformed
+    private void txtidentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidentificacionActionPerformed
         CARGAR_CLIENTE(txtidentificacion.getText());
-    }//GEN-LAST:event_txtidentificacion1ActionPerformed
+    }//GEN-LAST:event_txtidentificacionActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
@@ -661,7 +661,6 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField TXTTIPOFACT;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> combocliente;
-    private javax.swing.JComboBox<String> combocliente1;
     private javax.swing.JComboBox<String> comboproducto;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -670,16 +669,12 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -694,7 +689,6 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -705,15 +699,12 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtcostototal;
     private javax.swing.JTextField txtcostound;
     private javax.swing.JTextField txtdireccion;
-    private javax.swing.JTextField txtdireccion1;
     private javax.swing.JTextField txtidentificacion;
-    private javax.swing.JTextField txtidentificacion1;
     private javax.swing.JTextField txtnumfactura;
     private javax.swing.JTextField txtreferencia;
     private javax.swing.JTextField txtsaldo;
     private javax.swing.JTextField txtsubtotal;
     private javax.swing.JTextField txttelefono;
-    private javax.swing.JTextField txttelefono1;
     private javax.swing.JTextField txtvalorpago;
     // End of variables declaration//GEN-END:variables
 
