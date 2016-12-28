@@ -5,50 +5,36 @@
  */
 package com.thalisoft.vista.index;
 
-
 import com.thalisoft.main.util.styles.Imagen_Fondo;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-/**
- *
- * @author ZAVALA
- */
 public class Contenedor extends javax.swing.JFrame {
-    /*    private Control Controlador = new Control();
-     private Usuarios FrmUsuarios;*/
-
-//    private FormProducto productoII;
+  
     static java.awt.Point Variable_Movimiento;
 
     public Contenedor() {
         //si no quieren borde redondeado comentan esta linea de codigo y 
         //las que les indicare dejando la letra Z
-        setUndecorated(true);
+//        setUndecorated(true);
         initComponents();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        JM_venta.setVisible(false);
+
+        JM_venta.setVisible(true);
         MENU_COMPRAS.setVisible(true);
         jMenu4.setVisible(false);
         jMenu5.setVisible(false);
-       //this.setExtendedState(this.MAXIMIZED_BOTH);
-        this.setSize(1010, 720);//Z
+        //this.setExtendedState(this.MAXIMIZED_BOTH);
+//        this.setSize(1010, 720);//Z
         setLocationRelativeTo(null);
         setVisible(true);
-
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //Z ... no borde redondeado :COMENTEN ESTAS DOS LINEAS
-        java.awt.Shape forma = new java.awt.geom.RoundRectangle2D.Double(0, 0, this.getBounds().width,
+       /* java.awt.Shape forma = new java.awt.geom.RoundRectangle2D.Double(0, 0, this.getBounds().width,
                 this.getBounds().height, 30, 30);
-        com.sun.awt.AWTUtilities.setWindowShape(this, forma);
+        com.sun.awt.AWTUtilities.setWindowShape(this, forma);*/
 
-        this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+//        this.setDefaultCloseOperation(javax.swing.JFrame.ICONIFIED);
         java.awt.Image Icono = java.awt.Toolkit.getDefaultToolkit().getImage(getClass().
                 getResource("/Iconos/Planeta.png"));
         this.setIconImage(Icono);
@@ -58,21 +44,25 @@ public class Contenedor extends javax.swing.JFrame {
         Variable_Movimiento = null;
 
         //Z ... no borde redondeado :COMENTEN TODO this.addMouseListener Y this.addMouseMotionListener
-        this.addMouseListener(new java.awt.event.MouseListener() {
+       /* this.addMouseListener(new java.awt.event.MouseListener() {
             public void mouseReleased(java.awt.event.MouseEvent e) {
                 Variable_Movimiento = null;
             }
 
+            @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
                 Variable_Movimiento = e.getPoint();
             }
 
+            @Override
             public void mouseExited(java.awt.event.MouseEvent e) {
             }
 
+            @Override
             public void mouseEntered(java.awt.event.MouseEvent e) {
             }
 
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
 
                 if (e.getClickCount() == 2) {
@@ -92,22 +82,24 @@ public class Contenedor extends javax.swing.JFrame {
                 }
             }
         });
-
+*/
         Obtener_Eventos_De_SubMenu(JM_FacturaCompras);
         Obtener_Eventos_De_SubMenu(JM_OrdenCompra);
         Obtener_Eventos_De_SubMenu(R_Salir);
 
         Contenedor.Panel_Contenedor.setBorder(new Imagen_Fondo());
 
-        this.Panel_Contenedor.setUI(new javax.swing.plaf.basic.BasicDesktopPaneUI() {
+        Contenedor.Panel_Contenedor.setUI(new javax.swing.plaf.basic.BasicDesktopPaneUI() {
+            @Override
             public void paint(java.awt.Graphics g, javax.swing.JComponent c) {
-                javax.swing.ImageIcon Img = new javax.swing.ImageIcon(getClass().getResource("/Iconos/Gold_Collection.jpg"));
+                javax.swing.ImageIcon Img = new javax.swing.ImageIcon(getClass().getResource("/Iconos/portada3.jpg"));
                 g.drawImage(Img.getImage(), 0, 0, c.getWidth(), c.getHeight(), null);
 
             }
         });
 
         this.Contenedor_Menu_General.setUI(new javax.swing.plaf.basic.BasicMenuBarUI() {
+            @Override
             public void paint(java.awt.Graphics g, javax.swing.JComponent c) {
                 // g.setColor ( java.awt.Color.RED );
                 g.setColor(new java.awt.Color(61, 100, 135));
@@ -162,7 +154,7 @@ public class Contenedor extends javax.swing.JFrame {
         JM_Profile = new javax.swing.JMenu();
         R_Salir = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         javax.swing.GroupLayout Panel_ContenedorLayout = new javax.swing.GroupLayout(Panel_Contenedor);
         Panel_Contenedor.setLayout(Panel_ContenedorLayout);
@@ -517,22 +509,21 @@ public class Contenedor extends javax.swing.JFrame {
     private void Obtener_Resultado_Click(java.awt.event.ActionEvent evt) {
         if (evt.getActionCommand().equals("Registrar Empleados")) {
 
-          /* if (Obtener_Estado_Formulario(null, this.Panel_Contenedor)) {
+            /* if (Obtener_Estado_Formulario(null, this.Panel_Contenedor)) {
 
-              new controllerProducto().GO();
-                productoII = new FormProducto();
-                Panel_Contenedor.add(productoII);
-                productoII.show();
-                java.awt.Dimension Tamaño_Panel = Panel_Contenedor.getSize();
-                java.awt.Dimension Tamaño_InternalFrame = productoII.getSize();
-                productoII.setLocation((Tamaño_Panel.width - Tamaño_InternalFrame.width) / 2,
-                        (Tamaño_Panel.height - Tamaño_InternalFrame.height) / 2);
-            } else {
+             new controllerProducto().GO();
+             productoII = new FormProducto();
+             Panel_Contenedor.add(productoII);
+             productoII.show();
+             java.awt.Dimension Tamaño_Panel = Panel_Contenedor.getSize();
+             java.awt.Dimension Tamaño_InternalFrame = productoII.getSize();
+             productoII.setLocation((Tamaño_Panel.width - Tamaño_InternalFrame.width) / 2,
+             (Tamaño_Panel.height - Tamaño_InternalFrame.height) / 2);
+             } else {
                  
-//                productoII.show(true);
+             //                productoII.show(true);
                 
-            }*/
-
+             }*/
         } else if (evt.getActionCommand().equals("Registrar Clientes")) {
             javax.swing.JOptionPane.showMessageDialog(this, "Aqui PONER TU SIGUIENTE FORMULARIO");
         } else if (evt.getActionCommand().equals("Salir")) {

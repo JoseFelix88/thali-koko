@@ -506,13 +506,19 @@ public class FormFacturaCompra extends javax.swing.JInternalFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        int SI_NO = (int) edicion.msjQuest(1, "estas seguro que deseas eliminar el producto?");
-        if (SI_NO == 0) {
-            int idcompra = Integer.parseInt(TB_detalle.getValueAt(TB_detalle.getSelectedRow(), 0).toString());
-            if (factCompraDao.BORRAR_PRODUCTO_DETALLE(idcompra) != false) {
-                edicion.menu_emergente(TB_detalle);
-                calculatotalesfactura();
+        try {
+
+            int SI_NO = (int) edicion.msjQuest(1, "estas seguro que deseas eliminar el producto?");
+            if (SI_NO == 0) {
+                int idcompra = Integer.parseInt(TB_detalle.getValueAt(TB_detalle.getSelectedRow(), 0).toString());
+                if (factCompraDao.BORRAR_PRODUCTO_DETALLE(idcompra) != false) {
+                    edicion.menu_emergente(TB_detalle);
+                    calculatotalesfactura();
+                }
             }
+
+        } catch (Exception e) {
+            edicion.mensajes(3, "seleccione un producto de la lista.");
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 

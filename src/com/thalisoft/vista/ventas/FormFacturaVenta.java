@@ -6,11 +6,11 @@ import com.thalisoft.main.util.CambiaFormatoTexto;
 import com.thalisoft.main.util.DateUtil;
 import com.thalisoft.main.util.Edicion;
 import com.thalisoft.main.util.Variables_Gloabales;
-import com.thalisoft.model.compras.FacturaCompra;
-import com.thalisoft.model.compras.FacturaCompraDao;
 import com.thalisoft.model.maestros.producto.Producto;
 import com.thalisoft.model.maestros.producto.ProductoDao;
 import com.thalisoft.model.maestros.proveedor.ProveedorDao;
+import com.thalisoft.model.venta.FacturaVenta;
+import com.thalisoft.model.venta.FacturaVentaDao;
 import com.thalisoft.vista.maestros.cliente.FormCliente;
 import com.thalisoft.vista.maestros.producto.FormProducto;
 import java.awt.event.ItemEvent;
@@ -26,14 +26,14 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
     Edicion edicion = new Edicion();
     CambiaFormatoTexto formatoTexto = new CambiaFormatoTexto();
     ProductoDao productoDao;
-    FacturaCompra facturaCompra;
-    FacturaCompraDao factCompraDao;
-    ProveedorDao proveedorDao;
+    FacturaVenta facturaVenta;
+    FacturaVentaDao factVentaDao;
+    ProveedorDao clienteDao;
 
     public FormFacturaVenta() {
-        proveedorDao = new ProveedorDao();
-        facturaCompra = new FacturaCompra();
-        factCompraDao = new FacturaCompraDao();
+        clienteDao = new ProveedorDao();
+        facturaVenta = new FacturaVenta();
+        factVentaDao = new FacturaVentaDao();
         productoDao = new ProductoDao();
         initComponents();
         llenar_combo();
@@ -590,9 +590,9 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (VALIDAR_FORMULARIO() != false) {
-            if (factCompraDao.CRUD_COMPRA(DATOS_FACTURA(0)) != false) {
+            if (factVentaDao.CRUD_VENTA(DATOS_FACTURA(0)) != false) {
                 edicion.llenarTabla(TB_detalle,
-                        factCompraDao.SELECT_DETALLECOMPRA(txtnumfactura.getText()));
+                        factVentaDao.SELECT_DETALLEVENTA(txtnumfactura.getText()));
                 calculatotalesfactura();
             }
         }
@@ -603,7 +603,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         int SI_NO = (int) edicion.msjQuest(1, "estas seguro que deseas eliminar el producto?");
         if (SI_NO == 0) {
             int idcompra = Integer.parseInt(TB_detalle.getValueAt(TB_detalle.getSelectedRow(), 0).toString());
-            if (factCompraDao.BORRAR_PRODUCTO_DETALLE(idcompra) != false) {
+            if (factVentaDao.BORRAR_PRODUCTO_DETALLE(idcompra) != false) {
                 edicion.menu_emergente(TB_detalle);
                 calculatotalesfactura();
             }
@@ -613,16 +613,11 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
         Object factura = edicion.msjQuest(2, "ingresa el numero de la factura de compra.");
-        facturaCompra = factCompraDao.SELECT_COMPRA(factura);
-        if (facturaCompra != null) {
-            if ("CONTADO".equals(facturaCompra.getTipoCompra())) {
-                RadioArticulo.setSelected(true);
-            } else {
-                RadioOrden.setSelected(true);
-            }
-            txtnumfactura.setText(facturaCompra.getNumeroFactura());
-            JDateFactura.setDate(facturaCompra.getFechaFactura());
-            edicion.llenarTabla(TB_detalle, factCompraDao.SELECT_DETALLECOMPRA(factura));
+        facturaVenta = factVentaDao.SELECT_VENTA(factura);
+        if (facturaVenta != null) {
+            txtnumfactura.setText(facturaVenta.getNumeroFactura());
+            JDateFactura.setDate(facturaVenta.getFechaFactura());
+            edicion.llenarTabla(TB_detalle, factVentaDao.SELECT_DETALLEVENTA(factura));
             calculatotalesfactura();
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
@@ -630,9 +625,9 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         if (VALIDAR_FORMULARIO() != false) {
-            if (factCompraDao.CRUD_COMPRA(DATOS_FACTURA(1)) != false) {
+            if (factVentaDao.CRUD_VENTA(DATOS_FACTURA(1)) != false) {
                 edicion.llenarTabla(TB_detalle,
-                        factCompraDao.SELECT_DETALLECOMPRA(txtnumfactura.getText()));
+                        factVentaDao.SELECT_DETALLEVENTA(txtnumfactura.getText()));
                 calculatotalesfactura();
             }
         }
@@ -746,7 +741,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         comboproducto.removeAllItems();
         comboproducto.addItem(null);
         combocliente.addItem(null);
-        Object[][] rs = proveedorDao.LISTADO_PROVEEDORS();
+        Object[][] rs = clienteDao.LISTADO_PROVEEDORS();
         if (rs.length > 0) {
             for (Object[] objects : rs) {
                 combocliente.addItem(objects[2].toString());
@@ -768,19 +763,19 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         txtcantidad.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                CALCULARTOTALCOMPRA();
+                CALCULARTOTALVENTA();
             }
         });
 
         txtcostound.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                CALCULARTOTALCOMPRA();
+                CALCULARTOTALVENTA();
             }
         });
     }
 
-    private void CALCULARTOTALCOMPRA() {
+    private void CALCULARTOTALVENTA() {
         int totalcompra = edicion.toNumeroEntero(txtcostound.getText())
                 * edicion.toNumeroEntero(txtcantidad.getText());
         txtcostototal.setText("$ " + formatoTexto.numerico(totalcompra));
@@ -832,7 +827,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         datos[1] = "'" + edicion.formatearFechaSQL(JDateFactura.getDate()) + "'";
         datos[3] = "'" + txtnumfactura.getText() + "'";
         datos[4] = "'" + FORMA_PAGO + "'";
-        datos[5] = proveedorDao.CONSULTAR_PROVEEDOR("'" + combocliente.getSelectedItem() + "'").getIdproveedor();
+        datos[5] = clienteDao.CONSULTAR_PROVEEDOR("'" + combocliente.getSelectedItem() + "'").getIdproveedor();
         datos[6] = "'" + Variables_Gloabales.EMPLEADO.getIdentificacion() + "'";
         datos[7] = edicion.toNumeroEntero(txtcantidad.getText());
         datos[8] = edicion.toNumeroEntero(txtcostound.getText());
@@ -842,9 +837,9 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
 
     private void calculatotalesfactura() {
         edicion.calcula_total(TB_detalle, lb_item, txtsubtotal, 5);
-        facturaCompra = factCompraDao.SELECT_COMPRA(txtnumfactura.getText());
-        if (facturaCompra != null) {
-            txtsaldo.setText("$ " + formatoTexto.numerico(facturaCompra.getSaldo()));
+        facturaVenta = factVentaDao.SELECT_VENTA(txtnumfactura.getText());
+        if (facturaVenta != null) {
+            txtsaldo.setText("$ " + formatoTexto.numerico(facturaVenta.getSaldo()));
         }
         int totalpagar = edicion.toNumeroEntero(txtsubtotal.getText())
                 - edicion.toNumeroEntero(txtsaldo.getText());
