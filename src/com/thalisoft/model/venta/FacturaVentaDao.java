@@ -12,7 +12,7 @@ public class FacturaVentaDao extends database {
     }
 
     public Object[][] SELECT_DETALLEVENTA(String text) {
-        return SELECT_SP("SELECT_VENTAS", "1,"+text);
+        return SELECT_SP("SELECT_FACTURA_VENTA", "1,"+text);
     }
 
     public boolean BORRAR_PRODUCTO_DETALLE(int idcompra) {
@@ -21,7 +21,7 @@ public class FacturaVentaDao extends database {
 
     public FacturaVenta SELECT_VENTA(Object factura) {
         FacturaVenta fv = null;
-        Object[][] rs = SELECT_SP("SELECT_VENTAS", "0,"+factura);
+        Object[][] rs = SELECT_SP("SELECT_FACTURA_VENTA", "0,"+factura);
         if (rs.length  > 0) {
             fv = new FacturaVenta();
             fv.setNumeroFactura(Integer.parseInt(rs[0][0].toString()));
@@ -37,7 +37,10 @@ public class FacturaVentaDao extends database {
     }
 
     public Object[][] SELECT_DETALLEVENTA(Object factura) {
-         return SELECT_SP("SELECT_VENTAS", "1,"+factura);
+         return SELECT_SP("SELECT_FACTURA_VENTA", "1,"+factura);
     }
     
+    public String NUMERO_FACTURA_VENTA(){
+        return SELECT_SP("SELECT_FACTURA_VENTA", "0,0")[0][0].toString();
+    }
 }
