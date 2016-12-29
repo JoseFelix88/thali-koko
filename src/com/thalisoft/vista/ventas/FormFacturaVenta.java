@@ -1044,7 +1044,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
                 txtstock.setText(formatoTexto.numerico(producto.getStrock()));
                 txtcantidad.selectAll();
                 txtcantidad.requestFocus();
-                
+
             } else {
                 int SI_NO = (int) edicion.msjQuest(1, "el producto no se encuentra registrado, deseas registrarlo?");
                 if (SI_NO == 0) {
@@ -1067,6 +1067,10 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         }
 
         if (RadioOrden.isSelected()) {
+            dato_producto();
+        }
+
+        if (RadioPlan.isSelected()) {
             dato_producto();
         }
     }
@@ -1131,22 +1135,22 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
             }
         }
     }
-    Object[][] DETALLE_ORDEN;
+    Object[][] DETALLE_ORDEN_PLAN;
 
     private void llenar_PRODUCTO() {
         if (RadioPlan.isSelected()) {
             comboproducto.removeAllItems();
             comboproducto.addItem("");
             for (Object[] SELECT_PLANSEPARE : planDao.SELECT_PLANSEPARE("7," + TXTTIPOFACT.getText())) {
-                comboproducto.addItem(SELECT_PLANSEPARE[0].toString());
+                comboproducto.addItem(SELECT_PLANSEPARE[1].toString());
             }
         }
 
         if (RadioOrden.isSelected()) {
             comboproducto.removeAllItems();
             comboproducto.addItem("");
-            DETALLE_ORDEN = pedidoDao.DETALLE_ORDEN_COMPRA(TXTTIPOFACT.getText());
-            for (Object[] DETALLE_ORDEN_COMPRA : DETALLE_ORDEN) {
+            DETALLE_ORDEN_PLAN = pedidoDao.DETALLE_ORDEN_COMPRA(TXTTIPOFACT.getText());
+            for (Object[] DETALLE_ORDEN_COMPRA : DETALLE_ORDEN_PLAN) {
                 comboproducto.addItem(DETALLE_ORDEN_COMPRA[2].toString());
             }
         }
@@ -1155,13 +1159,24 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
 
     private void dato_producto() {
         if (RadioOrden.isSelected()) {
-            for (Object[] DETALLE_ORDEN1 : DETALLE_ORDEN) {
+            for (Object[] DETALLE_ORDEN1 : DETALLE_ORDEN_PLAN) {
                 if (comboproducto.getSelectedItem() == DETALLE_ORDEN1[2]) {
-                    System.out.println("producto: "+comboproducto.getSelectedItem() +" = "+ DETALLE_ORDEN1[2]);
-                    System.out.println("cantidad: "+DETALLE_ORDEN1[5].toString());
-                    System.out.println("precio venta: "+DETALLE_ORDEN1[6].toString());
-                    txtcantidad.setText(DETALLE_ORDEN1[5].toString());
-                    txtprecioventa.setText("$ " + formatoTexto.numerico(DETALLE_ORDEN1[6].toString()));
+                    txtreferencia.setText(DETALLE_ORDEN1[1].toString());
+                    txtcantidad.setText(DETALLE_ORDEN1[4].toString());
+                    txtprecioventa.setText("$ " + formatoTexto.numerico(DETALLE_ORDEN1[5].toString()));
+                    CALCULARTOTALVENTA();
+                }
+            }
+        }
+
+        if (RadioPlan.isSelected()) {
+            for (Object[] DETALLE_ORDEN1 : DETALLE_ORDEN_PLAN) {
+                System.out.println(comboproducto.getSelectedItem() +" = "+ DETALLE_ORDEN1[1]);
+                if (comboproducto.getSelectedItem() == DETALLE_ORDEN1[1]) {
+                    txtreferencia.setText(DETALLE_ORDEN1[0].toString());
+                    txtcantidad.setText(DETALLE_ORDEN1[2].toString());
+                    txtprecioventa.setText("$ " + formatoTexto.numerico(DETALLE_ORDEN1[3].toString()));
+                    CALCULARTOTALVENTA();
                 }
             }
         }
