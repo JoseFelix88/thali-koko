@@ -11,6 +11,9 @@ public class FacturaVenta {
     private String plansepare;
     private Cliente cliente;
     private Date fechahoraregistro;
+    private int subtotal;
+    private int saldo;
+    
 
     public int getNumeroFactura() {
         return numeroFactura;
@@ -58,6 +61,22 @@ public class FacturaVenta {
 
     public void setFechahoraregistro(Date fechahoraregistro) {
         this.fechahoraregistro = fechahoraregistro;
+    }
+
+    public int getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(int subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public int getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
     }
     
 }
