@@ -21,6 +21,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
@@ -84,7 +85,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         txttelefono = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         txtdireccion = new javax.swing.JTextField();
-        combocliente = new javax.swing.JComboBox<String>();
+        combocliente = new javax.swing.JComboBox<>();
         LBTIPOFAC = new javax.swing.JLabel();
         TXTTIPOFACT = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -104,7 +105,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtreferencia = new javax.swing.JTextField();
-        comboproducto = new javax.swing.JComboBox<String>();
+        comboproducto = new javax.swing.JComboBox<>();
         txtcantidad = new javax.swing.JTextField();
         txtprecioventa = new javax.swing.JTextField();
         txtventatotal = new javax.swing.JTextField();
@@ -241,7 +242,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         txtdireccion.setEditable(false);
 
         combocliente.setEditable(true);
-        combocliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combocliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -509,7 +510,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
 
         comboproducto.setEditable(true);
         comboproducto.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        comboproducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboproducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         txtcantidad.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         txtcantidad.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
@@ -660,6 +661,11 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/agregar-nuevo-documento-de-archivo-mas-icono-6249-32.png"))); // NOI18N
         jMenuItem2.setText("Nuevo");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
@@ -723,7 +729,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, Short.MAX_VALUE))
         );
 
         pack();
@@ -746,6 +752,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
             LBTIPOFAC.setText("No. " + RadioOrden.getText());
             TXTTIPOFACT.grabFocus();
             TXTTIPOFACT.setText(null);
+            LIMPIAR_FML(1);
         }
     }//GEN-LAST:event_RadioOrdenItemStateChanged
 
@@ -812,6 +819,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
             LBTIPOFAC.setText("No. " + RadioPlan.getText());
             TXTTIPOFACT.setText(null);
             TXTTIPOFACT.grabFocus();
+            LIMPIAR_FML(1);
         }
 
     }//GEN-LAST:event_RadioPlanItemStateChanged
@@ -855,6 +863,11 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_TXTTIPOFACTActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        LIMPIAR_FML(0);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1035,32 +1048,31 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
     }
 
     private void CARGAR_PRODUCTO(String text) {
-        if (RadioArticulo.isSelected()) {
-            Producto producto = productoDao.READ_PRODUCTO(text);
-            if (producto != null) {
-                txtreferencia.setText(producto.getReferencia());
-                comboproducto.setSelectedItem(producto.getDescripcion());
-                txtprecioventa.setText("$ " + formatoTexto.numerico(producto.getPrecio_venta()));
-                txtstock.setText(formatoTexto.numerico(producto.getStrock()));
-                txtcantidad.selectAll();
-                txtcantidad.requestFocus();
+//        if (RadioArticulo.isSelected()) {
+        Producto producto = productoDao.READ_PRODUCTO(text);
+        if (producto != null) {
+            txtreferencia.setText(producto.getReferencia());
+            comboproducto.setSelectedItem(producto.getDescripcion());
+            txtprecioventa.setText("$ " + formatoTexto.numerico(producto.getPrecio_venta()));
+            txtstock.setText(formatoTexto.numerico(producto.getStrock()));
+            txtcantidad.selectAll();
+            txtcantidad.requestFocus();
 
-            } else {
-                int SI_NO = (int) edicion.msjQuest(1, "el producto no se encuentra registrado, deseas registrarlo?");
-                if (SI_NO == 0) {
-                    JInternalFrame ji = validador.getJInternalFrame(FormProducto.class.getName());
-                    if (ji == null || ji.isClosed()) {
-                        ji = new FormProducto();
-                        ControllerContenedor.getjDesktopPane1().add(ji, 0);
-                        validador.addJIframe(FormProducto.class.getName(), ji);
-                        ji.setVisible(true);
-                    } else {
-                        ji.show(true);
-                        try {
-                            ji.setIcon(false);
-                        } catch (PropertyVetoException ex) {
-                            Logger.getLogger(FormCliente.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+        } else {
+            int SI_NO = (int) edicion.msjQuest(1, "el producto no se encuentra registrado, deseas registrarlo?");
+            if (SI_NO == 0) {
+                JInternalFrame ji = validador.getJInternalFrame(FormProducto.class.getName());
+                if (ji == null || ji.isClosed()) {
+                    ji = new FormProducto();
+                    ControllerContenedor.getjDesktopPane1().add(ji, 0);
+                    validador.addJIframe(FormProducto.class.getName(), ji);
+                    ji.setVisible(true);
+                } else {
+                    ji.show(true);
+                    try {
+                        ji.setIcon(false);
+                    } catch (PropertyVetoException ex) {
+                        Logger.getLogger(FormCliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -1135,13 +1147,14 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
             }
         }
     }
-    Object[][] DETALLE_ORDEN_PLAN;
+    Object[][] DETALLE_ORDEN, DETALLE_PLAN;
 
     private void llenar_PRODUCTO() {
         if (RadioPlan.isSelected()) {
             comboproducto.removeAllItems();
             comboproducto.addItem("");
-            for (Object[] SELECT_PLANSEPARE : planDao.SELECT_PLANSEPARE("7," + TXTTIPOFACT.getText())) {
+            DETALLE_PLAN = planDao.SELECT_PLANSEPARE("7," + TXTTIPOFACT.getText());
+            for (Object[] SELECT_PLANSEPARE : DETALLE_PLAN ) {
                 comboproducto.addItem(SELECT_PLANSEPARE[1].toString());
             }
         }
@@ -1149,8 +1162,8 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         if (RadioOrden.isSelected()) {
             comboproducto.removeAllItems();
             comboproducto.addItem("");
-            DETALLE_ORDEN_PLAN = pedidoDao.DETALLE_ORDEN_COMPRA(TXTTIPOFACT.getText());
-            for (Object[] DETALLE_ORDEN_COMPRA : DETALLE_ORDEN_PLAN) {
+            DETALLE_ORDEN = pedidoDao.DETALLE_ORDEN_COMPRA(TXTTIPOFACT.getText());
+            for (Object[] DETALLE_ORDEN_COMPRA : DETALLE_ORDEN) {
                 comboproducto.addItem(DETALLE_ORDEN_COMPRA[2].toString());
             }
         }
@@ -1159,7 +1172,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
 
     private void dato_producto() {
         if (RadioOrden.isSelected()) {
-            for (Object[] DETALLE_ORDEN1 : DETALLE_ORDEN_PLAN) {
+            for (Object[] DETALLE_ORDEN1 : DETALLE_ORDEN) {
                 if (comboproducto.getSelectedItem() == DETALLE_ORDEN1[2]) {
                     txtreferencia.setText(DETALLE_ORDEN1[1].toString());
                     txtcantidad.setText(DETALLE_ORDEN1[4].toString());
@@ -1170,12 +1183,14 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         }
 
         if (RadioPlan.isSelected()) {
-            for (Object[] DETALLE_ORDEN1 : DETALLE_ORDEN_PLAN) {
-                System.out.println(comboproducto.getSelectedItem() +" = "+ DETALLE_ORDEN1[1]);
-                if (comboproducto.getSelectedItem() == DETALLE_ORDEN1[1]) {
-                    txtreferencia.setText(DETALLE_ORDEN1[0].toString());
-                    txtcantidad.setText(DETALLE_ORDEN1[2].toString());
-                    txtprecioventa.setText("$ " + formatoTexto.numerico(DETALLE_ORDEN1[3].toString()));
+            System.out.println(Arrays.toString(DETALLE_PLAN));
+//            System.out.println(comboproducto.getSelectedItem() + " = " + DETALLE_ORDEN[0][2]);
+            for (Object[] DETALLE_PLAN1 : DETALLE_PLAN) {
+                System.out.println(Arrays.toString(DETALLE_PLAN1));
+                if (comboproducto.getSelectedItem() == DETALLE_PLAN1[1]) {
+                    txtreferencia.setText(DETALLE_PLAN1[0].toString());
+                    txtcantidad.setText(DETALLE_PLAN1[2].toString());
+                    txtprecioventa.setText("$ " + formatoTexto.numerico(DETALLE_PLAN1[3].toString()));
                     CALCULARTOTALVENTA();
                 }
             }
@@ -1197,6 +1212,41 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
             }
         }
     }
+
+    private void LIMPIAR_FML(int opcion) {
+        if (opcion == 0) {
+            llenar_combo();
+            txtidentificacion.setText(null);
+            txttelefono.setText(null);
+            txtdireccion.setText(null);
+            TXTTIPOFACT.setText(null);
+            RadioArticulo.setSelected(true);
+            txtnumrecibo.setText(null);
+            txtsubtotal.setText("$ 0");
+            txtsaldo.setText("$ 0");
+            txtvalorpago.setText("$ 0");
+            txtcntrecibo.setText("$ 0");
+            txtdevuelta.setText("$ 0");
+            lb_item.setText("0");
+            txtreferencia.setText(null);
+            txtcantidad.setText("0");
+            txtstock.setText("0");
+            txtprecioventa.setText("$ 0");
+            txtventatotal.setText("$ 0");
+            edicion.limpiar_tablas(TB_detalle);
+        }
+
+        if (opcion == 1) {
+            txtreferencia.setText(null);
+            txtcantidad.setText("0");
+            txtstock.setText("0");
+            txtprecioventa.setText("$ 0");
+            txtventatotal.setText("$ 0");
+            comboproducto.setSelectedItem(null);
+        }
+
+    }
+
 }
 
 class validador {
