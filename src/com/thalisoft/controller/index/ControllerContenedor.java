@@ -109,17 +109,13 @@ public class ControllerContenedor extends SwingWorker<Object, Object> {
     }
 
     private void Obtener_Eventos_De_SubMenu(javax.swing.JMenuItem SubMenu) {
-        SubMenu.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evento) {
-                try {
-                    Obtener_Resultado_Click(evento);
-                } catch (PropertyVetoException ex) {
-                    Logger.getLogger(ControllerContenedor.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        SubMenu.addActionListener((java.awt.event.ActionEvent evento) -> {
+            try {
+                Obtener_Resultado_Click(evento);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(ControllerContenedor.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        );
+        });
     }
 
     private void Obtener_Resultado_Click(java.awt.event.ActionEvent evt) throws PropertyVetoException {

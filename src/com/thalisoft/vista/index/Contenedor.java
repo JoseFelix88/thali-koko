@@ -92,7 +92,7 @@ public class Contenedor extends javax.swing.JFrame {
         Contenedor.Panel_Contenedor.setUI(new javax.swing.plaf.basic.BasicDesktopPaneUI() {
             @Override
             public void paint(java.awt.Graphics g, javax.swing.JComponent c) {
-                javax.swing.ImageIcon Img = new javax.swing.ImageIcon(getClass().getResource("/Iconos/portada3.jpg"));
+                javax.swing.ImageIcon Img = new javax.swing.ImageIcon(getClass().getResource("/Iconos/vilma.png"));
                 g.drawImage(Img.getImage(), 0, 0, c.getWidth(), c.getHeight(), null);
 
             }

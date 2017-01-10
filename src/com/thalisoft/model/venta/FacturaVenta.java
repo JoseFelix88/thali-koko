@@ -1,6 +1,7 @@
 package com.thalisoft.model.venta;
 
 import com.thalisoft.model.maestros.cliente.Cliente;
+import com.thalisoft.model.maestros.empleado.Empleado;
 import java.util.Date;
 
 public class FacturaVenta {
@@ -13,6 +14,11 @@ public class FacturaVenta {
     private Date fechahoraregistro;
     private int subtotal;
     private int saldo;
+    private Empleado realiza;
+    private int cntrecibida;
+    private int cntdevuelta;
+    private String medioPago;
+    private String numerorecibo;
     
 
     public int getNumeroFactura() {
@@ -77,6 +83,46 @@ public class FacturaVenta {
 
     public void setSaldo(int saldo) {
         this.saldo = saldo;
+    }
+
+    public Empleado getRealiza() {
+        return realiza;
+    }
+
+    public void setRealiza(Empleado realiza) {
+        this.realiza = realiza;
+    }
+
+    public int getCntrecibida() {
+        return cntrecibida;
+    }
+
+    public void setCntrecibida(int cntrecibida) {
+        this.cntrecibida = cntrecibida;
+    }
+
+    public int getCntdevuelta() {
+        return cntdevuelta;
+    }
+
+    public void setCntdevuelta(int cntdevuelta) {
+        this.cntdevuelta = cntdevuelta;
+    }
+
+    public String getMedioPago() {
+        return medioPago;
+    }
+
+    public void setMedioPago(String medioPago) {
+        this.medioPago = medioPago;
+    }
+
+    public String getNumerorecibo() {
+        return numerorecibo;
+    }
+
+    public void setNumerorecibo(String numerorecibo) {
+        this.numerorecibo = numerorecibo;
     }
     
 }

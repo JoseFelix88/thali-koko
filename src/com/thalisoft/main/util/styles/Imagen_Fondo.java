@@ -14,7 +14,7 @@ public class Imagen_Fondo implements Border{
      public Imagen_Fondo(){
         try {
             //se obtiene la imagen
-            URL url = new URL(getClass().getResource("/Iconos/portada3.jpg").toString());
+            URL url = new URL(getClass().getResource("/Iconos/vilma.png").toString());
             System.out.println(url);
             fondo = ImageIO.read(url);
         } catch (IOException ex) {            
