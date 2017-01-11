@@ -26,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -65,10 +66,11 @@ public class Edicion extends database {
         }
     }
 
-    public String AGREGAR_CEROS_LEFT(int numero){
+    public String AGREGAR_CEROS_LEFT(int numero) {
         Formatter fmt = new Formatter();
         return fmt.format("%04d", numero).toString();
     }
+
     public int toNumeroEntero(String entero) {
 
         if (isNumeric(entero)) {
@@ -76,7 +78,7 @@ public class Edicion extends database {
             return Integer.parseInt(ReemplazarCarateres(entero));
         } else {
 
-            mensajes(3, "ingrese solo numeros: " + entero);
+            mensajes(4, "ingrese solo numeros: " + entero);
         }
 
         return 0;
@@ -99,7 +101,7 @@ public class Edicion extends database {
             return Float.parseFloat(ReemplazarCarateres(decimal));
         } else {
 
-            mensajes(3, "ingrese solo numeros: " + ReemplazarCarateres(decimal));
+            mensajes(4, "ingrese solo numeros: " + ReemplazarCarateres(decimal));
         }
 
         return 0;
@@ -276,7 +278,25 @@ public class Edicion extends database {
         return null;
     }
 
-    public void Lanzador(JasperReport masterReport, Map param) {
+    public void LANZAR_RPT_SIN_VP(JasperReport masterReport, Map param) {
+
+        try {
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(masterReport, param,
+                    getConnection());
+            JasperPrintManager.printReport(jasperPrint, false);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, "NO FUE POSIBLE ABRIR EL INFORME \n(error en el lanzador_SIN_VP) \n" + ex, "Error", JOptionPane.ERROR_MESSAGE);
+
+            System.out.println("Error En El Lanzador Del Reporte: " + ex);
+
+        }
+
+    }
+
+    public void Lanzador_rpt_vista_previa(JasperReport masterReport, Map param) {
 
         try {
 

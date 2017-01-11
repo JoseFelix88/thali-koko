@@ -30,7 +30,7 @@ public class Manager_Report extends database {
             masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
             PARAMETROS.put("key", key.toString());
 //            PARAMETROS.put("numCaja", numcaja);
-            edicion.Lanzador(masterReport, PARAMETROS);
+            edicion.Lanzador_rpt_vista_previa(masterReport, PARAMETROS);
         } catch (Exception j) {
             edicion.mensajes(3, "NO SE PUEDE LANZAR la ficha del empleado.\n" + j);
             System.out.println("Mensaje de Error:" + j);
@@ -42,7 +42,7 @@ public class Manager_Report extends database {
             String Ubicacion = RUTA_REPORTE + "/Empleado/";
             String reporte = "listado de Empleados.jasper";
             masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
-            edicion.Lanzador(masterReport, PARAMETROS);
+            edicion.Lanzador_rpt_vista_previa(masterReport, PARAMETROS);
         } catch (Exception j) {
             edicion.mensajes(3, "NO SE PUEDE LANZAR el listado del empleado.\n" + j);
             System.out.println("Mensaje de Error:" + j);
@@ -55,7 +55,7 @@ public class Manager_Report extends database {
             String Ubicacion = RUTA_REPORTE + "/Orden de Compra/";
             masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
             PARAMETROS.put("idordencompra", key);
-            edicion.Lanzador(masterReport, PARAMETROS);
+            edicion.Lanzador_rpt_vista_previa(masterReport, PARAMETROS);
         } catch (Exception j) {
             edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
             System.out.println("Mensaje de Error:" + j);
@@ -68,7 +68,7 @@ public class Manager_Report extends database {
             String Ubicacion = RUTA_REPORTE + "/Orden de Compra/";
             masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
             PARAMETROS.put("idordencompra", key);
-            edicion.Lanzador(masterReport, PARAMETROS);
+            edicion.Lanzador_rpt_vista_previa(masterReport, PARAMETROS);
         } catch (Exception j) {
             edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
             System.out.println("Mensaje de Error:" + j);
@@ -81,7 +81,7 @@ public class Manager_Report extends database {
             String Ubicacion = RUTA_REPORTE + "/Orden de Compra/";
             masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
             PARAMETROS.put("NUMPAGO", key);
-            edicion.Lanzador(masterReport, PARAMETROS);
+            edicion.Lanzador_rpt_vista_previa(masterReport, PARAMETROS);
         } catch (Exception j) {
             edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
             System.out.println("Mensaje de Error:" + j);
@@ -96,7 +96,7 @@ public class Manager_Report extends database {
             PARAMETROS.put("fecha1", key[0]);
             PARAMETROS.put("fecha2", key[1]);
             PARAMETROS.put("idorden", key[2]);
-            edicion.Lanzador(masterReport, PARAMETROS);
+            edicion.Lanzador_rpt_vista_previa(masterReport, PARAMETROS);
         } catch (Exception j) {
             edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
             System.out.println("Mensaje de Error:" + j);
@@ -109,7 +109,7 @@ public class Manager_Report extends database {
             String Ubicacion = RUTA_REPORTE + "/PREVENTA/";
             masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
             PARAMETROS.put("NUMPAGO", key);
-            edicion.Lanzador(masterReport, PARAMETROS);
+            edicion.Lanzador_rpt_vista_previa(masterReport, PARAMETROS);
         } catch (Exception j) {
             edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
             System.out.println("Mensaje de Error:" + j);
@@ -123,7 +123,7 @@ public class Manager_Report extends database {
             masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
             PARAMETROS.put("fecha1", key[0]);
             PARAMETROS.put("fecha2", key[1]);
-            edicion.Lanzador(masterReport, PARAMETROS);
+            edicion.Lanzador_rpt_vista_previa(masterReport, PARAMETROS);
         } catch (Exception j) {
             edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
             System.out.println("Mensaje de Error:" + j);
@@ -136,7 +136,7 @@ public class Manager_Report extends database {
             String Ubicacion = RUTA_REPORTE + "/PREVENTA/";
             masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
             PARAMETROS.put("idcotizacion", key.toString());
-            edicion.Lanzador(masterReport, PARAMETROS);
+            edicion.Lanzador_rpt_vista_previa(masterReport, PARAMETROS);
         } catch (Exception j) {
             edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
             System.out.println("Mensaje de Error:" + j);
@@ -149,7 +149,7 @@ public class Manager_Report extends database {
             String Ubicacion = RUTA_REPORTE + "/PREVENTA/";
             masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
             PARAMETROS.put("idplan", key);
-            edicion.Lanzador(masterReport, PARAMETROS);
+            edicion.Lanzador_rpt_vista_previa(masterReport, PARAMETROS);
         } catch (Exception j) {
             edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
             System.out.println("Mensaje de Error:" + j);
@@ -162,7 +162,7 @@ public class Manager_Report extends database {
             String Ubicacion = RUTA_REPORTE + "/PREVENTA/";
             masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
             PARAMETROS.put("NUMPAGO", key);
-            edicion.Lanzador(masterReport, PARAMETROS);
+            edicion.Lanzador_rpt_vista_previa(masterReport, PARAMETROS);
         } catch (Exception j) {
             edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
             System.out.println("Mensaje de Error:" + j);
@@ -177,10 +177,23 @@ public class Manager_Report extends database {
             PARAMETROS.put("fe1", key[0]);
             PARAMETROS.put("fe2", key[1]);
             PARAMETROS.put("filtro", key[2]);
-            edicion.Lanzador(masterReport, PARAMETROS);
+            edicion.Lanzador_rpt_vista_previa(masterReport, PARAMETROS);
         } catch (Exception j) {
             edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
             System.out.println("Mensaje de Error:" + j);
         }
     }
+     
+     public void FACTURA_VENTA_TIKECT(String numerofactura){
+          String reporte = "factura de venta - tikect.jasper";
+        try {
+            String Ubicacion = RUTA_REPORTE + "/ventas/";
+            masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
+            PARAMETROS.put("idfactura", numerofactura);
+            edicion.LANZAR_RPT_SIN_VP(masterReport, PARAMETROS);
+        } catch (Exception j) {
+            edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
+            System.out.println("Mensaje de Error:" + j);
+        }
+     }
 }

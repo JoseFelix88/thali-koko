@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura de venta - membrete" language="groovy" pageWidth="595" pageHeight="842" columnWidth="483" leftMargin="56" rightMargin="56" topMargin="85" bottomMargin="56" uuid="c56d73a5-9f96-4e6a-82aa-3f29ad5f41aa">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="15"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -63,8 +63,10 @@ productos.descripcion ASC;]]>
      facturaventas.`numerorecibo` AS facturaventas_numerorecibo,
      facturaventas.`fechaemision` AS facturaventas_fechaemision,
     IF( facturaventas.`plansepare` = 'NULL','',LPAD(facturaventas.`plansepare`,4,'0')) AS facturaventas_plansepare,
+SUBTOTAL_FACTURA_VENTA(facturaventas.idfacturaventas) AS subtotal,
      facturaventas.`cntrecibida` AS facturaventas_cntrecibida,
-     facturaventas.`cntdevuelta` AS facturaventas_cntdevuelta
+     facturaventas.`cntdevuelta` AS facturaventas_cntdevuelta,
+datos_empresa() as empresa
 FROM
      `facturaventas` facturaventas]]>
 	</queryString>
@@ -75,17 +77,21 @@ FROM
 	<field name="facturaventas_numerorecibo" class="java.lang.String"/>
 	<field name="facturaventas_fechaemision" class="java.sql.Date"/>
 	<field name="facturaventas_plansepare" class="java.lang.String"/>
+	<field name="subtotal" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="facturaventas_cntrecibida" class="java.lang.Integer"/>
 	<field name="facturaventas_cntdevuelta" class="java.lang.Integer"/>
+	<field name="empresa" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="73" splitType="Stretch">
+		<band height="148" splitType="Stretch">
 			<frame>
-				<reportElement uuid="47565db5-d9fe-4a2a-9875-d5a1273e6da1" x="0" y="0" width="483" height="73"/>
+				<reportElement uuid="47565db5-d9fe-4a2a-9875-d5a1273e6da1" x="0" y="0" width="483" height="148"/>
 				<textField>
-					<reportElement uuid="db70a982-4251-403a-873d-d0ab9970c46b" x="262" y="0" width="221" height="16"/>
+					<reportElement uuid="db70a982-4251-403a-873d-d0ab9970c46b" x="180" y="0" width="221" height="16"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial Narrow" size="12" isBold="true" isUnderline="true"/>
 					</textElement>
@@ -96,28 +102,39 @@ FROM
 					<imageExpression><![CDATA["C:\\ThaliSotf Report\\img\\vilma.png"]]></imageExpression>
 				</image>
 				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement uuid="3fb58cfe-a7cc-4c1f-9340-a9cbe1a2ed84" x="372" y="16" width="105" height="14"/>
+					<reportElement uuid="3fb58cfe-a7cc-4c1f-9340-a9cbe1a2ed84" x="280" y="16" width="105" height="14"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{facturaventas_fechaemision}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement uuid="43f3b5fa-4af8-4534-b8be-c77f36c2488f" x="280" y="30" width="172" height="25"/>
+					<reportElement uuid="43f3b5fa-4af8-4534-b8be-c77f36c2488f" x="180" y="30" width="172" height="25"/>
 					<textElement verticalAlignment="Middle">
 						<font size="7"/>
 					</textElement>
 					<textFieldExpression><![CDATA["No. ORDEN PEDIDO: "+$F{facturaventas_numordencompra}+"\nPLAN SEPARE No. :"+$F{facturaventas_plansepare}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement uuid="bd480f2c-df3e-45fd-a832-72b0231d893f" x="272" y="16" width="100" height="14"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<reportElement uuid="bd480f2c-df3e-45fd-a832-72b0231d893f" x="180" y="16" width="100" height="14"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle"/>
 					<text><![CDATA[FECHA FACTURA:]]></text>
 				</staticText>
+				<textField>
+					<reportElement uuid="89492192-a8e2-436c-a57c-208db8d34be2" x="180" y="55" width="172" height="14"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Medio de Pago: "+$F{facturaventas_mediopago}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="b0602eb2-c150-43c4-975a-5722edefd972" x="0" y="40" width="180" height="45"/>
+					<textElement verticalAlignment="Top">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
 	<summary>
 		<band height="30" splitType="Stretch">
 			<componentElement>
