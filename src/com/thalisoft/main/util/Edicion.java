@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -293,6 +294,11 @@ public class Edicion extends database {
             System.out.println("Error En El Lanzador Del Reporte: " + ex);
 
         }
+
+    }
+    
+
+    public void FILTAR_TABLA(JTable table, int columnafiltro) {
 
     }
 

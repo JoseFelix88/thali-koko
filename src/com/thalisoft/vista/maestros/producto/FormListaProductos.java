@@ -9,6 +9,7 @@ import com.thalisoft.controller.index.ControllerContenedor;
 import com.thalisoft.main.util.Edicion;
 import com.thalisoft.model.maestros.producto.ProductoDao;
 import com.thalisoft.vista.maestros.empleado.FormEmpleado;
+import com.thalisoft.vista.ventas.FormFacturaVenta;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,7 @@ public class FormListaProductos extends javax.swing.JInternalFrame {
 
     Edicion edicion = new Edicion();
     ProductoDao Pdao;
+    
 
     public FormListaProductos() {
         Pdao = new ProductoDao();
@@ -37,7 +39,7 @@ public class FormListaProductos extends javax.swing.JInternalFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TB_LISTAPRODUCTOS = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -54,9 +56,9 @@ public class FormListaProductos extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 102), 2), "REFERENCIAS REGISTRADAS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
-        jTable1.setBackground(new java.awt.Color(0, 102, 153));
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TB_LISTAPRODUCTOS.setBackground(new java.awt.Color(0, 102, 153));
+        TB_LISTAPRODUCTOS.setForeground(new java.awt.Color(255, 255, 255));
+        TB_LISTAPRODUCTOS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -75,16 +77,21 @@ public class FormListaProductos extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setComponentPopupMenu(jPopupMenu1);
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable1.setRowHeight(22);
-        jTable1.setSelectionBackground(new java.awt.Color(255, 102, 102));
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
-            jTable1.getColumnModel().getColumn(2).setMinWidth(200);
-            jTable1.getColumnModel().getColumn(3).setMaxWidth(75);
+        TB_LISTAPRODUCTOS.setComponentPopupMenu(jPopupMenu1);
+        TB_LISTAPRODUCTOS.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        TB_LISTAPRODUCTOS.setRowHeight(22);
+        TB_LISTAPRODUCTOS.setSelectionBackground(new java.awt.Color(255, 102, 102));
+        TB_LISTAPRODUCTOS.getTableHeader().setReorderingAllowed(false);
+        TB_LISTAPRODUCTOS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TB_LISTAPRODUCTOSMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TB_LISTAPRODUCTOS);
+        if (TB_LISTAPRODUCTOS.getColumnModel().getColumnCount() > 0) {
+            TB_LISTAPRODUCTOS.getColumnModel().getColumn(0).setMaxWidth(50);
+            TB_LISTAPRODUCTOS.getColumnModel().getColumn(2).setMinWidth(200);
+            TB_LISTAPRODUCTOS.getColumnModel().getColumn(3).setMaxWidth(75);
         }
 
         jToolBar1.setRollover(true);
@@ -175,7 +182,7 @@ public class FormListaProductos extends javax.swing.JInternalFrame {
         JInternalFrame ji = validador.getJInternalFrame(FormProducto.class.getName());
 
         if (ji == null || ji.isClosed()) {
-            if(fp.CONSULTA_PRODUCTO(jTable1.getValueAt(jTable1.getSelectedRow(), 0)) != false){
+            if(fp.CONSULTA_PRODUCTO(TB_LISTAPRODUCTOS.getValueAt(TB_LISTAPRODUCTOS.getSelectedRow(), 0)) != false){
                 fp.LOAD_PRODUCT_COMPONET();
             }
             
@@ -195,8 +202,14 @@ public class FormListaProductos extends javax.swing.JInternalFrame {
         OPEN_FRM_REFERENCIA();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void TB_LISTAPRODUCTOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TB_LISTAPRODUCTOSMouseClicked
+        // TODO add your handling code here:
+    
+    }//GEN-LAST:event_TB_LISTAPRODUCTOSMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TB_LISTAPRODUCTOS;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -204,7 +217,6 @@ public class FormListaProductos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 
@@ -227,7 +239,7 @@ public class FormListaProductos extends javax.swing.JInternalFrame {
     }
 
     public void LLENAR_LISTADO_DE_REFERENCIAS() {
-        edicion.llenarTabla(jTable1, Pdao.LISTADO_DE_PRODUCTOS());
+        edicion.llenarTabla(TB_LISTAPRODUCTOS, Pdao.LISTADO_DE_PRODUCTOS());
     }
 }
 

@@ -5,11 +5,16 @@ import com.thalisoft.controller.index.ControllerContenedor;
 import com.thalisoft.main.util.Edicion;
 import com.thalisoft.main.util.report.Manager_Report;
 import com.thalisoft.model.maestros.cliente.ClienteDao;
-import com.thalisoft.model.maestros.empleado.EmpleadoDao;
+import com.thalisoft.vista.ventas.FormFacturaVenta;
+import java.awt.event.ItemEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
 
 public class FormListarClientes extends javax.swing.JInternalFrame {
 
@@ -17,11 +22,31 @@ public class FormListarClientes extends javax.swing.JInternalFrame {
     ClienteDao Cdao;
     ClienteDao clienteDao;
     Manager_Report report = new Manager_Report();
+    int opcionFiltro = 2;
+    private final TableRowSorter trsFiltro;
 
     public FormListarClientes() {
         Cdao = new ClienteDao();
         initComponents();
         llenar_listado();
+
+        TXTFILTRO.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyReleased(final KeyEvent e) {
+                String cadenafiltra = (TXTFILTRO.getText());
+                TXTFILTRO.setText(cadenafiltra.toUpperCase());
+                repaint();
+                filtro();
+            }
+
+            private void filtro() {
+                trsFiltro.setRowFilter(RowFilter.regexFilter(TXTFILTRO.getText(), opcionFiltro));
+            }
+        });
+        trsFiltro = new TableRowSorter(TB_LISTADO_CLIENTES.getModel());
+        TB_LISTADO_CLIENTES.setRowSorter(trsFiltro);
+        TXTFILTRO.requestFocus();
     }
 
     @SuppressWarnings("unchecked")
@@ -37,6 +62,9 @@ public class FormListarClientes extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        combofiltro = new javax.swing.JComboBox<>();
+        TXTFILTRO = new javax.swing.JTextField();
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/thalisoft/image/iconos/shift-change.png"))); // NOI18N
         jMenuItem1.setText("MODIFICAR");
@@ -61,7 +89,7 @@ public class FormListarClientes extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "No. Ficha", "Identificacion", "Apellidos y Nombres", "Direccion", "Telefonos", "Registrado Por", "Fecha de Registro", "E-mail"
+                "No. Ficha", "Identificacion", "Apellidos y Nombres O RS", "Direccion", "Telefonos", "Registrado Por", "Fecha de Registro", "E-mail"
             }
         ) {
             Class[] types = new Class [] {
@@ -82,10 +110,15 @@ public class FormListarClientes extends javax.swing.JInternalFrame {
         TB_LISTADO_CLIENTES.setComponentPopupMenu(jPopupMenu1);
         TB_LISTADO_CLIENTES.setRowHeight(22);
         TB_LISTADO_CLIENTES.getTableHeader().setReorderingAllowed(false);
+        TB_LISTADO_CLIENTES.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TB_LISTADO_CLIENTESMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TB_LISTADO_CLIENTES);
         if (TB_LISTADO_CLIENTES.getColumnModel().getColumnCount() > 0) {
-            TB_LISTADO_CLIENTES.getColumnModel().getColumn(0).setMaxWidth(75);
-            TB_LISTADO_CLIENTES.getColumnModel().getColumn(2).setMinWidth(150);
+            TB_LISTADO_CLIENTES.getColumnModel().getColumn(0).setMaxWidth(50);
+            TB_LISTADO_CLIENTES.getColumnModel().getColumn(2).setMinWidth(250);
             TB_LISTADO_CLIENTES.getColumnModel().getColumn(3).setMinWidth(150);
             TB_LISTADO_CLIENTES.getColumnModel().getColumn(7).setMinWidth(160);
         }
@@ -128,6 +161,16 @@ public class FormListarClientes extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(jButton3);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/vista_style_business_and_data_icons_icons_pack_120673/embudo-filtrante-icono-4497-32.png"))); // NOI18N
+        jLabel1.setText("FILTRA CLIENTE:");
+
+        combofiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "APELLIDOS Y NOMBRES", "IDENTIFICACION" }));
+        combofiltro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                combofiltroItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -136,14 +179,26 @@ public class FormListarClientes extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 988, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(combofiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(TXTFILTRO, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(combofiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TXTFILTRO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -212,12 +267,43 @@ public class FormListarClientes extends javax.swing.JInternalFrame {
         report.ListadoDeEmpleados();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void combofiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combofiltroItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+
+            if (combofiltro.getSelectedItem().equals("IDENTIFICACION")) {
+                opcionFiltro = 1;
+            }
+            if (combofiltro.getSelectedItem().equals("APELLIDOS Y NOMBRES")) {
+                opcionFiltro = 2;
+            }
+
+            TXTFILTRO.grabFocus();
+        }
+    }//GEN-LAST:event_combofiltroItemStateChanged
+
+    private void TB_LISTADO_CLIENTESMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TB_LISTADO_CLIENTESMouseClicked
+        // TODO add your handling code here:
+        try {
+            if (evt.getClickCount() == 2) {
+                FormFacturaVenta.combocliente.setSelectedItem(
+                        TB_LISTADO_CLIENTES.getValueAt(TB_LISTADO_CLIENTES.getSelectedRow(), 2));
+                dispose();
+            }
+        } catch (Exception e) {
+            System.out.println("error: " + e);
+        }
+    }//GEN-LAST:event_TB_LISTADO_CLIENTESMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TB_LISTADO_CLIENTES;
+    private javax.swing.JTextField TXTFILTRO;
+    private javax.swing.JComboBox<String> combofiltro;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
