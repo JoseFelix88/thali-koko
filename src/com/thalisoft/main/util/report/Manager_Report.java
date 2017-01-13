@@ -196,4 +196,17 @@ public class Manager_Report extends database {
             System.out.println("Mensaje de Error:" + j);
         }
      }
+     
+      public void FACTURA_VENTA_MEMBRETE(String numerofactura){
+          String reporte = "factura de venta - membrete.jasper";
+        try {
+            String Ubicacion = RUTA_REPORTE + "/ventas/";
+            masterReport = (JasperReport) JRLoader.loadObject(Ubicacion.concat(reporte));
+            PARAMETROS.put("idfactura", numerofactura);
+            edicion.Lanzador_rpt_vista_previa(masterReport, PARAMETROS);
+        } catch (Exception j) {
+            edicion.mensajes(3, "NO SE PUEDE LANZAR el reporte " + reporte + ".\n" + j);
+            System.out.println("Mensaje de Error:" + j);
+        }
+     }
 }

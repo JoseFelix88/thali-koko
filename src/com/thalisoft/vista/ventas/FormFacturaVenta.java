@@ -103,8 +103,8 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         jLabel23 = new javax.swing.JLabel();
         txtnumrecibo = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        RadioTiket = new javax.swing.JRadioButton();
+        RadioMembrete = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -374,18 +374,18 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
             }
         });
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 0));
-        groupimpresion.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("POST");
-        jRadioButton1.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/printer_post.png"))); // NOI18N
-        jRadioButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        RadioTiket.setBackground(new java.awt.Color(255, 255, 0));
+        groupimpresion.add(RadioTiket);
+        RadioTiket.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
+        RadioTiket.setSelected(true);
+        RadioTiket.setText("POST");
+        RadioTiket.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/printer_post.png"))); // NOI18N
+        RadioTiket.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jRadioButton2.setBackground(new java.awt.Color(0, 255, 204));
-        groupimpresion.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        jRadioButton2.setText("MEMBRETE");
+        RadioMembrete.setBackground(new java.awt.Color(0, 255, 204));
+        groupimpresion.add(RadioMembrete);
+        RadioMembrete.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
+        RadioMembrete.setText("MEMBRETE");
 
         jLabel5.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 0));
@@ -463,9 +463,9 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(RadioPlan)))
                                         .addGap(18, 18, 18)
-                                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(RadioTiket, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jRadioButton2))))
+                                        .addComponent(RadioMembrete))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(LBTIPOFAC, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -536,14 +536,12 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButton1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jRadioButton2, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                    .addComponent(RadioTiket, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(RadioMembrete, javax.swing.GroupLayout.Alignment.TRAILING)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -872,13 +870,11 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        Object factura = edicion.msjQuest(2, "ingresa el numero de la factura de compra.");
-        facturaVenta = factVentaDao.SELECT_VENTA(factura);
-        if (facturaVenta != null) {
-            txtnumfactura.setText(edicion.AGREGAR_CEROS_LEFT(facturaVenta.getNumeroFactura()));
-            JDateFactura.setDate(facturaVenta.getFechaFactura());
-            edicion.llenarTabla(TB_detalle, factVentaDao.SELECT_DETALLEVENTA(factura));
-            calculatotalesfactura();
+        if (RadioTiket.isSelected()) {
+            report.FACTURA_VENTA_TIKECT(txtnumfactura.getText());
+        }
+        if (RadioMembrete.isSelected()) {
+            report.FACTURA_VENTA_MEMBRETE(txtnumfactura.getText());
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
@@ -992,7 +988,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
                 Logger.getLogger(FormListarClientes.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -1000,8 +996,10 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser JDateFactura;
     private javax.swing.JLabel LBTIPOFAC;
     private javax.swing.JRadioButton RadioArticulo;
+    private javax.swing.JRadioButton RadioMembrete;
     private javax.swing.JRadioButton RadioOrden;
     private javax.swing.JRadioButton RadioPlan;
+    private javax.swing.JRadioButton RadioTiket;
     private javax.swing.JTable TB_detalle;
     private javax.swing.JTextField TXTTIPOFACT;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -1046,8 +1044,6 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JLabel lb_item;
@@ -1135,7 +1131,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
 
         TXTTIPOFACT.addKeyListener(new KeyAdapter() {
             @Override
-        public void keyReleased(KeyEvent e) {
+            public void keyReleased(KeyEvent e) {
                 TXTTIPOFACT.setText(edicion.AGREGAR_CEROS_LEFT(
                         edicion.toNumeroEntero(TXTTIPOFACT.getText())));
             }
@@ -1143,13 +1139,13 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
 
         txtcantidad.addKeyListener(new KeyAdapter() {
             @Override
-        public void keyReleased(KeyEvent e) {
+            public void keyReleased(KeyEvent e) {
                 CALCULARTOTALVENTA();
             }
         });
         txtcntrecibida.addKeyListener(new KeyAdapter() {
             @Override
-        public void keyReleased(KeyEvent e) {
+            public void keyReleased(KeyEvent e) {
                 txtcntrecibida.setText("$ " + formatoTexto.numerico(edicion.toNumeroEntero(txtcntrecibida.getText())));
                 if (edicion.toNumeroEntero(txtsubtotal.getText())
                         <= edicion.toNumeroEntero(txtcntrecibida.getText())) {
@@ -1164,7 +1160,7 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
         });
         txtprecioventa.addKeyListener(new KeyAdapter() {
             @Override
-        public void keyReleased(KeyEvent e) {
+            public void keyReleased(KeyEvent e) {
                 CALCULARTOTALVENTA();
             }
         });
@@ -1189,28 +1185,25 @@ public class FormFacturaVenta extends javax.swing.JInternalFrame {
 
         } else {
             int SI_NO = (int) edicion.msjQuest(1, "el producto no se encuentra registrado, deseas registrarlo?");
-            
 
-if (SI_NO == 0) {
+            if (SI_NO == 0) {
                 JInternalFrame ji = validador.getJInternalFrame(FormProducto.class
-.getName());
+                        .getName());
                 if (ji == null || ji.isClosed()) {
                     ji = new FormProducto();
                     ControllerContenedor.getjDesktopPane1().add(ji, 0);
                     validador
-
-.addJIframe(FormProducto.class
-.getName(), ji);
+                            .addJIframe(FormProducto.class
+                                    .getName(), ji);
                     ji.setVisible(true);
                 } else {
                     ji.show(true);
                     try {
                         ji.setIcon(false);
-                    
 
-} catch (PropertyVetoException ex) {
+                    } catch (PropertyVetoException ex) {
                         Logger.getLogger(FormCliente.class
-.getName()).log(Level.SEVERE, null, ex);
+                                .getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -1272,28 +1265,25 @@ if (SI_NO == 0) {
             txtreferencia.grabFocus();
         } else {
             int SI_NO = (int) edicion.msjQuest(1, "el cliente no se encuentra registrado, deseas registrarlo?");
-            
 
-if (SI_NO == 0) {
+            if (SI_NO == 0) {
                 JInternalFrame ji = validador.getJInternalFrame(FormCliente.class
-.getName());
+                        .getName());
                 if (ji == null || ji.isClosed()) {
                     ji = new FormCliente();
                     ControllerContenedor.getjDesktopPane1().add(ji, 0);
                     validador
-
-.addJIframe(FormCliente.class
-.getName(), ji);
+                            .addJIframe(FormCliente.class
+                                    .getName(), ji);
                     ji.setVisible(true);
                 } else {
                     ji.show(true);
                     try {
                         ji.setIcon(false);
-                    
 
-} catch (PropertyVetoException ex) {
+                    } catch (PropertyVetoException ex) {
                         Logger.getLogger(FormCliente.class
-.getName()).log(Level.SEVERE, null, ex);
+                                .getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -1352,30 +1342,27 @@ if (SI_NO == 0) {
             PlanSepare ps = planDao.CONSULTAR_PLAN_SEPARE(TXTTIPOFACT.getText());
             if (ps != null) {
                 if (ps.getSaldo() > 0) {
-                    int SI_NO = (int) edicion.msjQuest(1, "el "+RadioPlan.getText()+" tiene un saldo sin pagar de $ " + formatoTexto.numerico(ps.getSaldo()) + ","
+                    int SI_NO = (int) edicion.msjQuest(1, "el " + RadioPlan.getText() + " tiene un saldo sin pagar de $ " + formatoTexto.numerico(ps.getSaldo()) + ","
                             + " deseas registrar el pago?");
-                    
 
-if (SI_NO == 0) {
+                    if (SI_NO == 0) {
                         JInternalFrame ji = validador.getJInternalFrame(FormPagosPlanSepare.class
-.getName());
+                                .getName());
                         if (ji == null || ji.isClosed()) {
                             ji = new FormPagosPlanSepare();
                             ControllerContenedor.getjDesktopPane1().add(ji, 0);
                             validador
-
-.addJIframe(FormPagosPlanSepare.class
-.getName(), ji);
+                                    .addJIframe(FormPagosPlanSepare.class
+                                            .getName(), ji);
                             ji.setVisible(true);
                         } else {
                             ji.show(true);
                             try {
                                 ji.setIcon(false);
-                            
 
-} catch (PropertyVetoException ex) {
+                            } catch (PropertyVetoException ex) {
                                 Logger.getLogger(FormPagosPlanSepare.class
-.getName()).log(Level.SEVERE, null, ex);
+                                        .getName()).log(Level.SEVERE, null, ex);
                             }
                         }
                     }
@@ -1383,7 +1370,7 @@ if (SI_NO == 0) {
             } else {
                 CARGAR_CLIENTE(planDao.CONSULTAR_PLAN_SEPARE(
                         TXTTIPOFACT.getText()).getCliente().getIdentificacion());
-                
+
             }
         }
         if (RadioOrden.isSelected()) {
@@ -1391,43 +1378,39 @@ if (SI_NO == 0) {
                 OrdenPedido op = pedidoDao.CONSULTA_ORDEN_COMPRA(TXTTIPOFACT.getText());
                 if (op != null) {
                     if (op.getSaldo() > 0) {
-                        int SI_NO = (int) edicion.msjQuest(1, "la "+RadioOrden.getText()+" tiene un saldo sin pagar de $ " + formatoTexto.numerico(op.getSaldo()) + ","
+                        int SI_NO = (int) edicion.msjQuest(1, "la " + RadioOrden.getText() + " tiene un saldo sin pagar de $ " + formatoTexto.numerico(op.getSaldo()) + ","
                                 + " deseas registrar el pago?");
-                        
 
-if (SI_NO == 0) {
+                        if (SI_NO == 0) {
                             JInternalFrame ji = validador.getJInternalFrame(FormPagosCliente.class
-.getName());
+                                    .getName());
                             if (ji == null || ji.isClosed()) {
                                 ji = new FormPagosCliente();
                                 ControllerContenedor.getjDesktopPane1().add(ji, 0);
                                 validador
-
-.addJIframe(FormPagosCliente.class
-.getName(), ji);
+                                        .addJIframe(FormPagosCliente.class
+                                                .getName(), ji);
                                 ji.setVisible(true);
                             } else {
                                 ji.show(true);
                                 try {
                                     ji.setIcon(false);
-                                
 
-} catch (PropertyVetoException ex) {
+                                } catch (PropertyVetoException ex) {
                                     Logger.getLogger(FormPagosCliente.class
-.getName()).log(Level.SEVERE, null, ex);
+                                            .getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
                         }
                     } else {
                         CARGAR_CLIENTE(pedidoDao.CONSULTA_ORDEN_COMPRA(
                                 TXTTIPOFACT.getText()).getCliente().getIdentificacion());
-                    
 
-}
+                    }
                 }
             } catch (ParseException ex) {
                 Logger.getLogger(FormFacturaVenta.class
-.getName()).log(Level.SEVERE, null, ex);
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -1556,10 +1539,13 @@ if (SI_NO == 0) {
             if (factVentaDao.FACTURAR_FACTURA(DATOS_FACTURAR_VENTA()) != false) {
                 int sino = (int) edicion.msjQuest(1, "deseas imprimir la factura.");
                 if (sino == 0) {
-                    report.FACTURA_VENTA_TIKECT(txtnumfactura.getText());
-                
-
-}
+                    if (RadioTiket.isSelected()) {
+                        report.FACTURA_VENTA_TIKECT(txtnumfactura.getText());
+                    }
+                    if (RadioMembrete.isSelected()) {
+                        report.FACTURA_VENTA_MEMBRETE(txtnumfactura.getText());
+                    }
+                }
             }
         }
     }
