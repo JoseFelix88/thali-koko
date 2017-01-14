@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura de venta - membrete" language="groovy" pageWidth="595" pageHeight="842" columnWidth="483" leftMargin="56" rightMargin="56" topMargin="85" bottomMargin="56" uuid="c56d73a5-9f96-4e6a-82aa-3f29ad5f41aa">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="15"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -24,6 +24,9 @@
 		</box>
 	</style>
 	<subDataset name="Detalle_Factura_1" uuid="589b9122-a17c-45ef-989d-bac7197bc949">
+		<parameter name="factura" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
 		<queryString>
 			<![CDATA[SELECT
 productos.referencia, productos.descripcion,
@@ -35,7 +38,7 @@ detalleventas
 INNER JOIN productos ON detalleventas.producto = productos.referencia
 INNER JOIN facturaventas ON detalleventas.facturaventa = facturaventas.idfacturaventas
 WHERE
-facturaventas.idfacturaventas =  7
+facturaventas.idfacturaventas =  $P{factura}
 ORDER BY
 productos.descripcion ASC;]]>
 		</queryString>
@@ -54,6 +57,9 @@ productos.descripcion ASC;]]>
 			<variableExpression><![CDATA[$F{vrTotal}]]></variableExpression>
 		</variable>
 	</subDataset>
+	<parameter name="idfactura" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      LPAD(facturaventas.idfacturaventas,4,'0') AS facturaventas_idfacturaventas,
@@ -66,9 +72,12 @@ productos.descripcion ASC;]]>
 SUBTOTAL_FACTURA_VENTA(facturaventas.idfacturaventas) AS subtotal,
      facturaventas.`cntrecibida` AS facturaventas_cntrecibida,
      facturaventas.`cntdevuelta` AS facturaventas_cntdevuelta,
-datos_empresa() as empresa
+datos_empresa() as empresa,
+datos_cliente(facturaventas.cliente) as cliente,
+usuario_sistema(facturaventas.empleado) as empleado
 FROM
-     `facturaventas` facturaventas]]>
+     `facturaventas` facturaventas
+where facturaventas.idfacturaventas = $P{idfactura}]]>
 	</queryString>
 	<field name="facturaventas_idfacturaventas" class="java.lang.String"/>
 	<field name="facturaventas_fechahoraemision" class="java.sql.Timestamp"/>
@@ -83,54 +92,60 @@ FROM
 	<field name="facturaventas_cntrecibida" class="java.lang.Integer"/>
 	<field name="facturaventas_cntdevuelta" class="java.lang.Integer"/>
 	<field name="empresa" class="java.lang.String"/>
+	<field name="cliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empleado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="148" splitType="Stretch">
+		<band height="121" splitType="Stretch">
 			<frame>
-				<reportElement uuid="47565db5-d9fe-4a2a-9875-d5a1273e6da1" x="0" y="0" width="483" height="148"/>
+				<reportElement uuid="47565db5-d9fe-4a2a-9875-d5a1273e6da1" x="0" y="0" width="483" height="121"/>
 				<textField>
-					<reportElement uuid="db70a982-4251-403a-873d-d0ab9970c46b" x="180" y="0" width="221" height="16"/>
+					<reportElement uuid="db70a982-4251-403a-873d-d0ab9970c46b" x="190" y="30" width="221" height="16"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial Narrow" size="12" isBold="true" isUnderline="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["FACTURA DE VENTA No: "+$F{facturaventas_idfacturaventas}]]></textFieldExpression>
 				</textField>
-				<image scaleImage="FillFrame" hAlign="Center">
-					<reportElement uuid="17e84523-b01a-4517-8105-9ddd621cfbb3" x="0" y="0" width="100" height="40"/>
-					<imageExpression><![CDATA["C:\\ThaliSotf Report\\img\\vilma.png"]]></imageExpression>
+				<image scaleImage="FillFrame" hAlign="Left">
+					<reportElement uuid="17e84523-b01a-4517-8105-9ddd621cfbb3" x="0" y="0" width="180" height="30"/>
+					<imageExpression><![CDATA["C:\\ThaliSotf Report\\img\\logo vilma.png"]]></imageExpression>
 				</image>
 				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement uuid="3fb58cfe-a7cc-4c1f-9340-a9cbe1a2ed84" x="280" y="16" width="105" height="14"/>
+					<reportElement uuid="3fb58cfe-a7cc-4c1f-9340-a9cbe1a2ed84" x="290" y="46" width="105" height="14"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{facturaventas_fechaemision}]]></textFieldExpression>
 				</textField>
-				<textField>
-					<reportElement uuid="43f3b5fa-4af8-4534-b8be-c77f36c2488f" x="180" y="30" width="172" height="25"/>
-					<textElement verticalAlignment="Middle">
-						<font size="7"/>
-					</textElement>
-					<textFieldExpression><![CDATA["No. ORDEN PEDIDO: "+$F{facturaventas_numordencompra}+"\nPLAN SEPARE No. :"+$F{facturaventas_plansepare}]]></textFieldExpression>
-				</textField>
 				<staticText>
-					<reportElement uuid="bd480f2c-df3e-45fd-a832-72b0231d893f" x="180" y="16" width="100" height="14"/>
+					<reportElement uuid="bd480f2c-df3e-45fd-a832-72b0231d893f" x="190" y="46" width="100" height="14"/>
 					<textElement textAlignment="Justified" verticalAlignment="Middle"/>
 					<text><![CDATA[FECHA FACTURA:]]></text>
 				</staticText>
 				<textField>
-					<reportElement uuid="89492192-a8e2-436c-a57c-208db8d34be2" x="180" y="55" width="172" height="14"/>
-					<textElement verticalAlignment="Middle">
-						<font size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA["Medio de Pago: "+$F{facturaventas_mediopago}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement uuid="b0602eb2-c150-43c4-975a-5722edefd972" x="0" y="40" width="180" height="45"/>
-					<textElement verticalAlignment="Top">
+					<reportElement uuid="b0602eb2-c150-43c4-975a-5722edefd972" x="7" y="30" width="167" height="69"/>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
 						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="337bfe65-940f-4628-80d9-432a5435cf95" x="190" y="72" width="221" height="49"/>
+					<textElement>
+						<font fontName="Arial Narrow" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="57436f08-8544-44fd-bab1-7eecc37d1669" x="190" y="60" width="172" height="12"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Realizado Por: "+$F{empleado}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
@@ -138,9 +153,12 @@ FROM
 	<summary>
 		<band height="30" splitType="Stretch">
 			<componentElement>
-				<reportElement uuid="200621b1-8f61-419c-80f1-920e4b7accb8" key="table" style="table" x="75" y="0" width="340" height="30"/>
+				<reportElement uuid="200621b1-8f61-419c-80f1-920e4b7accb8" key="table" style="table" x="40" y="0" width="340" height="30"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Detalle_Factura_1" uuid="db2b76f2-4151-4553-aec7-a17d524eeaa2">
+					<datasetRun subDataset="Detalle_Factura_1" uuid="ff673309-0017-4630-91f7-4853bd40663d">
+						<datasetParameter name="factura">
+							<datasetParameterExpression><![CDATA[$F{facturaventas_idfacturaventas}]]></datasetParameterExpression>
+						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
 					<jr:column width="42" uuid="3e4515da-90ca-4a73-b309-dde1d34e046b">
@@ -153,9 +171,9 @@ FROM
 								<text><![CDATA[Referencia]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table_TD" height="14" rowSpan="1">
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField>
-								<reportElement uuid="cabb305d-2e28-4976-9ada-6f265554dbd3" x="0" y="0" width="42" height="14"/>
+								<reportElement uuid="cabb305d-2e28-4976-9ada-6f265554dbd3" x="0" y="0" width="42" height="20"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial Narrow" size="8"/>
 								</textElement>
@@ -163,19 +181,19 @@ FROM
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="126" uuid="e2d48623-cb1c-4173-a357-e52b1af6ccc1">
+					<jr:column width="197" uuid="e2d48623-cb1c-4173-a357-e52b1af6ccc1">
 						<jr:columnHeader style="table_CH" height="14" rowSpan="1">
 							<staticText>
-								<reportElement uuid="55ca9679-317e-48fa-bbaa-a93794fdc7d6" x="0" y="0" width="126" height="14"/>
+								<reportElement uuid="55ca9679-317e-48fa-bbaa-a93794fdc7d6" x="0" y="0" width="197" height="14"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial Narrow" size="8"/>
 								</textElement>
 								<text><![CDATA[Descripcion]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table_TD" height="14" rowSpan="1">
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField>
-								<reportElement uuid="d2cce369-d7a0-4ad2-82c4-03a8ed924386" x="2" y="0" width="124" height="14"/>
+								<reportElement uuid="d2cce369-d7a0-4ad2-82c4-03a8ed924386" x="2" y="0" width="195" height="20"/>
 								<textElement verticalAlignment="Middle">
 									<font fontName="Arial Narrow" size="8"/>
 								</textElement>
@@ -193,9 +211,9 @@ FROM
 								<text><![CDATA[Cantidad]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table_TD" height="14" rowSpan="1">
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField>
-								<reportElement uuid="97f56946-63f0-4726-ae35-eae5d8211075" x="0" y="0" width="50" height="14"/>
+								<reportElement uuid="97f56946-63f0-4726-ae35-eae5d8211075" x="0" y="0" width="50" height="20"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font fontName="Arial Narrow" size="8"/>
 								</textElement>
@@ -222,9 +240,9 @@ FROM
 								<text><![CDATA[SUBTOTAL]]></text>
 							</staticText>
 						</jr:columnFooter>
-						<jr:detailCell style="table_TD" height="14" rowSpan="1">
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField pattern="$ #,##0">
-								<reportElement uuid="442455fd-2862-4e79-b692-deacef6d0db4" x="0" y="0" width="62" height="14"/>
+								<reportElement uuid="442455fd-2862-4e79-b692-deacef6d0db4" x="0" y="0" width="62" height="20"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font fontName="Arial Narrow" size="8"/>
 								</textElement>
@@ -251,9 +269,9 @@ FROM
 								<textFieldExpression><![CDATA[$V{subtotal}]]></textFieldExpression>
 							</textField>
 						</jr:columnFooter>
-						<jr:detailCell style="table_TD" height="14" rowSpan="1">
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField pattern="$ #,##0">
-								<reportElement uuid="a04a6e3b-da5e-470f-a0b4-b46eece84085" x="0" y="0" width="50" height="14"/>
+								<reportElement uuid="a04a6e3b-da5e-470f-a0b4-b46eece84085" x="0" y="0" width="50" height="20"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font fontName="Arial Narrow" size="8"/>
 								</textElement>
