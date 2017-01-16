@@ -285,7 +285,12 @@ public class Edicion extends database {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(masterReport, param,
                     getConnection());
-            JasperPrintManager.printReport(jasperPrint, false);
+            if (jasperPrint != null) {
+                JasperPrintManager.printReport(jasperPrint, false);
+            } else {
+                mensajes(3, "no se encontro impresora. por favor verifica en que tienes una impresora configurada como predeterminada\n"
+                        + "en la entrada de 'impresoras y dispositivos.'");
+            }
 
         } catch (Exception ex) {
 
@@ -296,7 +301,6 @@ public class Edicion extends database {
         }
 
     }
-    
 
     public void FILTAR_TABLA(JTable table, int columnafiltro) {
 
